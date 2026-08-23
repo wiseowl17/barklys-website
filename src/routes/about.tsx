@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BrandLogo } from "@/components/brand-logo";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -18,9 +17,13 @@ function AboutPage() {
           Meet the groomer
         </p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">Vanessa</h1>
-        <aside className="mt-8 w-full rounded-2xl border border-line bg-paper p-8 shadow-soft">
-          <BrandLogo className="mx-auto h-48 w-auto sm:h-56" />
-          <div className="mt-6">
+        <aside className="mt-8 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
+          <img
+            src="/vanessa.jpg"
+            alt="Vanessa with a golden retriever on the grooming table"
+            className="mx-auto aspect-square w-full max-w-lg object-cover"
+          />
+          <div className="p-6">
             <p className="font-display text-2xl text-navy">Vanessa Cordova</p>
             <p className="mt-1 text-sm text-muted">
               Fear Free Certified Professional · Groomer
