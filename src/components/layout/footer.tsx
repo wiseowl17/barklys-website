@@ -4,9 +4,9 @@ import { NAV, SITE } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-line bg-navy text-paper">
+    <footer className="mt-auto border-t border-line bg-navy text-center text-paper">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
-        <div>
+        <div className="flex flex-col items-center">
           <img
             src="/logo.jpeg"
             alt=""
@@ -22,7 +22,7 @@ export function Footer() {
           </p>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center">
           <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
             Visit
           </p>
@@ -37,7 +37,7 @@ export function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="flex flex-col items-center">
           <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
             Contact
           </p>
@@ -52,7 +52,7 @@ export function Footer() {
                 {SITE.email}
               </a>
             </li>
-            <li className="flex items-center gap-3 pt-1">
+            <li className="flex justify-center pt-1">
               <a
                 href={SITE.instagram}
                 className="inline-flex items-center gap-1.5 hover:text-paper"
@@ -74,13 +74,13 @@ export function Footer() {
               </a>
             </li>
           </ul>
-          <p className="mt-6 text-xs leading-relaxed text-sky/80">
+          <p className="mt-6 max-w-xs text-xs leading-relaxed text-sky/80">
             Serving {SITE.area}. Exact studio address is shared after your
             appointment is confirmed.
           </p>
         </div>
       </div>
-      <div className="border-t border-paper/10 py-5 text-center text-xs text-sky/80">
+      <div className="border-t border-paper/10 py-5 text-xs text-sky/80">
         © {new Date().getFullYear()} Barkly’s. All rights reserved.
       </div>
     </footer>

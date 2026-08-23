@@ -24,50 +24,48 @@ function BookPage() {
   }
 
   return (
-    <main className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1fr_1.1fr]">
-      <div>
-        <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
-          By appointment
-        </p>
-        <h1 className="mt-3 font-display text-4xl sm:text-5xl">
-          Request a booking
-        </h1>
-        <p className="mt-4 leading-relaxed text-muted">
-          All appointments are by request and must be manually confirmed. We
-          will contact you shortly to review timing, coat notes, and anything
-          your dog needs to feel comfortable.
-        </p>
-        <dl className="mt-8 space-y-3 text-sm">
-          <div>
-            <dt className="text-muted">Phone</dt>
-            <dd>
-              <a className="font-medium text-navy" href={SITE.phoneHref}>
-                {SITE.phoneDisplay}
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt className="text-muted">Email</dt>
-            <dd>
-              <a className="font-medium text-navy" href={`mailto:${SITE.email}`}>
-                {SITE.email}
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt className="text-muted">Social</dt>
-            <dd className="font-medium text-navy">
-              Instagram & TikTok {SITE.handle}
-            </dd>
-          </div>
-        </dl>
-        <p className="mt-8 rounded-lg border border-line bg-cream-deep p-4 text-sm text-muted">
-          Home-based studio. The exact address is shared only after your
-          appointment is confirmed.
-        </p>
-      </div>
+    <main className="mx-auto flex max-w-xl flex-col items-center px-4 py-14 text-center sm:px-6">
+      <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
+        By appointment
+      </p>
+      <h1 className="mt-3 font-display text-4xl sm:text-5xl">
+        Request a booking
+      </h1>
+      <p className="mt-4 leading-relaxed text-muted">
+        All appointments are by request and must be manually confirmed. We
+        will contact you shortly to review timing, coat notes, and anything
+        your dog needs to feel comfortable.
+      </p>
+      <dl className="mt-8 space-y-3 text-sm">
+        <div>
+          <dt className="text-muted">Phone</dt>
+          <dd>
+            <a className="font-medium text-navy" href={SITE.phoneHref}>
+              {SITE.phoneDisplay}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt className="text-muted">Email</dt>
+          <dd>
+            <a className="font-medium text-navy" href={`mailto:${SITE.email}`}>
+              {SITE.email}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt className="text-muted">Social</dt>
+          <dd className="font-medium text-navy">
+            Instagram & TikTok {SITE.handle}
+          </dd>
+        </div>
+      </dl>
+      <p className="mt-8 rounded-lg border border-line bg-cream-deep p-4 text-sm text-muted">
+        Home-based studio. The exact address is shared only after your
+        appointment is confirmed.
+      </p>
 
-      <div className="rounded-2xl border border-line bg-paper p-6 shadow-soft sm:p-8">
+      <div className="mt-10 w-full rounded-2xl border border-line bg-paper p-6 shadow-soft sm:p-8">
         {sent ? (
           <div>
             <h2 className="font-display text-2xl">Request received</h2>
@@ -82,9 +80,8 @@ function BookPage() {
         ) : (
           <form onSubmit={onSubmit} className="grid gap-4">
             <p className="text-sm text-muted">
-              Connect this form to Formspree later by adding your form endpoint
-              to the action. For now, requests stay on this device until we
-              confirm them personally.
+              We’ll confirm every request personally before the appointment is
+              booked.
             </p>
             <div>
               <Label htmlFor="name">Your name</Label>
@@ -127,7 +124,7 @@ function BookPage() {
                   id="service"
                   name="service"
                   required
-                  className="h-11 w-full rounded-md border border-line bg-paper px-3.5 text-sm text-ink outline-none focus:border-teal focus:ring-2 focus:ring-teal/25"
+                  className="h-11 w-full rounded-md border border-line bg-paper px-3.5 text-center text-sm text-ink outline-none focus:border-teal focus:ring-2 focus:ring-teal/25"
                   defaultValue=""
                 >
                   <option value="" disabled>
@@ -153,7 +150,7 @@ function BookPage() {
                 placeholder="Coat notes, anxiety, senior care, puppies…"
               />
             </div>
-            <Button type="submit" size="lg" className="mt-2">
+            <Button type="submit" size="lg" className="mt-2 w-full">
               Send request
             </Button>
           </form>

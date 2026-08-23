@@ -11,13 +11,13 @@ export const Route = createFileRoute("/services")({
 
 function ServicesPage() {
   return (
-    <main>
+    <main className="text-center">
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
           Care menu
         </p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">Services</h1>
-        <p className="mt-4 max-w-2xl text-muted">
+        <p className="mx-auto mt-4 max-w-2xl text-muted">
           Full grooms, baths, boarding, and daycare. All breeds are welcome,
           with extra fluency in poodles, schnauzers, and doodles.
         </p>
@@ -38,15 +38,15 @@ function ServicesPage() {
       </section>
 
       <section className="bg-paper">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+        <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
           <h2 className="font-display text-3xl">Full groom starting prices</h2>
-          <p className="mt-2 max-w-2xl text-sm text-muted">
+          <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
             Prices below are starting points. Final quotes depend on coat
             condition, breed, and the work your dog actually needs. Bath-and-brush
             packages are slightly lower.
           </p>
           <div className="mt-8 overflow-hidden rounded-xl border border-line">
-            <table className="w-full text-left text-sm">
+            <table className="w-full text-center text-sm">
               <thead className="bg-cream-deep text-navy">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Size</th>
@@ -72,7 +72,7 @@ function ServicesPage() {
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <h2 className="font-display text-3xl">Add-ons</h2>
-        <p className="mt-2 text-sm text-muted">
+        <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
           Deshedding, teeth brushing, touch-ups, paw balm, nails, senior and
           puppy care, and specialty shampoos for different coat types.
         </p>
@@ -80,7 +80,7 @@ function ServicesPage() {
           {ADD_ONS.map((item) => (
             <li
               key={item.name}
-              className="flex items-center justify-between rounded-lg border border-line bg-paper px-4 py-3"
+              className="flex flex-col items-center rounded-lg border border-line bg-paper px-4 py-3"
             >
               <span className="font-medium text-navy">{item.name}</span>
               <span className="text-sm text-muted">{item.from}</span>

@@ -11,24 +11,26 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur-md">
-      <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+      <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-3 sm:px-6">
+        <Link
+          to="/"
+          className="flex flex-col items-center text-center"
+          onClick={() => setOpen(false)}
+        >
           <img
             src="/logo.jpeg"
             alt="Barkly's logo"
-            className="h-12 w-12 rounded-full object-cover shadow-card ring-1 ring-gold/40"
+            className="h-14 w-14 rounded-full object-cover shadow-card ring-1 ring-gold/40"
           />
-          <span className="leading-tight">
-            <span className="block font-display text-xl font-semibold text-navy">
-              {SITE.name}
-            </span>
-            <span className="hidden text-[11px] tracking-[0.16em] text-teal-deep uppercase sm:block">
-              {SITE.tagline}
-            </span>
+          <span className="mt-1 font-display text-xl font-semibold text-navy">
+            {SITE.name}
+          </span>
+          <span className="text-[11px] tracking-[0.16em] text-teal-deep uppercase">
+            {SITE.tagline}
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="mt-3 hidden items-center justify-center gap-1 lg:flex">
           {NAV.filter((item) => item.to !== "/book").map((item) => (
             <Link
               key={item.to}
@@ -50,7 +52,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex size-11 items-center justify-center rounded-md text-navy lg:hidden"
+          className="absolute top-4 right-4 inline-flex size-11 items-center justify-center rounded-md text-navy lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
@@ -59,15 +61,15 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="border-t border-line bg-cream px-4 py-4 lg:hidden">
-          <nav className="flex flex-col gap-1">
+        <div className="border-t border-line bg-cream px-4 py-4 text-center lg:hidden">
+          <nav className="flex flex-col items-center gap-1">
             {NAV.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "rounded-md px-3 py-3 text-base font-medium",
+                  "w-full rounded-md px-3 py-3 text-base font-medium",
                   pathname === item.to ? "bg-sky/40 text-navy" : "text-navy",
                 )}
               >

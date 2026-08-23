@@ -11,42 +11,19 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   return (
-    <main>
-      <section className="mx-auto grid max-w-6xl gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:py-20">
-        <div>
-          <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
-            Meet the groomer
-          </p>
-          <h1 className="mt-3 font-display text-4xl sm:text-5xl">Vanessa</h1>
-          <p className="mt-6 text-lg leading-relaxed text-muted">
-            Nearly two decades in animal care, a veterinary education from
-            Venezuela, and five years as a professional groomer — with a Fear
-            Free certification at the center of every appointment.
-          </p>
-          <ul className="mt-8 space-y-4 text-[15px] leading-relaxed text-ink">
-            <li className="rounded-lg border border-line bg-paper px-4 py-3">
-              Trained as a veterinary doctor in Venezuela
-            </li>
-            <li className="rounded-lg border border-line bg-paper px-4 py-3">
-              Currently studying to revalidate her veterinary degree in the
-              United States
-            </li>
-            <li className="rounded-lg border border-line bg-paper px-4 py-3">
-              Professional groomer with 5 years of hands-on salon experience
-            </li>
-            <li className="rounded-lg border border-line bg-paper px-4 py-3">
-              Special care for poodles, schnauzers, doodles, and small breeds —
-              all breeds welcome
-            </li>
-          </ul>
-        </div>
-        <aside className="overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
+    <main className="text-center">
+      <section className="mx-auto flex max-w-3xl flex-col items-center px-4 py-14 sm:px-6 lg:py-20">
+        <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
+          Meet the groomer
+        </p>
+        <h1 className="mt-3 font-display text-4xl sm:text-5xl">Vanessa</h1>
+        <aside className="mt-8 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
           <img
             src="/logo.jpeg"
             alt="Barkly's crest"
             className="mx-auto mt-10 h-44 w-44 object-contain"
           />
-          <div className="p-8 text-center">
+          <div className="p-8">
             <p className="font-display text-2xl text-navy">Vanessa Cordova</p>
             <p className="mt-1 text-sm text-muted">
               Fear Free Certified Professional · Groomer
@@ -57,10 +34,31 @@ function AboutPage() {
             </p>
           </div>
         </aside>
+        <p className="mt-8 text-lg leading-relaxed text-muted">
+          Nearly two decades in animal care, a veterinary education from
+          Venezuela, and five years as a professional groomer — with a Fear
+          Free certification at the center of every appointment.
+        </p>
+        <ul className="mt-8 w-full space-y-4 text-[15px] leading-relaxed text-ink">
+          <li className="rounded-lg border border-line bg-paper px-4 py-3">
+            Trained as a veterinary doctor in Venezuela
+          </li>
+          <li className="rounded-lg border border-line bg-paper px-4 py-3">
+            Currently studying to revalidate her veterinary degree in the
+            United States
+          </li>
+          <li className="rounded-lg border border-line bg-paper px-4 py-3">
+            Professional groomer with 5 years of hands-on salon experience
+          </li>
+          <li className="rounded-lg border border-line bg-paper px-4 py-3">
+            Special care for poodles, schnauzers, doodles, and small breeds —
+            all breeds welcome
+          </li>
+        </ul>
       </section>
 
       <section className="bg-paper">
-        <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+        <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-16 sm:px-6">
           <h2 className="font-display text-3xl">Why Fear Free matters</h2>
           <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted">
             <p>
