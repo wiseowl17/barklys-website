@@ -1,4 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Droplets,
+  HeartHandshake,
+  Home,
+  Scissors,
+  Sparkles,
+} from "lucide-react";
 import { ADD_ONS, GROOM_PRICES, SERVICES } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 
@@ -8,6 +15,13 @@ export const Route = createFileRoute("/services")({
     meta: [{ title: "Services & Pricing | Barkly's" }],
   }),
 });
+
+const SERVICE_ICONS = {
+  grooming: Scissors,
+  baths: Droplets,
+  boarding: Home,
+  daycare: HeartHandshake,
+} as const;
 
 function ServicesPage() {
   return (
@@ -23,17 +37,23 @@ function ServicesPage() {
         </p>
 
         <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {SERVICES.map((service) => (
-            <article
-              key={service.slug}
-              className="rounded-xl border border-line bg-paper p-6 shadow-card"
-            >
-              <h2 className="font-display text-2xl">{service.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted">
-                {service.blurb}
-              </p>
-            </article>
-          ))}
+          {SERVICES.map((service) => {
+            const Icon = SERVICE_ICONS[service.slug] ?? Sparkles;
+            return (
+              <article
+                key={service.slug}
+                className="flex flex-col items-center rounded-xl border border-line bg-paper p-6 shadow-card"
+              >
+                <span className="flex size-12 items-center justify-center rounded-full bg-sky/35 text-teal-deep">
+                  <Icon className="size-6" strokeWidth={1.75} />
+                </span>
+                <h2 className="mt-4 font-display text-2xl">{service.title}</h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  {service.blurb}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </section>
 
