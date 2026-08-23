@@ -9,12 +9,11 @@ export function Footer() {
     <footer className="mt-auto border-t border-line bg-navy text-center text-paper">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div className="flex flex-col items-center">
-          <BrandLogo decorative className="mb-4 h-28 w-auto drop-shadow-md" />
+          <BrandLogo decorative className="mx-auto mb-4 h-28 w-auto drop-shadow-md" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky">
             Fear-Free grooming, boarding, and daycare for Charlotte and nearby
             towns. Home-based, by appointment.
           </p>
-          <FearFreeBadge className="mt-5 w-36 drop-shadow-md" />
         </div>
 
         <div className="flex flex-col items-center">
@@ -74,6 +73,9 @@ export function Footer() {
             appointment is confirmed.
           </p>
         </div>
+      </div>
+      <div className="flex justify-center px-4 pb-10">
+        <FearFreeBadge className="mx-auto w-36 drop-shadow-md" />
       </div>
       <div className="border-t border-paper/10 py-5 text-xs text-sky/80">
         © {new Date().getFullYear()} Barkly’s. All rights reserved.

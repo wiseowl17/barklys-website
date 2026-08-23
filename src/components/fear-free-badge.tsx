@@ -9,7 +9,7 @@ export function FearFreeBadge({
     <img
       src="/fear-free-certified.png"
       alt="Fear Free Certified Professional"
-      className={cn("h-auto w-40 object-contain", className)}
+      className={cn("mx-auto block h-auto w-40 object-contain", className)}
     />
   );
 }
