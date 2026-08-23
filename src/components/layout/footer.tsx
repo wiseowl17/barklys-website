@@ -1,0 +1,88 @@
+import { Link } from "@tanstack/react-router";
+import { Instagram } from "lucide-react";
+import { NAV, SITE } from "@/lib/site";
+
+export function Footer() {
+  return (
+    <footer className="mt-auto border-t border-line bg-navy text-paper">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
+        <div>
+          <img
+            src="/logo.jpeg"
+            alt=""
+            className="mb-4 h-16 w-16 rounded-full object-cover ring-2 ring-gold/50"
+          />
+          <p className="font-display text-2xl">{SITE.name}</p>
+          <p className="mt-1 text-sm tracking-[0.14em] text-sky uppercase">
+            {SITE.tagline}
+          </p>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky">
+            Fear-Free grooming, boarding, and daycare for Charlotte and nearby
+            towns. Home-based, by appointment.
+          </p>
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
+            Visit
+          </p>
+          <ul className="mt-4 space-y-2 text-sm">
+            {NAV.map((item) => (
+              <li key={item.to}>
+                <Link to={item.to} className="text-sky hover:text-paper">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
+            Contact
+          </p>
+          <ul className="mt-4 space-y-2 text-sm text-sky">
+            <li>
+              <a href={SITE.phoneHref} className="hover:text-paper">
+                {SITE.phoneDisplay}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${SITE.email}`} className="hover:text-paper">
+                {SITE.email}
+              </a>
+            </li>
+            <li className="flex items-center gap-3 pt-1">
+              <a
+                href={SITE.instagram}
+                className="inline-flex items-center gap-1.5 hover:text-paper"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Instagram className="size-4" />
+                Instagram {SITE.handle}
+              </a>
+            </li>
+            <li>
+              <a
+                href={SITE.tiktok}
+                className="hover:text-paper"
+                target="_blank"
+                rel="noreferrer"
+              >
+                TikTok {SITE.handle}
+              </a>
+            </li>
+          </ul>
+          <p className="mt-6 text-xs leading-relaxed text-sky/80">
+            Serving {SITE.area}. Exact studio address is shared after your
+            appointment is confirmed.
+          </p>
+        </div>
+      </div>
+      <div className="border-t border-paper/10 py-5 text-center text-xs text-sky/80">
+        © {new Date().getFullYear()} Barkly’s. All rights reserved.
+      </div>
+    </footer>
+  );
+}
