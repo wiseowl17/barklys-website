@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { Instagram } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { BrandLogo } from "@/components/brand-logo";
-import { FearFreeBadge } from "@/components/fear-free-badge";
 
 export function Footer() {
   return (
@@ -73,9 +72,6 @@ export function Footer() {
             appointment is confirmed.
           </p>
         </div>
-      </div>
-      <div className="flex justify-center px-4 pb-10">
-        <FearFreeBadge className="mx-auto w-36 drop-shadow-md" />
       </div>
       <div className="border-t border-paper/10 py-5 text-xs text-sky/80">
         © {new Date().getFullYear()} Barkly’s. All rights reserved.

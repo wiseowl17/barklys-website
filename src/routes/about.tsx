@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { FearFreeBadge } from "@/components/fear-free-badge";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -28,7 +27,6 @@ function AboutPage() {
             <p className="mt-1 text-sm text-muted">
               Fear Free Certified Professional · Groomer
             </p>
-            <FearFreeBadge className="mx-auto mt-6 w-44" />
           </div>
         </aside>
         <p className="mt-8 text-lg leading-relaxed text-muted">
