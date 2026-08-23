@@ -112,11 +112,11 @@ function HomePage() {
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 py-16 sm:px-6">
           <h2 className="font-display text-3xl">Ready when your pup is</h2>
           <p className="max-w-xl text-sky">
-            Requests are reviewed personally. We’ll confirm timing, coat notes,
-            and anything your dog needs to feel safe.
+            Pick a time that works. We’ll take it from there — coat notes,
+            Fear-Free handling, and a calm visit for your pup.
           </p>
           <Button asChild size="lg" variant="primary" className="bg-gold text-navy-deep hover:bg-gold/90">
-            <Link to="/book">Request a booking</Link>
+            <Link to="/book">Book an appointment</Link>
           </Button>
         </div>
       </section>

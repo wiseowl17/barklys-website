@@ -6,7 +6,7 @@ Fear-Free pet grooming, boarding, and daycare website for Charlotte, NC and surr
 
 - TanStack Start (React)
 - Tailwind CSS v4
-- Vanilla client form handling (booking requests are reviewed manually)
+- Tuft booking widget on the Book page
 
 ## Local preview
 
@@ -38,13 +38,10 @@ Create a public repository (for example `barklys-website`) and push this project
 4. At your DNS provider, add the records Vercel shows (usually an `A` record for apex and `CNAME` for `www`)
 5. Wait for SSL to provision (often a few minutes)
 
-### 4. Booking form (optional)
+### 4. Booking
 
-The booking form currently confirms in the browser. To receive emails:
-
-1. Create a form at [formspree.io](https://formspree.io)
-2. Replace the submit handler in `src/routes/book.tsx` with a Formspree `action` URL
-3. Redeploy
+Appointments are booked through the Tuft widget on `/book`
+(`https://widget.tuftapp.com/index.html?groomer_id=7105`).
 
 ### 5. Environment
 

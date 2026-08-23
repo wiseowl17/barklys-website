@@ -1,8 +1,5 @@
-import { useState, type FormEvent } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/lib/site";
-import { Button } from "@/components/ui/button";
-import { Input, Label, Textarea } from "@/components/ui/input";
 
 export const Route = createFileRoute("/book")({
   component: BookPage,
@@ -11,32 +8,45 @@ export const Route = createFileRoute("/book")({
   }),
 });
 
+const TUFT_SRC = "https://widget.tuftapp.com/index.html?groomer_id=7105";
+
 function BookPage() {
-  const [sent, setSent] = useState(false);
-
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
-    console.info("Barkly's booking request", data);
-    setSent(true);
-    form.reset();
-  }
-
   return (
-    <main className="mx-auto flex max-w-xl flex-col items-center px-4 py-14 text-center sm:px-6">
+    <main className="mx-auto flex max-w-3xl flex-col items-center px-4 py-14 text-center sm:px-6">
       <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
         By appointment
       </p>
-      <h1 className="mt-3 font-display text-4xl sm:text-5xl">
-        Request a booking
-      </h1>
-      <p className="mt-4 leading-relaxed text-muted">
-        All appointments are by request and must be manually confirmed. We
-        will contact you shortly to review timing, coat notes, and anything
-        your dog needs to feel comfortable.
+      <h1 className="mt-3 font-display text-4xl sm:text-5xl">Book with us</h1>
+      <p className="mt-4 max-w-xl leading-relaxed text-muted">
+        Choose a service and time below. We’ll follow up with anything we need
+        for a calm, Fear-Free visit.
       </p>
-      <dl className="mt-8 space-y-3 text-sm">
+
+      <div className="mt-10 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
+        <iframe
+          title="Book an appointment with Barkly's"
+          src={TUFT_SRC}
+          height={750}
+          className="w-full border-0"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
+
+      <p className="mt-4 text-sm text-muted">
+        Having trouble with the calendar?{" "}
+        <a
+          href={TUFT_SRC}
+          className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open booking in a new tab
+        </a>
+        .
+      </p>
+
+      <dl className="mt-10 space-y-3 text-sm">
         <div>
           <dt className="text-muted">Phone</dt>
           <dd>
@@ -64,98 +74,6 @@ function BookPage() {
         Home-based studio. The exact address is shared only after your
         appointment is confirmed.
       </p>
-
-      <div className="mt-10 w-full rounded-2xl border border-line bg-paper p-6 shadow-soft sm:p-8">
-        {sent ? (
-          <div>
-            <h2 className="font-display text-2xl">Request received</h2>
-            <p className="mt-3 text-muted">
-              Thank you. We’ll review your note and follow up to confirm. If
-              it’s urgent, call or text {SITE.phoneDisplay}.
-            </p>
-            <Button className="mt-6" type="button" onClick={() => setSent(false)}>
-              Send another request
-            </Button>
-          </div>
-        ) : (
-          <form onSubmit={onSubmit} className="grid gap-4">
-            <p className="text-sm text-muted">
-              We’ll confirm every request personally before the appointment is
-              booked.
-            </p>
-            <div>
-              <Label htmlFor="name">Your name</Label>
-              <Input id="name" name="name" required autoComplete="name" />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                />
-              </div>
-              <div>
-                <Label htmlFor="phone">Phone</Label>
-                <Input id="phone" name="phone" type="tel" required autoComplete="tel" />
-              </div>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="dogName">Dog’s name</Label>
-                <Input id="dogName" name="dogName" required />
-              </div>
-              <div>
-                <Label htmlFor="breed">Breed</Label>
-                <Input id="breed" name="breed" required />
-              </div>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="weight">Weight (lbs)</Label>
-                <Input id="weight" name="weight" inputMode="decimal" />
-              </div>
-              <div>
-                <Label htmlFor="service">Service</Label>
-                <select
-                  id="service"
-                  name="service"
-                  required
-                  className="h-11 w-full rounded-md border border-line bg-paper px-3.5 text-center text-sm text-ink outline-none focus:border-teal focus:ring-2 focus:ring-teal/25"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select a service
-                  </option>
-                  <option>Full groom</option>
-                  <option>Bath & brush</option>
-                  <option>Boarding</option>
-                  <option>Daycare / sitting</option>
-                  <option>Add-ons only</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="dates">Preferred dates</Label>
-              <Input id="dates" name="dates" placeholder="e.g. next Tuesday morning" />
-            </div>
-            <div>
-              <Label htmlFor="message">Anything we should know?</Label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Coat notes, anxiety, senior care, puppies…"
-              />
-            </div>
-            <Button type="submit" size="lg" className="mt-2 w-full">
-              Send request
-            </Button>
-          </form>
-        )}
-      </div>
     </main>
   );
 }
