@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Instagram } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { BrandLogo } from "@/components/brand-logo";
+import { FearFreeBadge } from "@/components/fear-free-badge";
 
 export function Footer() {
   return (
@@ -13,6 +14,7 @@ export function Footer() {
             Fear-Free grooming, boarding, and daycare for Charlotte and nearby
             towns. Home-based, by appointment.
           </p>
+          <FearFreeBadge className="mt-5 w-36 drop-shadow-md" />
         </div>
 
         <div className="flex flex-col items-center">

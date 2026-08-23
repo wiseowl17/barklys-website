@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { HeartHandshake, Home, Scissors, Sparkles, ShieldCheck } from "lucide-react";
+import { HeartHandshake, Home, Scissors, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { FearFreeBadge } from "@/components/fear-free-badge";
 import { REVIEWS, SERVICES } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
@@ -25,10 +26,7 @@ function HomePage() {
     <main className="text-center">
       <section className="relative overflow-hidden">
         <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-12 sm:px-6 lg:py-16">
-          <p className="inline-flex items-center gap-2 rounded-full bg-sky/40 px-3 py-1 text-xs font-semibold tracking-wide text-navy uppercase">
-            <ShieldCheck className="size-3.5" />
-            Fear Free Certified Professional
-          </p>
+          <FearFreeBadge className="w-44 sm:w-48" />
           <h1 className="mt-5 font-display text-4xl leading-[1.1] text-navy-deep sm:text-5xl lg:text-6xl">
             Fear-Free grooming in the Charlotte area
           </h1>

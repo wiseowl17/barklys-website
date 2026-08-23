@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FearFreeBadge } from "@/components/fear-free-badge";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -28,10 +28,7 @@ function AboutPage() {
             <p className="mt-1 text-sm text-muted">
               Fear Free Certified Professional · Groomer
             </p>
-            <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-sky/40 px-3 py-1 text-xs font-semibold tracking-wide text-navy uppercase">
-              <ShieldCheck className="size-3.5" />
-              Fear Free Certified
-            </p>
+            <FearFreeBadge className="mx-auto mt-6 w-44" />
           </div>
         </aside>
         <p className="mt-8 text-lg leading-relaxed text-muted">
@@ -60,6 +57,7 @@ function AboutPage() {
       <section className="bg-paper">
         <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-16 sm:px-6">
           <h2 className="font-display text-3xl">Why Fear Free matters</h2>
+          <FearFreeBadge className="mt-5 w-40" />
           <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted">
             <p>
               Fear Free is a science-based certification that trains
