@@ -87,6 +87,17 @@ export const GALLERY = [
   { src: "/gallery/aussie-pink-side.jpg", alt: "Australian Shepherd sitting in profile after a groom", name: "Aussie profile" },
 ] as const;
 
+export const HERO_SLIDES = [
+  GALLERY[0],
+  GALLERY[1],
+  GALLERY[2],
+  GALLERY[3],
+  GALLERY[5],
+  GALLERY[6],
+  GALLERY[8],
+  GALLERY[11],
+] as const;
+
 export const REVIEWS = [
   {
     name: "Lauren M.",

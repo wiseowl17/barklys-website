@@ -1,21 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
+import { BrandLogo } from "@/components/brand-logo";
 
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-line bg-navy text-center text-paper">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div className="flex flex-col items-center">
-          <img
-            src="/logo.jpeg"
-            alt=""
-            className="mb-4 h-16 w-16 rounded-full object-cover ring-2 ring-gold/50"
-          />
-          <p className="font-display text-2xl">{SITE.name}</p>
-          <p className="mt-1 text-sm tracking-[0.14em] text-sky uppercase">
-            {SITE.tagline}
-          </p>
+          <BrandLogo decorative className="mb-4 h-28 w-auto drop-shadow-md" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky">
             Fear-Free grooming, boarding, and daycare for Charlotte and nearby
             towns. Home-based, by appointment.

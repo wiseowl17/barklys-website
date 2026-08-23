@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeartHandshake, Home, Scissors, Sparkles, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HeroCarousel } from "@/components/hero-carousel";
 import { REVIEWS, SERVICES } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
@@ -48,16 +49,7 @@ function HomePage() {
             Serving Charlotte, Fort Mill, Tega Cay, and nearby towns · By
             appointment only
           </p>
-          <div className="mt-10 w-full max-w-xl overflow-hidden rounded-2xl shadow-soft ring-1 ring-gold/30">
-            <img
-              src="/images/hero-angel.jpg"
-              alt="Angel, a freshly groomed Australian Shepherd wearing a blue bandana"
-              className="aspect-[4/5] w-full object-cover sm:aspect-[5/4]"
-            />
-          </div>
-          <p className="mt-3 text-xs tracking-wide text-muted">
-            Fresh from the table — and still smiling.
-          </p>
+          <HeroCarousel />
         </div>
       </section>
 

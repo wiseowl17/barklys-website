@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import { NAV, SITE } from "@/lib/site";
+import { NAV } from "@/lib/site";
 import { Button } from "@/components/ui/button";
+import { BrandLogo } from "@/components/brand-logo";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -12,25 +13,11 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur-md">
       <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-3 sm:px-6">
-        <Link
-          to="/"
-          className="flex flex-col items-center text-center"
-          onClick={() => setOpen(false)}
-        >
-          <img
-            src="/logo.jpeg"
-            alt="Barkly's logo"
-            className="h-14 w-14 rounded-full object-cover shadow-card ring-1 ring-gold/40"
-          />
-          <span className="mt-1 font-display text-xl font-semibold text-navy">
-            {SITE.name}
-          </span>
-          <span className="text-[11px] tracking-[0.16em] text-teal-deep uppercase">
-            {SITE.tagline}
-          </span>
+        <Link to="/" className="flex flex-col items-center" onClick={() => setOpen(false)}>
+          <BrandLogo className="h-[4.75rem] w-auto sm:h-20" />
         </Link>
 
-        <nav className="mt-3 hidden items-center justify-center gap-1 lg:flex">
+        <nav className="mt-2 hidden items-center justify-center gap-1 lg:flex">
           {NAV.filter((item) => item.to !== "/book").map((item) => (
             <Link
               key={item.to}
