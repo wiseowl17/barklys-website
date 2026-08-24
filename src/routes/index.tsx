@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { HeartHandshake, Home, KeyRound, Scissors, Sparkles, ShieldCheck } from "lucide-react";
+import { HeartHandshake, Home, Scissors, Sparkles, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { REVIEWS, SERVICES } from "@/lib/site";
@@ -18,7 +18,12 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const ICONS = [Scissors, Sparkles, Home, KeyRound, HeartHandshake];
+const ICONS = {
+  grooming: Scissors,
+  baths: Sparkles,
+  boarding: Home,
+  daycare: HeartHandshake,
+} as const;
 
 function HomePage() {
   return (
@@ -57,22 +62,24 @@ function HomePage() {
           <h2 className="mt-2 font-display text-3xl sm:text-4xl">
             Groom. Play. Stay.
           </h2>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((service, i) => {
-              const Icon = ICONS[i] ?? Scissors;
-              return (
-                <article
-                  key={service.slug}
-                  className="flex flex-col items-center rounded-xl border border-line bg-cream p-6 shadow-card"
-                >
-                  <Icon className="size-6 text-teal-deep" strokeWidth={1.75} />
-                  <h3 className="mt-4 font-display text-xl">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {service.blurb}
-                  </p>
-                </article>
-              );
-            })}
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {SERVICES.filter((service) => service.slug !== "sitting").map(
+              (service) => {
+                const Icon = ICONS[service.slug] ?? Scissors;
+                return (
+                  <article
+                    key={service.slug}
+                    className="flex flex-col items-center rounded-xl border border-line bg-cream p-6 shadow-card"
+                  >
+                    <Icon className="size-6 text-teal-deep" strokeWidth={1.75} />
+                    <h3 className="mt-4 font-display text-xl">{service.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">
+                      {service.blurb}
+                    </p>
+                  </article>
+                );
+              },
+            )}
           </div>
         </div>
       </section>
