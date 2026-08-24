@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { HeartHandshake, Home, Scissors, Sparkles } from "lucide-react";
+import { HeartHandshake, Home, KeyRound, Scissors, Sparkles, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { REVIEWS, SERVICES } from "@/lib/site";
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const ICONS = [Scissors, Sparkles, Home, HeartHandshake];
+const ICONS = [Scissors, Sparkles, Home, KeyRound, HeartHandshake];
 
 function HomePage() {
   return (
@@ -57,7 +57,7 @@ function HomePage() {
           <h2 className="mt-2 font-display text-3xl sm:text-4xl">
             Groom. Play. Stay.
           </h2>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((service, i) => {
               const Icon = ICONS[i] ?? Scissors;
               return (

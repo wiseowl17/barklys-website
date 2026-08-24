@@ -37,6 +37,27 @@ export const ADD_ONS = [
   { name: "Specialty shampoo", from: "Quoted" },
 ] as const;
 
+export const HOUSE_SITTING_RATES = [
+  { name: "Overnight", price: "$50", note: "per night · in your home" },
+  { name: "Holiday rate", price: "$60", note: "per night" },
+  { name: "Additional dog", price: "+$15", note: "per dog per night" },
+  { name: "Puppy rate", price: "$60", note: "per night" },
+  { name: "Cat care", price: "$35", note: "per night" },
+  { name: "Additional cat", price: "+$15", note: "per cat per night" },
+  { name: "Extended care", price: "50–100%", note: "of nightly rate" },
+] as const;
+
+export const BOARDING_RATES = [
+  { name: "Overnight", price: "$50", note: "per night · in our home" },
+  { name: "Holiday rate", price: "$60", note: "per night" },
+  { name: "Additional dog", price: "+$40", note: "per dog per night" },
+  { name: "Puppy rate", price: "$55", note: "per night" },
+  { name: "Cat care", price: "$35", note: "per night" },
+  { name: "Additional cat", price: "+$23", note: "per cat per night" },
+  { name: "Bathing / grooming", price: "+$50", note: "each" },
+  { name: "Extended care", price: "50–100%", note: "of nightly rate" },
+] as const;
+
 export const SERVICES = [
   {
     slug: "grooming",
@@ -54,11 +75,17 @@ export const SERVICES = [
     slug: "boarding",
     title: "Boarding",
     blurb:
-      "Overnight stay in a calm home setting with structure, rest, and care.",
+      "Overnight stay in our calm home — structure, rest, and Fear-Free care.",
+  },
+  {
+    slug: "sitting",
+    title: "House Sitting",
+    blurb:
+      "Overnight care in your home so your pets stay in their own space.",
   },
   {
     slug: "daycare",
-    title: "Daycare & Sitting",
+    title: "Daycare",
     blurb:
       "Daytime companionship for pups who need play, rest, and a familiar face.",
   },
