@@ -72,7 +72,11 @@ function HomePage() {
                     className="flex flex-col items-center rounded-xl border border-line bg-cream p-6 shadow-card"
                   >
                     <Icon className="size-6 text-teal-deep" strokeWidth={1.75} />
-                    <h3 className="mt-4 font-display text-xl">{service.title}</h3>
+                    <h3 className="mt-4 font-display text-xl">
+                      {service.slug === "daycare"
+                        ? "Doggy Daycare"
+                        : service.title}
+                    </h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted">
                       {service.blurb}
                     </p>
