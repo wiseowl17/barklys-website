@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { NAV } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/brand-logo";
+import { SocialLinks } from "@/components/social-links";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -35,6 +36,7 @@ export function Header() {
           <Button asChild size="sm" className="ml-2">
             <Link to="/book">Book appointment</Link>
           </Button>
+          <SocialLinks className="ml-2" />
         </nav>
 
         <button
@@ -63,6 +65,7 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <SocialLinks className="mt-3" />
           </nav>
         </div>
       ) : null}

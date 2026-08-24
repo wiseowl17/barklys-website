@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram } from "lucide-react";
 import { NAV, SITE } from "@/lib/site";
 import { BrandLogo } from "@/components/brand-logo";
+import { SocialLinks } from "@/components/social-links";
 
 export function Footer() {
   return (
@@ -45,28 +45,8 @@ export function Footer() {
                 {SITE.email}
               </a>
             </li>
-            <li className="flex justify-center pt-1">
-              <a
-                href={SITE.instagram}
-                className="inline-flex items-center gap-1.5 hover:text-paper"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Instagram className="size-4" />
-                Instagram {SITE.handle}
-              </a>
-            </li>
-            <li>
-              <a
-                href={SITE.tiktok}
-                className="hover:text-paper"
-                target="_blank"
-                rel="noreferrer"
-              >
-                TikTok {SITE.handle}
-              </a>
-            </li>
           </ul>
+          <SocialLinks tone="paper" className="mt-5" />
           <p className="mt-6 max-w-xs text-xs leading-relaxed text-sky/80">
             Serving {SITE.area}. Exact studio address is shared after your
             appointment is confirmed.

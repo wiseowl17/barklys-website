@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/lib/site";
+import { SocialLinks } from "@/components/social-links";
 
 export const Route = createFileRoute("/book")({
   component: BookPage,
@@ -65,8 +66,8 @@ function BookPage() {
         </div>
         <div>
           <dt className="text-muted">Social</dt>
-          <dd className="font-medium text-navy">
-            Instagram & TikTok {SITE.handle}
+          <dd className="mt-2">
+            <SocialLinks />
           </dd>
         </div>
       </dl>
