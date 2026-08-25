@@ -21,7 +21,7 @@ export const NAV = [
 ] as const;
 
 export const GROOM_PRICES = [
-  { size: "S", range: "11–25 lbs", groom: "$75", touchUp: "$65" },
+  { size: "S", range: "0–25 lbs", groom: "$75", touchUp: "$65" },
   { size: "M", range: "26–40 lbs", groom: "$85", touchUp: "$75" },
   { size: "L", range: "41–70 lbs", groom: "$95", touchUp: "$85" },
   { size: "XL", range: "71–90 lbs", groom: "$105", touchUp: "$95" },
