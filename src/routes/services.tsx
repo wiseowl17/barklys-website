@@ -102,19 +102,20 @@ function ServicesPage() {
 
       <section className="bg-paper">
         <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
-          <h2 className="font-display text-3xl">Full groom starting prices</h2>
+          <h2 className="font-display text-3xl">Grooming prices</h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-            Prices below are starting points. Final quotes depend on coat
-            condition, breed, and the work your dog actually needs. Bath-and-brush
-            packages are slightly lower.
+            Full grooms include haircut, bath, dry, ears, and nails. Touch-ups
+            include a bath plus face, feet, sanitary trim, and light shaping —
+            $10 less than a full groom.
           </p>
-          <div className="mt-8 overflow-hidden rounded-xl border border-line">
-            <table className="w-full text-center text-sm">
+          <div className="mt-8 overflow-x-auto rounded-xl border border-line">
+            <table className="w-full min-w-[28rem] text-center text-sm">
               <thead className="bg-cream-deep text-navy">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Size</th>
                   <th className="px-4 py-3 font-semibold">Weight</th>
-                  <th className="px-4 py-3 font-semibold">Starting at</th>
+                  <th className="px-4 py-3 font-semibold">Full groom</th>
+                  <th className="px-4 py-3 font-semibold">Touch-up</th>
                 </tr>
               </thead>
               <tbody className="bg-paper">
@@ -123,13 +124,19 @@ function ServicesPage() {
                     <td className="px-4 py-3 font-medium text-navy">{row.size}</td>
                     <td className="px-4 py-3 text-muted">{row.range}</td>
                     <td className="px-4 py-3 tabular-nums text-teal-deep">
-                      {row.price}
+                      {row.groom}
+                    </td>
+                    <td className="px-4 py-3 tabular-nums text-teal-deep">
+                      {row.touchUp}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+          <p className="mx-auto mt-4 max-w-xl text-xs text-muted">
+            Extra time for matting or heavy coat work may be quoted at drop-off.
+          </p>
         </div>
       </section>
 
@@ -162,8 +169,8 @@ function ServicesPage() {
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
           <h2 className="font-display text-3xl">Add-ons</h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-            Deshedding, teeth brushing, touch-ups, paw balm, nails, senior and
-            puppy care, and specialty shampoos for different coat types.
+            Deshedding, teeth brushing, paw balm, nails, and specialty shampoos
+            for different coat types.
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {ADD_ONS.map((item) => (
@@ -177,7 +184,7 @@ function ServicesPage() {
             ))}
           </ul>
           <Button asChild className="mt-10">
-            <Link to="/book">Request a quote</Link>
+            <Link to="/book">Book an appointment</Link>
           </Button>
         </div>
       </section>

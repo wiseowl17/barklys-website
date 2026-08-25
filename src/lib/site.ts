@@ -21,11 +21,11 @@ export const NAV = [
 ] as const;
 
 export const GROOM_PRICES = [
-  { size: "Extra Small", range: "0–10 lbs", price: "$65" },
-  { size: "Small", range: "11–30 lbs", price: "$80" },
-  { size: "Medium", range: "31–50 lbs", price: "$95" },
-  { size: "Large", range: "51–75 lbs", price: "$115" },
-  { size: "Extra Large", range: "75+ lbs", price: "$135+" },
+  { size: "S", range: "11–25 lbs", groom: "$75", touchUp: "$65" },
+  { size: "M", range: "26–40 lbs", groom: "$85", touchUp: "$75" },
+  { size: "L", range: "41–70 lbs", groom: "$95", touchUp: "$85" },
+  { size: "XL", range: "71–90 lbs", groom: "$105", touchUp: "$95" },
+  { size: "XL+", range: "91+ lbs", groom: "$115", touchUp: "$105" },
 ] as const;
 
 export const ADD_ONS = [
@@ -33,7 +33,6 @@ export const ADD_ONS = [
   { name: "Nail trim", from: "$15–$20" },
   { name: "Teeth brushing", from: "$12" },
   { name: "Paw balm", from: "$8" },
-  { name: "Touch-ups", from: "Quoted" },
   { name: "Specialty shampoo", from: "Quoted" },
 ] as const;
 
