@@ -42,8 +42,6 @@ export const BOARDING_RATES = [
   { name: "Holiday rate", price: "$60", note: "per night" },
   { name: "Additional dog", price: "+$40", note: "per dog per night" },
   { name: "Puppy rate", price: "$55", note: "per night" },
-  { name: "Cat care", price: "$35", note: "per night" },
-  { name: "Additional cat", price: "+$23", note: "per cat per night" },
   { name: "Bathing / grooming", price: "+$50", note: "each" },
   { name: "Extended care", price: "50–100%", note: "of nightly rate" },
 ] as const;
