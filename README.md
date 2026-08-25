@@ -6,7 +6,7 @@ Fear-Free pet grooming, boarding, and daycare website for Charlotte, NC and surr
 
 - TanStack Start (React)
 - Tailwind CSS v4
-- Booking request form on the Book page (appointments confirmed by hand)
+- Square Appointments widget on the Book page
 
 ## Local preview
 
@@ -40,8 +40,7 @@ Create a public repository (for example `barklys-website`) and push this project
 
 ### 4. Booking
 
-Appointments are requested through the form on `/book`. Nothing is booked
-until Barkly’s confirms. Requests open an email to barklysclt@gmail.com.
+Appointments are booked through Square Appointments on `/book`.
 
 ### 5. Environment
 
