@@ -5,7 +5,6 @@ import { NAV } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { BrandLogo } from "@/components/brand-logo";
 import { SocialLinks } from "@/components/social-links";
-import { PromoBanner } from "@/components/promo-banner";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -14,7 +13,6 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-cream/90 backdrop-blur-md">
-      <PromoBanner />
       <div className="relative mx-auto flex max-w-6xl flex-col items-center px-4 py-3 sm:px-6">
         <Link to="/" className="flex flex-col items-center" onClick={() => setOpen(false)}>
           <BrandLogo className="h-[4.75rem] w-auto sm:h-20" />

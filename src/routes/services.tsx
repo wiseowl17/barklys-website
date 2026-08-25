@@ -104,18 +104,15 @@ function ServicesPage() {
         <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
           <h2 className="font-display text-3xl">Grooming prices</h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-            Full grooms include haircut, bath, dry, ears, and nails. Touch-ups
-            include a bath plus face, feet, sanitary trim, and light shaping —
-            $10 less than a full groom.
+            Full grooms include haircut, bath, dry, ears, and nails.
           </p>
-          <div className="mt-8 overflow-x-auto rounded-xl border border-line">
-            <table className="w-full min-w-[28rem] text-center text-sm">
+          <div className="mt-8 overflow-hidden rounded-xl border border-line">
+            <table className="w-full text-center text-sm">
               <thead className="bg-cream-deep text-navy">
                 <tr>
                   <th className="px-4 py-3 font-semibold">Size</th>
                   <th className="px-4 py-3 font-semibold">Weight</th>
                   <th className="px-4 py-3 font-semibold">Full groom</th>
-                  <th className="px-4 py-3 font-semibold">Touch-up</th>
                 </tr>
               </thead>
               <tbody className="bg-paper">
@@ -124,13 +121,17 @@ function ServicesPage() {
                     <td className="px-4 py-3 font-medium text-navy">{row.size}</td>
                     <td className="px-4 py-3 text-muted">{row.range}</td>
                     <td className="px-4 py-3 tabular-nums text-teal-deep">
-                      {row.groom}
-                    </td>
-                    <td className="px-4 py-3 tabular-nums text-teal-deep">
-                      {row.touchUp}
+                      {row.price}
                     </td>
                   </tr>
                 ))}
+                <tr className="border-t border-line bg-cream">
+                  <td className="px-4 py-3 font-medium text-navy">Touch-up</td>
+                  <td className="px-4 py-3 text-muted">Bath, face, feet & tidy</td>
+                  <td className="px-4 py-3 text-teal-deep">
+                    $10 less than a full groom
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
