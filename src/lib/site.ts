@@ -29,9 +29,10 @@ export const GROOM_PRICES = [
 ] as const;
 
 export const ADD_ONS = [
-  { name: "Deshedding", from: "$25–$40" },
+  { name: "Deshedding", from: "$20–$40" },
+  { name: "Dematting", from: "$20–$40" },
   { name: "Nail trim", from: "$15–$20" },
-  { name: "Teeth brushing", from: "$12" },
+  { name: "Teeth brushing", from: "$6" },
   { name: "Paw balm", from: "$8" },
   { name: "Specialty shampoo", from: "Quoted" },
 ] as const;
