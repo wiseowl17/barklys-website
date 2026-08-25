@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { HeartHandshake, Home, Scissors, Sparkles, ShieldCheck } from "lucide-react";
+import { HeartHandshake, Home, Scissors, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { REVIEWS, SERVICES } from "@/lib/site";
@@ -43,7 +43,7 @@ function HomePage() {
               <Link to="/book">Book an appointment</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link to="/services">See services</Link>
+              <Link to="/grooming">See services</Link>
             </Button>
           </div>
           <p className="mt-6 text-sm text-muted">
@@ -64,24 +64,25 @@ function HomePage() {
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {SERVICES.map((service) => {
-                const Icon = ICONS[service.slug] ?? Scissors;
-                return (
-                  <article
-                    key={service.slug}
-                    className="flex flex-col items-center rounded-xl border border-line bg-cream p-6 shadow-card"
-                  >
-                    <Icon className="size-6 text-teal-deep" strokeWidth={1.75} />
-                    <h3 className="mt-4 font-display text-xl">
-                      {service.slug === "daycare"
-                        ? "Doggy Daycare"
-                        : service.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted">
-                      {service.blurb}
-                    </p>
-                  </article>
-                );
-              })}
+              const Icon = ICONS[service.slug] ?? Scissors;
+              return (
+                <Link
+                  key={service.slug}
+                  to={service.href}
+                  className="flex flex-col items-center rounded-xl border border-line bg-cream p-6 shadow-card transition-shadow hover:shadow-md"
+                >
+                  <Icon className="size-6 text-teal-deep" strokeWidth={1.75} />
+                  <h3 className="mt-4 font-display text-xl">
+                    {service.slug === "daycare"
+                      ? "Doggy Daycare"
+                      : service.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                    {service.blurb}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -120,7 +121,12 @@ function HomePage() {
             Pick a time that works. We’ll take it from there — coat notes,
             Fear-Free handling, and a calm visit for your pup.
           </p>
-          <Button asChild size="lg" variant="primary" className="bg-gold text-navy-deep hover:bg-gold/90">
+          <Button
+            asChild
+            size="lg"
+            variant="primary"
+            className="bg-gold text-navy-deep hover:bg-gold/90"
+          >
             <Link to="/book">Book an appointment</Link>
           </Button>
         </div>

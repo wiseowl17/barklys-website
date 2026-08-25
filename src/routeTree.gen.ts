@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as BoardingRouteImport } from './routes/boarding'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as GroomingRouteImport } from './routes/grooming'
 import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as ServicesRouteImport } from './routes/services'
 
@@ -31,9 +33,19 @@ const BookRoute = BookRouteImport.update({
   path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BoardingRoute = BoardingRouteImport.update({
+  id: '/boarding',
+  path: '/boarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GroomingRoute = GroomingRouteImport.update({
+  id: '/grooming',
+  path: '/grooming',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PoliciesRoute = PoliciesRouteImport.update({
@@ -51,7 +63,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
+  '/boarding': typeof BoardingRoute
   '/gallery': typeof GalleryRoute
+  '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
   '/services': typeof ServicesRoute
 }
@@ -59,7 +73,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
+  '/boarding': typeof BoardingRoute
   '/gallery': typeof GalleryRoute
+  '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
   '/services': typeof ServicesRoute
 }
@@ -68,21 +84,41 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/book': typeof BookRoute
+  '/boarding': typeof BoardingRoute
   '/gallery': typeof GalleryRoute
+  '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/book' | '/gallery' | '/policies' | '/services'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/book'
+    | '/boarding'
+    | '/gallery'
+    | '/grooming'
+    | '/policies'
+    | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/book' | '/gallery' | '/policies' | '/services'
+  to:
+    | '/'
+    | '/about'
+    | '/book'
+    | '/boarding'
+    | '/gallery'
+    | '/grooming'
+    | '/policies'
+    | '/services'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/book'
+    | '/boarding'
     | '/gallery'
+    | '/grooming'
     | '/policies'
     | '/services'
   fileRoutesById: FileRoutesById
@@ -91,7 +127,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   BookRoute: typeof BookRoute
+  BoardingRoute: typeof BoardingRoute
   GalleryRoute: typeof GalleryRoute
+  GroomingRoute: typeof GroomingRoute
   PoliciesRoute: typeof PoliciesRoute
   ServicesRoute: typeof ServicesRoute
 }
@@ -119,11 +157,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/boarding': {
+      id: '/boarding'
+      path: '/boarding'
+      fullPath: '/boarding'
+      preLoaderRoute: typeof BoardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/grooming': {
+      id: '/grooming'
+      path: '/grooming'
+      fullPath: '/grooming'
+      preLoaderRoute: typeof GroomingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/policies': {
@@ -147,7 +199,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   BookRoute: BookRoute,
+  BoardingRoute: BoardingRoute,
   GalleryRoute: GalleryRoute,
+  GroomingRoute: GroomingRoute,
   PoliciesRoute: PoliciesRoute,
   ServicesRoute: ServicesRoute,
 }

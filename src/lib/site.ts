@@ -11,10 +11,21 @@ export const SITE = {
     "Charlotte, NC and surrounding towns including Fort Mill and Tega Cay",
 } as const;
 
-export const NAV = [
+export type NavLink = { to: string; label: string };
+export type NavItem =
+  | NavLink
+  | { label: string; children: readonly NavLink[] };
+
+export const NAV: readonly NavItem[] = [
   { to: "/", label: "Home" },
   { to: "/about", label: "Meet the Groomer" },
-  { to: "/services", label: "Services" },
+  {
+    label: "Services",
+    children: [
+      { to: "/grooming", label: "Grooming" },
+      { to: "/boarding", label: "Boarding" },
+    ],
+  },
   { to: "/gallery", label: "Gallery" },
   { to: "/policies", label: "Policies" },
   { to: "/book", label: "Book" },
@@ -29,7 +40,7 @@ export const GROOM_PRICES = [
 ] as const;
 
 export const ADD_ONS = [
-  { name: "Deshedding", from: "$20–$40" },
+  { name: "Deshedding", from: "$25–$40" },
   { name: "Dematting", from: "$20–$40" },
   { name: "Nail trim", from: "$15–$20" },
   { name: "Teeth brushing", from: "$6" },
@@ -52,24 +63,28 @@ export const SERVICES = [
     title: "Full Grooming",
     blurb:
       "Breed-appropriate haircut, bath, dry, ears, and nails — at your dog’s pace.",
+    href: "/grooming",
   },
   {
     slug: "baths",
     title: "Baths",
     blurb:
       "Gentle wash, conditioner, and fluffy dry with coat-specific shampoos.",
+    href: "/grooming",
   },
   {
     slug: "boarding",
     title: "Boarding",
     blurb:
       "Overnight stay in our calm home — structure, rest, and Fear-Free care.",
+    href: "/boarding",
   },
   {
     slug: "daycare",
     title: "Daycare",
     blurb:
       "Daytime companionship for pups who need play, rest, and a familiar face.",
+    href: "/boarding",
   },
 ] as const;
 
