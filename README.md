@@ -6,7 +6,7 @@ Fear-Free pet grooming, boarding, and daycare website for Charlotte, NC and surr
 
 - TanStack Start (React)
 - Tailwind CSS v4
-- Tuft booking widget on the Book page
+- Booking request form on the Book page (appointments confirmed by hand)
 
 ## Local preview
 
@@ -40,8 +40,8 @@ Create a public repository (for example `barklys-website`) and push this project
 
 ### 4. Booking
 
-Appointments are booked through the Tuft widget on `/book`
-(`https://widget.tuftapp.com/index.html?groomer_id=7105`).
+Appointments are requested through the form on `/book`. Nothing is booked
+until Barkly’s confirms. Requests open an email to barklysclt@gmail.com.
 
 ### 5. Environment
 
