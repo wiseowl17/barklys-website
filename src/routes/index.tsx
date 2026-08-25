@@ -63,8 +63,7 @@ function HomePage() {
             Groom. Play. Stay.
           </h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {SERVICES.filter((service) => service.slug !== "sitting").map(
-              (service) => {
+            {SERVICES.map((service) => {
                 const Icon = ICONS[service.slug] ?? Scissors;
                 return (
                   <article
@@ -82,8 +81,7 @@ function HomePage() {
                     </p>
                   </article>
                 );
-              },
-            )}
+              })}
           </div>
         </div>
       </section>

@@ -3,7 +3,6 @@ import {
   Droplets,
   HeartHandshake,
   Home,
-  KeyRound,
   Scissors,
   Sparkles,
 } from "lucide-react";
@@ -11,7 +10,6 @@ import {
   ADD_ONS,
   BOARDING_RATES,
   GROOM_PRICES,
-  HOUSE_SITTING_RATES,
   SERVICES,
 } from "@/lib/site";
 import { Button } from "@/components/ui/button";
@@ -27,7 +25,6 @@ const SERVICE_ICONS = {
   grooming: Scissors,
   baths: Droplets,
   boarding: Home,
-  sitting: KeyRound,
   daycare: HeartHandshake,
 } as const;
 
@@ -75,11 +72,11 @@ function ServicesPage() {
         </p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">Services</h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">
-          Full grooms, baths, boarding, house sitting, and daycare. All breeds
-          are welcome, with extra fluency in poodles, schnauzers, and doodles.
+          Full grooms, baths, boarding, and daycare. All breeds are welcome,
+          with extra fluency in poodles, schnauzers, and doodles.
         </p>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((service) => {
             const Icon = SERVICE_ICONS[service.slug] ?? Sparkles;
             return (
@@ -141,19 +138,13 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <h2 className="font-display text-3xl">Stay & sit rates</h2>
+      <section className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+        <h2 className="font-display text-3xl">Boarding rates</h2>
         <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-          House sitting is overnight care in your home. Boarding is overnight
-          in ours. Holiday dates, extra pets, puppies, and extended hours are
-          listed below.
+          Overnight stay in our home. Holiday dates, extra pets, puppies, and
+          extended hours are listed below.
         </p>
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          <RateCard
-            title="House sitting"
-            subtitle="In your home"
-            rows={HOUSE_SITTING_RATES}
-          />
+        <div className="mt-8">
           <RateCard
             title="Boarding"
             subtitle="In our home"
