@@ -1,11 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SITE } from "@/lib/site";
 import { SocialLinks } from "@/components/social-links";
 
 export const Route = createFileRoute("/book")({
   component: BookPage,
   head: () => ({
-    meta: [{ title: "Book an Appointment | Barkly's" }],
+    meta: [{ title: "Book Grooming | Barkly's" }],
   }),
 });
 
@@ -18,17 +18,28 @@ function BookPage() {
   return (
     <main className="mx-auto flex max-w-3xl flex-col items-center px-4 py-14 text-center sm:px-6">
       <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
-        By appointment
+        Grooming
       </p>
-      <h1 className="mt-3 font-display text-4xl sm:text-5xl">Book with us</h1>
+      <h1 className="mt-3 font-display text-4xl sm:text-5xl">Book grooming</h1>
       <p className="mt-4 max-w-xl leading-relaxed text-muted">
-        Pick a service and time below. We’ll follow up if we need anything for
-        a calm, Fear-Free visit.
+        Pick a grooming service and time below. We’ll follow up if we need
+        anything for a calm, Fear-Free visit.
+      </p>
+
+      <p className="mt-4 max-w-xl rounded-xl border border-line bg-cream-deep px-4 py-3 text-sm text-muted">
+        Looking for overnight boarding or daycare?{" "}
+        <Link
+          to="/boarding"
+          className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
+        >
+          Request boarding or daycare here
+        </Link>
+        .
       </p>
 
       <div className="mt-10 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
         <iframe
-          title="Book an appointment with Barkly's"
+          title="Book a grooming appointment with Barkly's"
           src={SQUARE_WIDGET}
           allow="payment"
           className="h-[820px] w-full border-0"

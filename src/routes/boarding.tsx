@@ -1,7 +1,9 @@
+import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeartHandshake, Home } from "lucide-react";
-import { BOARDING_RATES } from "@/lib/site";
+import { BOARDING_RATES, SITE } from "@/lib/site";
 import { Button } from "@/components/ui/button";
+import { Input, Label, Textarea } from "@/components/ui/input";
 
 export const Route = createFileRoute("/boarding")({
   component: BoardingPage,
@@ -42,6 +44,184 @@ function RateCard({
         ))}
       </ul>
     </article>
+  );
+}
+
+function BoardingRequestForm() {
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    setSending(true);
+
+    try {
+      // FormSubmit delivers to the business email without a backend.
+      const res = await fetch(`https://formsubmit.co/ajax/${SITE.email}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: data,
+      });
+
+      if (!res.ok) throw new Error("send failed");
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      // Fallback: open mail client with the request details.
+      const entries = Object.fromEntries(data.entries());
+      const body = Object.entries(entries)
+        .filter(([k]) => !k.startsWith("_"))
+        .map(([k, v]) => `${k}: ${v}`)
+        .join("\n");
+      window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(
+        "Boarding / daycare request",
+      )}&body=${encodeURIComponent(body)}`;
+      setSubmitted(true);
+    } finally {
+      setSending(false);
+    }
+  }
+
+  if (submitted) {
+    return (
+      <div className="rounded-2xl border border-line bg-cream-deep px-6 py-10 text-center">
+        <h3 className="font-display text-2xl text-navy">Request received</h3>
+        <p className="mx-auto mt-3 max-w-md text-sm text-muted">
+          Thanks! We’ll review availability and get back to you to confirm your
+          boarding or daycare dates.
+        </p>
+        <Button
+          type="button"
+          className="mt-6"
+          variant="outline"
+          onClick={() => setSubmitted(false)}
+        >
+          Send another request
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      onSubmit={onSubmit}
+      className="mx-auto max-w-xl space-y-4 rounded-2xl border border-line bg-paper p-6 text-left shadow-card sm:p-8"
+    >
+      <input type="hidden" name="_subject" value="Barkly's boarding / daycare request" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+
+      <p className="text-center text-sm text-muted">
+        This is a request only — all stays are confirmed manually based on
+        availability.
+      </p>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <Label htmlFor="name">Your name</Label>
+          <Input id="name" name="name" required autoComplete="name" />
+        </div>
+        <div>
+          <Label htmlFor="phone">Phone</Label>
+          <Input id="phone" name="phone" type="tel" required autoComplete="tel" />
+        </div>
+      </div>
+
+      <div>
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+        />
+      </div>
+
+      <div>
+        <Label htmlFor="service">Service</Label>
+        <select
+          id="service"
+          name="service"
+          required
+          className="h-11 w-full rounded-md border border-line bg-paper px-3.5 text-center text-sm text-ink outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-teal/25"
+          defaultValue=""
+        >
+          <option value="" disabled>
+            Select…
+          </option>
+          <option value="Boarding (overnight)">Boarding (overnight)</option>
+          <option value="Daycare">Daycare</option>
+        </select>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <Label htmlFor="start_date">Preferred start date</Label>
+          <Input id="start_date" name="start_date" type="date" required />
+        </div>
+        <div>
+          <Label htmlFor="end_date">Preferred end date</Label>
+          <Input id="end_date" name="end_date" type="date" />
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <Label htmlFor="days">Number of days / nights</Label>
+          <Input
+            id="days"
+            name="days"
+            type="number"
+            min={1}
+            max={30}
+            placeholder="e.g. 3"
+            required
+          />
+        </div>
+        <div>
+          <Label htmlFor="dogs">Number of dogs</Label>
+          <Input
+            id="dogs"
+            name="dogs"
+            type="number"
+            min={1}
+            max={5}
+            defaultValue={1}
+            required
+          />
+        </div>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <Label htmlFor="dog_name">Dog’s name</Label>
+          <Input id="dog_name" name="dog_name" required />
+        </div>
+        <div>
+          <Label htmlFor="breed">Breed</Label>
+          <Input id="breed" name="breed" required />
+        </div>
+      </div>
+
+      <div>
+        <Label htmlFor="weight">Weight (lbs)</Label>
+        <Input id="weight" name="weight" type="number" min={1} step={1} />
+      </div>
+
+      <div>
+        <Label htmlFor="message">Notes (temperament, meds, schedule)</Label>
+        <Textarea id="message" name="message" rows={4} />
+      </div>
+
+      <Button type="submit" className="w-full" disabled={sending}>
+        {sending ? "Sending…" : "Send boarding request"}
+      </Button>
+    </form>
   );
 }
 
@@ -111,12 +291,30 @@ function BoardingPage() {
           <p className="mx-auto mt-8 max-w-xl rounded-xl border border-line bg-cream px-5 py-4 text-sm text-muted">
             <span className="font-medium text-navy">Daycare</span> is daytime
             only and quoted per visit. Tell us your pup’s schedule when you
-            book.
+            request care.
           </p>
-          <Button asChild className="mt-10">
-            <Link to="/book">Book an appointment</Link>
-          </Button>
         </div>
+      </section>
+
+      <section id="request" className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
+        <h2 className="font-display text-3xl">Request boarding or daycare</h2>
+        <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
+          Tell us how many days you need and whether it’s overnight boarding or
+          daycare. We’ll confirm availability by phone or email.
+        </p>
+        <div className="mt-8">
+          <BoardingRequestForm />
+        </div>
+        <p className="mt-6 text-sm text-muted">
+          Need a haircut instead?{" "}
+          <Link
+            to="/book"
+            className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
+          >
+            Book grooming on Square
+          </Link>
+          .
+        </p>
       </section>
     </main>
   );
