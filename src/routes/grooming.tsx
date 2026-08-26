@@ -102,10 +102,6 @@ function GroomingPage() {
 
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <h2 className="font-display text-3xl">Add-ons</h2>
-        <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-          Deshedding, dematting, teeth brushing, paw balm, nails, and specialty
-          shampoos for different coat types.
-        </p>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {ADD_ONS.map((item) => (
             <li
