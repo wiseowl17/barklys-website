@@ -3,6 +3,7 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { WhatsAppBubble } from "@/components/whatsapp-bubble";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "Barkly's";
@@ -48,6 +49,7 @@ function RootLayout() {
           <Header />
           <Outlet />
           <Footer />
+          <WhatsAppBubble />
         </AuthProvider>
         <Scripts />
       </body>

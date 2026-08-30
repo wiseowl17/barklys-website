@@ -3,6 +3,12 @@ export const SITE = {
   tagline: "Groom, Play & Stay",
   phoneDisplay: "(801) 696-6507",
   phoneHref: "tel:+18016966507",
+  whatsappNumber: "18016966507",
+  whatsappHref:
+    "https://wa.me/18016966507?text=" +
+    encodeURIComponent(
+      "Hi Barkly's! I'd like to ask about grooming or boarding.",
+    ),
   email: "barklysclt@gmail.com",
   instagram: "https://instagram.com/barklysclt",
   tiktok: "https://www.tiktok.com/@barklysclt",
