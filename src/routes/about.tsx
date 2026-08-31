@@ -16,19 +16,29 @@ function AboutPage() {
           Meet the groomer
         </p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">Vanessa</h1>
-        <aside className="mt-8 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
-          <img
-            src="/vanessa.jpg"
-            alt="Vanessa with a golden retriever on the grooming table"
-            className="mx-auto aspect-square w-full max-w-lg object-cover"
+
+        <div className="relative mt-10 flex flex-col items-center">
+          <div
+            className="pointer-events-none absolute inset-x-8 -top-4 h-72 rounded-full bg-gold/25 blur-3xl sm:h-96"
+            aria-hidden
           />
-          <div className="p-6">
-            <p className="font-display text-2xl text-navy">Vanessa Cordova</p>
-            <p className="mt-1 text-sm text-muted">
-              Fear Free Certified Professional · Groomer
-            </p>
+          <div className="relative size-56 rounded-full bg-gold p-1.5 shadow-soft sm:size-72">
+            <div className="size-full rounded-full bg-navy p-1">
+              <img
+                src="/vanessa-headshot.jpg"
+                alt="Vanessa Cordova, Fear Free certified professional groomer"
+                className="size-full rounded-full object-cover object-[center_18%]"
+              />
+            </div>
           </div>
-        </aside>
+          <p className="relative mt-6 font-display text-3xl text-navy">
+            Vanessa Cordova
+          </p>
+          <p className="relative mt-1 text-sm text-muted">
+            Fear Free Certified Professional · Groomer
+          </p>
+        </div>
+
         <p className="mt-8 text-lg leading-relaxed text-muted">
           Nearly two decades in animal care, a veterinary education from
           Venezuela, and five years as a professional groomer — with a Fear
@@ -50,6 +60,17 @@ function AboutPage() {
             all breeds welcome
           </li>
         </ul>
+
+        <figure className="mt-12 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-card">
+          <img
+            src="/vanessa.jpg"
+            alt="Vanessa with a golden retriever on the grooming table"
+            className="mx-auto w-full object-cover"
+          />
+          <figcaption className="px-5 py-4 text-sm text-muted">
+            In the studio — every appointment at the dog’s pace.
+          </figcaption>
+        </figure>
       </section>
 
       <section className="bg-paper">
