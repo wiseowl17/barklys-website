@@ -7,6 +7,7 @@ import { WhatsAppBubble } from "@/components/whatsapp-bubble";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "Barkly's";
+const GA_ID = "G-GRS5XQS6NT";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -31,6 +32,18 @@ export const Route = createRootRoute({
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        async: true,
+        src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`,
+      },
+      {
+        children: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`,
       },
     ],
   }),
