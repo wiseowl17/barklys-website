@@ -1,10 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/policies")({
   component: PoliciesPage,
-  head: () => ({
-    meta: [{ title: "Policies | Barkly's" }],
-  }),
+  head: () =>
+    pageHead({
+      title: "Grooming & Boarding Policies | Barkly's Charlotte",
+      description:
+        "Cancellation, vaccine, pick-up, and Fear-Free handling policies for dog grooming, boarding, and daycare at Barkly's in Charlotte NC.",
+      path: "/policies",
+    }),
 });
 
 const POLICIES = [

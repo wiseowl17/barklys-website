@@ -1,15 +1,29 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeartHandshake, Home } from "lucide-react";
+import { pageHead, serviceJsonLd } from "@/lib/seo";
 import { BOARDING_RATES, SITE } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
 
+const TITLE = "Dog Boarding, Daycare & Dog Sitting in Charlotte NC | Barkly's";
+const DESCRIPTION =
+  "In-home dog boarding, daycare, and dog sitting in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Calm overnight stays with Fear-Free care.";
+
 export const Route = createFileRoute("/boarding")({
   component: BoardingPage,
-  head: () => ({
-    meta: [{ title: "Boarding & Daycare | Barkly's" }],
-  }),
+  head: () =>
+    pageHead({
+      title: TITLE,
+      description: DESCRIPTION,
+      path: "/boarding",
+      jsonLd: serviceJsonLd({
+        name: "Dog boarding, daycare, and dog sitting",
+        description: DESCRIPTION,
+        path: "/boarding",
+        serviceType: "Pet boarding",
+      }),
+    }),
 });
 
 function RateCard({
@@ -155,7 +169,7 @@ function BoardingRequestForm() {
             Select…
           </option>
           <option value="Boarding (overnight)">Boarding (overnight)</option>
-          <option value="Daycare">Daycare</option>
+          <option value="Daycare / dog sitting">Daycare / dog sitting</option>
         </select>
       </div>
 
@@ -232,10 +246,13 @@ function BoardingPage() {
         <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
           Services
         </p>
-        <h1 className="mt-3 font-display text-4xl sm:text-5xl">Boarding</h1>
+        <h1 className="mt-3 font-display text-4xl sm:text-5xl">
+          Boarding, daycare & dog sitting
+        </h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">
-          Overnight stays and daytime care in our calm home — structure, rest,
-          and familiar faces.
+          Overnight dog boarding, in-home dog sitting, and daytime daycare in
+          our calm home — structure, rest, and familiar faces for families in{" "}
+          {SITE.area}.
         </p>
 
         <div className="mx-auto mt-6 flex max-w-md justify-center gap-2 rounded-full border border-line bg-paper p-1">
@@ -265,10 +282,11 @@ function BoardingPage() {
             <span className="flex size-12 items-center justify-center rounded-full bg-sky/35 text-teal-deep">
               <HeartHandshake className="size-6" strokeWidth={1.75} />
             </span>
-            <h2 className="mt-4 font-display text-2xl">Doggy Daycare</h2>
+            <h2 className="mt-4 font-display text-2xl">Daycare & dog sitting</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Daytime companionship for pups who need play, rest, and a familiar
-              face.
+              Daytime dog sitting and companionship for pups who need play,
+              rest, and a familiar face while you are at work or out for the
+              day.
             </p>
           </article>
         </div>
@@ -289,18 +307,22 @@ function BoardingPage() {
             />
           </div>
           <p className="mx-auto mt-8 max-w-xl rounded-xl border border-line bg-cream px-5 py-4 text-sm text-muted">
-            <span className="font-medium text-navy">Daycare</span> is daytime
-            only and quoted per visit. Tell us your pup’s schedule when you
-            request care.
+            <span className="font-medium text-navy">Daycare & dog sitting</span>{" "}
+            is daytime only and quoted per visit. Need someone to watch your dog
+            while you work, run errands, or travel for the day? Request in-home
+            dog sitting on the form below — no separate daycare page.
           </p>
         </div>
       </section>
 
       <section id="request" className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
-        <h2 className="font-display text-3xl">Request boarding or daycare</h2>
+        <h2 className="font-display text-3xl">
+          Request boarding, daycare, or dog sitting
+        </h2>
         <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-          Tell us how many days you need and whether it’s overnight boarding or
-          daycare. We’ll confirm availability by phone or email.
+          Tell us how many days you need and whether it’s overnight boarding,
+          daytime daycare, or in-home dog sitting. We’ll confirm availability by
+          phone or email.
         </p>
         <div className="mt-8">
           <BoardingRequestForm />

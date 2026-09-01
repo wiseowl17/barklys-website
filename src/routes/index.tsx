@@ -2,20 +2,18 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeartHandshake, Home, Scissors, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
-import { REVIEWS, SERVICES } from "@/lib/site";
+import { pageHead } from "@/lib/seo";
+import { REVIEWS, SERVICES, SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
-  head: () => ({
-    meta: [
-      { title: "Barkly's | Fear-Free Grooming in Charlotte" },
-      {
-        name: "description",
-        content:
-          "Fear-Free certified grooming, boarding, and daycare serving Charlotte, Fort Mill, and Tega Cay.",
-      },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Barkly's | Fear-Free Dog Grooming in Charlotte",
+      description:
+        "Fear-Free certified dog grooming, boarding, daycare, and dog sitting serving Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC.",
+      path: "/",
+    }),
 });
 
 const ICONS = {
@@ -34,9 +32,9 @@ function HomePage() {
             Fear-Free grooming in the Charlotte area
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            Barkly’s is a calm, home-based studio for grooming, boarding, and
-            daycare. Every appointment is paced to your dog — especially the
-            sensitive, senior, and first-time guests.
+            Barkly’s is a calm, home-based studio for dog grooming, boarding,
+            daycare, and dog sitting. Every appointment is paced to your dog —
+            especially the sensitive, senior, and first-time guests.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
@@ -47,8 +45,7 @@ function HomePage() {
             </Button>
           </div>
           <p className="mt-6 text-sm text-muted">
-            Serving Charlotte, Fort Mill, Tega Cay, and nearby towns · By
-            appointment only
+            Serving {SITE.area} · By appointment only
           </p>
           <HeroCarousel />
         </div>

@@ -1,11 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { pageHead } from "@/lib/seo";
+import { SITE } from "@/lib/site";
+
+const TITLE = "Meet Vanessa | Fear-Free Dog Groomer in Charlotte | Barkly's";
+const DESCRIPTION =
+  "Meet Vanessa Cordova, Fear Free certified professional dog groomer serving dogs in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC.";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
-  head: () => ({
-    meta: [{ title: "Meet Vanessa | Barkly's" }],
-  }),
+  head: () =>
+    pageHead({
+      title: TITLE,
+      description: DESCRIPTION,
+      path: "/about",
+    }),
 });
 
 function AboutPage() {
@@ -41,8 +50,9 @@ function AboutPage() {
 
         <p className="mt-8 text-lg leading-relaxed text-muted">
           Nearly two decades in animal care, a veterinary education from
-          Venezuela, and five years as a professional groomer — with a Fear
-          Free certification at the center of every appointment.
+          Venezuela, and five years as a professional dog groomer — with a Fear
+          Free certification at the center of every appointment. Vanessa
+          welcomes dogs from {SITE.area}.
         </p>
         <ul className="mt-8 w-full space-y-4 text-[15px] leading-relaxed text-ink">
           <li className="rounded-lg border border-line bg-paper px-4 py-3">

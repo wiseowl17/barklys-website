@@ -1,13 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Droplets, Scissors } from "lucide-react";
-import { ADD_ONS, GROOM_PRICES } from "@/lib/site";
+import { pageHead, serviceJsonLd } from "@/lib/seo";
+import { ADD_ONS, GROOM_PRICES, SITE } from "@/lib/site";
 import { Button } from "@/components/ui/button";
+
+const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Salon";
+const DESCRIPTION =
+  "Fear-Free dog grooming in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Full grooms, baths, and breed-specific cuts at your pup's pace.";
 
 export const Route = createFileRoute("/grooming")({
   component: GroomingPage,
-  head: () => ({
-    meta: [{ title: "Grooming & Pricing | Barkly's" }],
-  }),
+  head: () =>
+    pageHead({
+      title: TITLE,
+      description: DESCRIPTION,
+      path: "/grooming",
+      jsonLd: serviceJsonLd({
+        name: "Fear-Free dog grooming",
+        description: DESCRIPTION,
+        path: "/grooming",
+        serviceType: "Pet grooming",
+      }),
+    }),
 });
 
 function GroomingPage() {
@@ -19,8 +33,8 @@ function GroomingPage() {
         </p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">Grooming</h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">
-          Full grooms, baths, and add-ons. All breeds welcome, with extra fluency
-          in poodles, schnauzers, and doodles.
+          Full grooms, baths, and add-ons for dogs in {SITE.area}. All breeds
+          welcome, with extra fluency in poodles, schnauzers, and doodles.
         </p>
 
         <div className="mx-auto mt-6 flex max-w-md justify-center gap-2 rounded-full border border-line bg-paper p-1">
