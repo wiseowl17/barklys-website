@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { NAV, SITE } from "@/lib/site";
+import { navLinks, SERVICE_AREAS, SITE } from "@/lib/site";
 import { BrandLogo } from "@/components/brand-logo";
 import { SocialLinks } from "@/components/social-links";
 
@@ -10,8 +10,8 @@ export function Footer() {
         <div className="flex flex-col items-center">
           <BrandLogo decorative className="mx-auto mb-4 h-28 w-auto drop-shadow-md" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky">
-            Fear-Free grooming, boarding, and daycare for Charlotte and nearby
-            towns. Home-based, by appointment.
+            Fear-Free dog grooming, boarding, daycare, and dog sitting for{" "}
+            {SITE.area}. Home-based, by appointment.
           </p>
         </div>
 
@@ -20,7 +20,7 @@ export function Footer() {
             Visit
           </p>
           <ul className="mt-4 space-y-2 text-sm">
-            {NAV.map((item) => (
+            {navLinks().map((item) => (
               <li key={item.to}>
                 <Link to={item.to} className="text-sky hover:text-paper">
                   {item.label}
@@ -47,7 +47,17 @@ export function Footer() {
             </li>
           </ul>
           <SocialLinks tone="paper" className="mt-5" />
-          <p className="mt-6 max-w-xs text-xs leading-relaxed text-sky/80">
+          <p className="mt-6 text-xs font-semibold tracking-[0.18em] text-gold uppercase">
+            Service areas
+          </p>
+          <ul className="mt-3 flex max-w-xs flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-sky/90">
+            {SERVICE_AREAS.map((area) => (
+              <li key={`${area.name}-${area.state}`}>
+                {area.name} {area.state}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 max-w-xs text-xs leading-relaxed text-sky/80">
             Serving {SITE.area}. Exact studio address is shared after your
             appointment is confirmed.
           </p>

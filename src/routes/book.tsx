@@ -1,12 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { pageHead, serviceJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 import { SocialLinks } from "@/components/social-links";
 
+const TITLE = "Book Dog Grooming in Charlotte NC | Barkly's";
+const DESCRIPTION =
+  "Book a Fear-Free dog grooming appointment in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Boarding, daycare, and dog sitting by request.";
+
 export const Route = createFileRoute("/book")({
   component: BookPage,
-  head: () => ({
-    meta: [{ title: "Book Grooming | Barkly's" }],
-  }),
+  head: () =>
+    pageHead({
+      title: TITLE,
+      description: DESCRIPTION,
+      path: "/book",
+      jsonLd: serviceJsonLd({
+        name: "Book dog grooming",
+        description: DESCRIPTION,
+        path: "/book",
+        serviceType: "Pet grooming appointment",
+      }),
+    }),
 });
 
 const SQUARE_WIDGET =

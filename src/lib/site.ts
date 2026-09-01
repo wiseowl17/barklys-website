@@ -1,3 +1,25 @@
+export const SERVICE_AREAS = [
+  { name: "Charlotte", state: "NC" },
+  { name: "Tega Cay", state: "SC" },
+  { name: "Fort Mill", state: "SC" },
+  { name: "Ballantyne", state: "NC" },
+  { name: "Matthews", state: "NC" },
+  { name: "Belmont", state: "NC" },
+  { name: "Gastonia", state: "NC" },
+] as const;
+
+function joinList(items: readonly string[]): string {
+  if (items.length === 0) return "";
+  if (items.length === 1) return items[0]!;
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+}
+
+/** Full named list: "Charlotte NC, Tega Cay SC, …, and Gastonia NC" */
+export const SERVICE_AREA_NAMES = joinList(
+  SERVICE_AREAS.map((area) => `${area.name} ${area.state}`),
+);
+
 export const SITE = {
   name: "Barkly's",
   tagline: "Groom, Play & Stay",
@@ -9,8 +31,7 @@ export const SITE = {
   instagram: "https://instagram.com/barklysclt",
   tiktok: "https://www.tiktok.com/@barklysclt",
   handle: "@barklysclt",
-  area:
-    "Charlotte, NC and surrounding towns including Fort Mill and Tega Cay",
+  area: SERVICE_AREA_NAMES,
 } as const;
 
 export type NavLink = { to: string; label: string };
@@ -32,6 +53,11 @@ export const NAV: readonly NavItem[] = [
   { to: "/policies", label: "Policies" },
   { to: "/book", label: "Book" },
 ] as const;
+
+/** Flatten dropdown groups so footer can emit crawlable leaf links. */
+export function navLinks(items: readonly NavItem[] = NAV): NavLink[] {
+  return items.flatMap((item) => ("children" in item ? [...item.children] : [item]));
+}
 
 export const GROOM_PRICES = [
   { size: "S", range: "0–25 lbs", price: "$75" },
@@ -85,7 +111,7 @@ export const SERVICES = [
     slug: "daycare",
     title: "Daycare",
     blurb:
-      "Daytime companionship for pups who need play, rest, and a familiar face.",
+      "Daytime dog sitting and companionship for pups who need play, rest, and a familiar face.",
     href: "/boarding",
   },
 ] as const;

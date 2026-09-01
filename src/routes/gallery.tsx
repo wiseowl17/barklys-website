@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart, X } from "lucide-react";
+import { pageHead } from "@/lib/seo";
 import { GALLERY } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
-  head: () => ({
-    meta: [{ title: "Gallery | Barkly's" }],
-  }),
+  head: () =>
+    pageHead({
+      title: "Dog Grooming Gallery | Barkly's Charlotte",
+      description:
+        "Real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails.",
+      path: "/gallery",
+    }),
 });
 
 const TAPES = ["bg-pink", "bg-gold", "bg-sky", "bg-teal"] as const;

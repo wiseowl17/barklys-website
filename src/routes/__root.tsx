@@ -4,9 +4,13 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppBubble } from "@/components/whatsapp-bubble";
+import { localBusinessJsonLd, OG_IMAGE_URL } from "@/lib/seo";
 import appCss from "../styles.css?url";
 
-const APP_NAME = "Barkly's";
+const FALLBACK_TITLE =
+  "Barkly's | Fear-Free Dog Grooming, Boarding & Daycare in Charlotte";
+const FALLBACK_DESCRIPTION =
+  "Fear-Free dog grooming, boarding, daycare, and dog sitting in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC.";
 const GA_ID = "G-GRS5XQS6NT";
 
 export const Route = createRootRoute({
@@ -14,13 +18,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: APP_NAME },
-      {
-        name: "description",
-        content:
-          "Fear-Free pet grooming, boarding, and daycare in Charlotte, NC. Barkly's — Groom, Play & Stay.",
-      },
+      { title: FALLBACK_TITLE },
+      { name: "description", content: FALLBACK_DESCRIPTION },
       { name: "theme-color", content: "#2C5A71" },
+      { property: "og:title", content: FALLBACK_TITLE },
+      { property: "og:description", content: FALLBACK_DESCRIPTION },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Barkly's" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -44,6 +53,10 @@ export const Route = createRootRoute({
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_ID}');`,
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(localBusinessJsonLd()),
       },
     ],
   }),

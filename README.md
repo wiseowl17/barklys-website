@@ -48,6 +48,6 @@ No secrets are required for the marketing site. Do not commit `.env` files.
 
 ## Contact
 
-- Phone: (801) 696-6507
+- Phone: (980) 320-0502
 - Email: barklysclt@gmail.com
 - Instagram & TikTok: @barklysclt

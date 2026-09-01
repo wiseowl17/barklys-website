@@ -11,8 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as BookRouteImport } from './routes/book'
 import { Route as BoardingRouteImport } from './routes/boarding'
+import { Route as BookRouteImport } from './routes/book'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as GroomingRouteImport } from './routes/grooming'
 import { Route as PoliciesRouteImport } from './routes/policies'
@@ -28,14 +28,14 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BookRoute = BookRouteImport.update({
-  id: '/book',
-  path: '/book',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BoardingRoute = BoardingRouteImport.update({
   id: '/boarding',
   path: '/boarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -62,8 +62,8 @@ const ServicesRoute = ServicesRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/book': typeof BookRoute
   '/boarding': typeof BoardingRoute
+  '/book': typeof BookRoute
   '/gallery': typeof GalleryRoute
   '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
@@ -72,8 +72,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/book': typeof BookRoute
   '/boarding': typeof BoardingRoute
+  '/book': typeof BookRoute
   '/gallery': typeof GalleryRoute
   '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
@@ -83,8 +83,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/book': typeof BookRoute
   '/boarding': typeof BoardingRoute
+  '/book': typeof BookRoute
   '/gallery': typeof GalleryRoute
   '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
@@ -95,8 +95,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/book'
     | '/boarding'
+    | '/book'
     | '/gallery'
     | '/grooming'
     | '/policies'
@@ -105,8 +105,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
-    | '/book'
     | '/boarding'
+    | '/book'
     | '/gallery'
     | '/grooming'
     | '/policies'
@@ -115,8 +115,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
-    | '/book'
     | '/boarding'
+    | '/book'
     | '/gallery'
     | '/grooming'
     | '/policies'
@@ -126,8 +126,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  BookRoute: typeof BookRoute
   BoardingRoute: typeof BoardingRoute
+  BookRoute: typeof BookRoute
   GalleryRoute: typeof GalleryRoute
   GroomingRoute: typeof GroomingRoute
   PoliciesRoute: typeof PoliciesRoute
@@ -150,18 +150,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/book': {
-      id: '/book'
-      path: '/book'
-      fullPath: '/book'
-      preLoaderRoute: typeof BookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/boarding': {
       id: '/boarding'
       path: '/boarding'
       fullPath: '/boarding'
       preLoaderRoute: typeof BoardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -198,8 +198,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  BookRoute: BookRoute,
   BoardingRoute: BoardingRoute,
+  BookRoute: BookRoute,
   GalleryRoute: GalleryRoute,
   GroomingRoute: GroomingRoute,
   PoliciesRoute: PoliciesRoute,
