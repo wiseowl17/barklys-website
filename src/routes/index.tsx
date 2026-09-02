@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeartHandshake, Home, Scissors, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
+import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { pageHead } from "@/lib/seo";
 import { REVIEWS, SERVICES, SITE } from "@/lib/site";
 
@@ -32,9 +33,9 @@ function HomePage() {
             Fear-Free grooming in the Charlotte area
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            Barkly’s is a calm, home-based studio for dog grooming, boarding,
-            daycare, and dog sitting. Every appointment is paced to your dog —
-            especially the sensitive, senior, and first-time guests.
+            Barkly’s is a calm, home-based studio for dog grooming, boarding, daycare, and dog
+            sitting. Every appointment is paced to your dog — especially the sensitive, senior, and
+            first-time guests.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
@@ -44,9 +45,7 @@ function HomePage() {
               <Link to="/grooming">See services</Link>
             </Button>
           </div>
-          <p className="mt-6 text-sm text-muted">
-            Serving {SITE.area} · By appointment only
-          </p>
+          <p className="mt-6 text-sm text-muted">Serving {SITE.area} · By appointment only</p>
           <HeroCarousel />
         </div>
       </section>
@@ -56,9 +55,7 @@ function HomePage() {
           <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
             What we do
           </p>
-          <h2 className="mt-2 font-display text-3xl sm:text-4xl">
-            Groom. Play. Stay.
-          </h2>
+          <h2 className="mt-2 font-display text-3xl sm:text-4xl">Groom. Play. Stay.</h2>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {SERVICES.map((service) => {
               const Icon = ICONS[service.slug] ?? Scissors;
@@ -70,17 +67,14 @@ function HomePage() {
                 >
                   <Icon className="size-6 text-teal-deep" strokeWidth={1.75} />
                   <h3 className="mt-4 font-display text-xl">
-                    {service.slug === "daycare"
-                      ? "Doggy Daycare"
-                      : service.title}
+                    {service.slug === "daycare" ? "Doggy Daycare" : service.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {service.blurb}
-                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{service.blurb}</p>
                 </Link>
               );
             })}
           </div>
+          <GalleryPoliciesLinks className="mx-auto mt-10 max-w-xl text-sm text-muted" />
         </div>
       </section>
 
@@ -98,9 +92,7 @@ function HomePage() {
                 key={review.name}
                 className="rounded-xl border border-line bg-paper p-6 shadow-card"
               >
-                <p className="text-[15px] leading-relaxed text-ink">
-                  “{review.quote}”
-                </p>
+                <p className="text-[15px] leading-relaxed text-ink">“{review.quote}”</p>
                 <footer className="mt-5 text-sm">
                   <span className="font-semibold text-navy">{review.name}</span>
                   <span className="text-muted"> · {review.area}</span>
@@ -115,8 +107,8 @@ function HomePage() {
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 py-16 sm:px-6">
           <h2 className="font-display text-3xl">Ready when your pup is</h2>
           <p className="max-w-xl text-sky">
-            Pick a time that works. We’ll take it from there — coat notes,
-            Fear-Free handling, and a calm visit for your pup.
+            Pick a time that works. We’ll take it from there — coat notes, Fear-Free handling, and a
+            calm visit for your pup.
           </p>
           <Button
             asChild

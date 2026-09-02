@@ -40,34 +40,29 @@ function AboutPage() {
               />
             </div>
           </div>
-          <p className="relative mt-6 font-display text-3xl text-navy">
-            Vanessa Cordova
-          </p>
+          <p className="relative mt-6 font-display text-3xl text-navy">Vanessa Cordova</p>
           <p className="relative mt-1 text-sm text-muted">
             Fear Free Certified Professional · Groomer
           </p>
         </div>
 
         <p className="mt-8 text-lg leading-relaxed text-muted">
-          Nearly two decades in animal care, a veterinary education from
-          Venezuela, and five years as a professional dog groomer — with a Fear
-          Free certification at the center of every appointment. Vanessa
-          welcomes dogs from {SITE.area}.
+          Nearly two decades in animal care, a veterinary education from Venezuela, and five years
+          as a professional dog groomer — with a Fear Free certification at the center of every
+          appointment. Vanessa welcomes dogs from {SITE.area}.
         </p>
         <ul className="mt-8 w-full space-y-4 text-[15px] leading-relaxed text-ink">
           <li className="rounded-lg border border-line bg-paper px-4 py-3">
             Trained as a veterinary doctor in Venezuela
           </li>
           <li className="rounded-lg border border-line bg-paper px-4 py-3">
-            Currently studying to revalidate her veterinary degree in the
-            United States
+            Currently studying to revalidate her veterinary degree in the United States
           </li>
           <li className="rounded-lg border border-line bg-paper px-4 py-3">
             Professional groomer with 5 years of hands-on salon experience
           </li>
           <li className="rounded-lg border border-line bg-paper px-4 py-3">
-            Special care for poodles, schnauzers, doodles, and small breeds —
-            all breeds welcome
+            Special care for poodles, schnauzers, doodles, and small breeds — all breeds welcome
           </li>
         </ul>
 
@@ -88,27 +83,36 @@ function AboutPage() {
           <h2 className="font-display text-3xl">Why Fear Free matters</h2>
           <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted">
             <p>
-              Fear Free is a science-based certification that trains
-              professionals to recognize and reduce fear, anxiety, and stress
-              in pets. It focuses on reading subtle body language, gentle
-              positive handling, environmental adjustments, and desensitizing
-              pets to grooming tools.
+              Fear Free is a science-based certification that trains professionals to recognize and
+              reduce fear, anxiety, and stress in pets. It focuses on reading subtle body language,
+              gentle positive handling, environmental adjustments, and desensitizing pets to
+              grooming tools.
             </p>
             <p>
-              The result is a calmer, safer experience for the dog and greater
-              peace of mind for owners. At Barkly’s every appointment
-              prioritizes your pet’s emotional well-being — the haircut never
-              comes before the animal in the chair.
+              The result is a calmer, safer experience for the dog and greater peace of mind for
+              owners. At Barkly’s every appointment prioritizes your pet’s emotional well-being —
+              the haircut never comes before the animal in the chair.
             </p>
             <p>
-              If your dog needs extra time, breaks, or a slower introduction to
-              the table, dryer, or clippers, that is the plan — not an
-              inconvenience.
+              If your dog needs extra time, breaks, or a slower introduction to the table, dryer, or
+              clippers, that is the plan — not an inconvenience.
             </p>
           </div>
           <Button asChild className="mt-8">
             <Link to="/book">Book with Vanessa</Link>
           </Button>
+          <p className="mt-6 text-sm text-muted">
+            If Vanessa took good care of your pup,{" "}
+            <a
+              href={SITE.googleReviewHref}
+              className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
+              target="_blank"
+              rel="noreferrer"
+            >
+              leave a Google review
+            </a>
+            .
+          </p>
         </div>
       </section>
     </main>

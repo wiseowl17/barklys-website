@@ -1,12 +1,41 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Droplets, Scissors } from "lucide-react";
-import { pageHead, serviceJsonLd } from "@/lib/seo";
-import { ADD_ONS, GROOM_PRICES, SITE } from "@/lib/site";
+import { FaqSection } from "@/components/faq-section";
+import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { Button } from "@/components/ui/button";
+import { faqPageJsonLd, pageHead, serviceJsonLd, type FaqItem } from "@/lib/seo";
+import { ADD_ONS, GROOM_PRICES, SITE } from "@/lib/site";
 
 const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Salon";
 const DESCRIPTION =
   "Fear-Free dog grooming in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Full grooms, baths, and breed-specific cuts at your pup's pace.";
+
+const FAQS: readonly FaqItem[] = [
+  {
+    question: "What is Fear-Free dog grooming?",
+    answer:
+      "Fear-Free grooming means we work at your dog’s pace — extra time, breaks, and gentle handling so the haircut never comes before the animal in the chair. Vanessa is a Fear Free Certified Professional.",
+  },
+  {
+    question: "Do you groom dogs from Fort Mill and Matthews?",
+    answer:
+      "Yes. Barkly’s grooms dogs from Charlotte NC, South End, South Charlotte, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Fort Mill and Matthews families book the same way as everyone else — online or by phone.",
+  },
+  {
+    question: "How do I book a grooming appointment?",
+    answer: `Book online on our Book page, call ${SITE.phoneDisplay}, or message us on WhatsApp. We’re open Sunday 9–5, Monday–Friday 6–9pm, and Saturday 9–5.`,
+  },
+  {
+    question: "Do you groom all breeds?",
+    answer:
+      "All breeds are welcome. We have extra fluency in poodles, schnauzers, doodles, and small breeds, and we pace every visit to the dog in the chair.",
+  },
+  {
+    question: "Where can I see recent grooms and house rules?",
+    answer:
+      "Recent clients are in our gallery. Cancellation, vaccine, pick-up, and Fear-Free handling notes are on our policies page.",
+  },
+];
 
 export const Route = createFileRoute("/grooming")({
   component: GroomingPage,
@@ -15,12 +44,15 @@ export const Route = createFileRoute("/grooming")({
       title: TITLE,
       description: DESCRIPTION,
       path: "/grooming",
-      jsonLd: serviceJsonLd({
-        name: "Fear-Free dog grooming",
-        description: DESCRIPTION,
-        path: "/grooming",
-        serviceType: "Pet grooming",
-      }),
+      jsonLd: [
+        serviceJsonLd({
+          name: "Fear-Free dog grooming",
+          description: DESCRIPTION,
+          path: "/grooming",
+          serviceType: "Pet grooming",
+        }),
+        faqPageJsonLd(FAQS),
+      ],
     }),
 });
 
@@ -28,13 +60,13 @@ function GroomingPage() {
   return (
     <main className="text-center">
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
-          Services
-        </p>
-        <h1 className="mt-3 font-display text-4xl sm:text-5xl">Grooming</h1>
+        <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">Services</p>
+        <h1 className="mt-3 font-display text-4xl sm:text-5xl">
+          Fear-Free dog grooming in Charlotte
+        </h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">
-          Full grooms, baths, and add-ons for dogs in {SITE.area}. All breeds
-          welcome, with extra fluency in poodles, schnauzers, and doodles.
+          Full grooms, baths, and add-ons for dogs in {SITE.area}. All breeds welcome, with extra
+          fluency in poodles, schnauzers, and doodles.
         </p>
 
         <div className="mx-auto mt-6 flex max-w-md justify-center gap-2 rounded-full border border-line bg-paper p-1">
@@ -56,8 +88,7 @@ function GroomingPage() {
             </span>
             <h2 className="mt-4 font-display text-2xl">Full Grooming</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Breed-appropriate haircut, bath, dry, ears, and nails — at your
-              dog’s pace.
+              Breed-appropriate haircut, bath, dry, ears, and nails — at your dog’s pace.
             </p>
           </article>
           <article className="flex flex-col items-center rounded-xl border border-line bg-paper p-6 shadow-card">
@@ -66,8 +97,7 @@ function GroomingPage() {
             </span>
             <h2 className="mt-4 font-display text-2xl">Baths</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Gentle wash, conditioner, and fluffy dry with coat-specific
-              shampoos.
+              Gentle wash, conditioner, and fluffy dry with coat-specific shampoos.
             </p>
           </article>
         </div>
@@ -93,17 +123,13 @@ function GroomingPage() {
                   <tr key={row.size} className="border-t border-line">
                     <td className="px-4 py-3 font-medium text-navy">{row.size}</td>
                     <td className="px-4 py-3 text-muted">{row.range}</td>
-                    <td className="px-4 py-3 tabular-nums text-teal-deep">
-                      {row.price}
-                    </td>
+                    <td className="px-4 py-3 tabular-nums text-teal-deep">{row.price}</td>
                   </tr>
                 ))}
                 <tr className="border-t border-line bg-cream">
                   <td className="px-4 py-3 font-medium text-navy">Touch-up</td>
                   <td className="px-4 py-3 text-muted">Bath, face, feet & tidy</td>
-                  <td className="px-4 py-3 text-teal-deep">
-                    $10 less than a full groom
-                  </td>
+                  <td className="px-4 py-3 text-teal-deep">$10 less than a full groom</td>
                 </tr>
               </tbody>
             </table>
@@ -130,7 +156,10 @@ function GroomingPage() {
         <Button asChild className="mt-10">
           <Link to="/book">Book an appointment</Link>
         </Button>
+        <GalleryPoliciesLinks />
       </section>
+
+      <FaqSection title="Grooming FAQs" faqs={FAQS} />
     </main>
   );
 }

@@ -1,14 +1,33 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeartHandshake, Home } from "lucide-react";
-import { pageHead, serviceJsonLd } from "@/lib/seo";
+import { faqPageJsonLd, pageHead, serviceJsonLd, type FaqItem } from "@/lib/seo";
 import { BOARDING_RATES, SITE } from "@/lib/site";
+import { FaqSection } from "@/components/faq-section";
+import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
 
 const TITLE = "Dog Boarding, Daycare & Dog Sitting in Charlotte NC | Barkly's";
 const DESCRIPTION =
   "In-home dog boarding, daycare, and dog sitting in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Calm overnight stays with Fear-Free care.";
+
+const FAQS: readonly FaqItem[] = [
+  {
+    question: "What’s the difference between boarding and daycare?",
+    answer:
+      "Boarding is an overnight stay in our calm home. Daycare and dog sitting are daytime only — play, rest, and a familiar face while you’re at work or out for the day. Both use Fear-Free handling and are confirmed based on availability.",
+  },
+  {
+    question: "How do I request boarding or daycare?",
+    answer: `Fill out the request form on this page with dates, number of dogs, and notes. Every stay is confirmed manually by phone or email. You can also call ${SITE.phoneDisplay}.`,
+  },
+  {
+    question: "What vaccines does my dog need?",
+    answer:
+      "Dogs should be current on core vaccines and free of contagious illness. Let us know about injuries, skin conditions, or medications before the visit. Full house rules are on our policies page.",
+  },
+];
 
 export const Route = createFileRoute("/boarding")({
   component: BoardingPage,
@@ -17,12 +36,15 @@ export const Route = createFileRoute("/boarding")({
       title: TITLE,
       description: DESCRIPTION,
       path: "/boarding",
-      jsonLd: serviceJsonLd({
-        name: "Dog boarding, daycare, and dog sitting",
-        description: DESCRIPTION,
-        path: "/boarding",
-        serviceType: "Pet boarding",
-      }),
+      jsonLd: [
+        serviceJsonLd({
+          name: "Dog boarding, daycare, and dog sitting",
+          description: DESCRIPTION,
+          path: "/boarding",
+          serviceType: "Pet boarding",
+        }),
+        faqPageJsonLd(FAQS),
+      ],
     }),
 });
 
@@ -49,9 +71,7 @@ function RateCard({
           >
             <span className="font-medium text-navy">{row.name}</span>
             <span className="text-sm">
-              <span className="font-semibold tabular-nums text-teal-deep">
-                {row.price}
-              </span>
+              <span className="font-semibold tabular-nums text-teal-deep">{row.price}</span>
               <span className="ml-1.5 text-muted">{row.note}</span>
             </span>
           </li>
@@ -105,8 +125,8 @@ function BoardingRequestForm() {
       <div className="rounded-2xl border border-line bg-cream-deep px-6 py-10 text-center">
         <h3 className="font-display text-2xl text-navy">Request received</h3>
         <p className="mx-auto mt-3 max-w-md text-sm text-muted">
-          Thanks! We’ll review availability and get back to you to confirm your
-          boarding or daycare dates.
+          Thanks! We’ll review availability and get back to you to confirm your boarding or daycare
+          dates.
         </p>
         <Button
           type="button"
@@ -130,8 +150,7 @@ function BoardingRequestForm() {
       <input type="hidden" name="_captcha" value="false" />
 
       <p className="text-center text-sm text-muted">
-        This is a request only — all stays are confirmed manually based on
-        availability.
+        This is a request only — all stays are confirmed manually based on availability.
       </p>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -147,13 +166,7 @@ function BoardingRequestForm() {
 
       <div>
         <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-        />
+        <Input id="email" name="email" type="email" required autoComplete="email" />
       </div>
 
       <div>
@@ -199,15 +212,7 @@ function BoardingRequestForm() {
         </div>
         <div>
           <Label htmlFor="dogs">Number of dogs</Label>
-          <Input
-            id="dogs"
-            name="dogs"
-            type="number"
-            min={1}
-            max={5}
-            defaultValue={1}
-            required
-          />
+          <Input id="dogs" name="dogs" type="number" min={1} max={5} defaultValue={1} required />
         </div>
       </div>
 
@@ -243,16 +248,19 @@ function BoardingPage() {
   return (
     <main className="text-center">
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
-          Services
-        </p>
-        <h1 className="mt-3 font-display text-4xl sm:text-5xl">
-          Boarding, daycare & dog sitting
-        </h1>
+        <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">Services</p>
+        <h1 className="mt-3 font-display text-4xl sm:text-5xl">Boarding, daycare & dog sitting</h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">
-          Overnight dog boarding, in-home dog sitting, and daytime daycare in
-          our calm home — structure, rest, and familiar faces for families in{" "}
-          {SITE.area}.
+          Overnight dog boarding, in-home dog sitting, and daytime daycare in our calm home —
+          structure, rest, and familiar faces for families in {SITE.area}.
+        </p>
+        <p className="mx-auto mt-3 max-w-2xl text-sm text-muted">
+          Fort Mill SC families are welcome for overnight boarding and daytime sitting in our
+          Charlotte-area home.
+        </p>
+        <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
+          Matthews NC dogs can request the same in-home boarding and daycare — we’ll confirm
+          availability by phone or email.
         </p>
 
         <div className="mx-auto mt-6 flex max-w-md justify-center gap-2 rounded-full border border-line bg-paper p-1">
@@ -274,8 +282,7 @@ function BoardingPage() {
             </span>
             <h2 className="mt-4 font-display text-2xl">Boarding</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Overnight stay in our calm home — structure, rest, and Fear-Free
-              care.
+              Overnight stay in our calm home — structure, rest, and Fear-Free care.
             </p>
           </article>
           <article className="flex flex-col items-center rounded-xl border border-line bg-paper p-6 shadow-card">
@@ -284,9 +291,8 @@ function BoardingPage() {
             </span>
             <h2 className="mt-4 font-display text-2xl">Daycare & dog sitting</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Daytime dog sitting and companionship for pups who need play,
-              rest, and a familiar face while you are at work or out for the
-              day.
+              Daytime dog sitting and companionship for pups who need play, rest, and a familiar
+              face while you are at work or out for the day.
             </p>
           </article>
         </div>
@@ -296,33 +302,25 @@ function BoardingPage() {
         <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
           <h2 className="font-display text-3xl">Boarding rates</h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-            Overnight stay in our home. Holiday dates, extra dogs, puppies, and
-            extended hours are listed below.
+            Overnight stay in our home. Holiday dates, extra dogs, puppies, and extended hours are
+            listed below.
           </p>
           <div className="mt-8">
-            <RateCard
-              title="Boarding"
-              subtitle="In our home"
-              rows={BOARDING_RATES}
-            />
+            <RateCard title="Boarding" subtitle="In our home" rows={BOARDING_RATES} />
           </div>
           <p className="mx-auto mt-8 max-w-xl rounded-xl border border-line bg-cream px-5 py-4 text-sm text-muted">
-            <span className="font-medium text-navy">Daycare & dog sitting</span>{" "}
-            is daytime only and quoted per visit. Need someone to watch your dog
-            while you work, run errands, or travel for the day? Request in-home
-            dog sitting on the form below — no separate daycare page.
+            <span className="font-medium text-navy">Daycare & dog sitting</span> is daytime only and
+            quoted per visit. Need someone to watch your dog while you work, run errands, or travel
+            for the day? Request in-home dog sitting on the form below — no separate daycare page.
           </p>
         </div>
       </section>
 
       <section id="request" className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
-        <h2 className="font-display text-3xl">
-          Request boarding, daycare, or dog sitting
-        </h2>
+        <h2 className="font-display text-3xl">Request boarding, daycare, or dog sitting</h2>
         <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-          Tell us how many days you need and whether it’s overnight boarding,
-          daytime daycare, or in-home dog sitting. We’ll confirm availability by
-          phone or email.
+          Tell us how many days you need and whether it’s overnight boarding, daytime daycare, or
+          in-home dog sitting. We’ll confirm availability by phone or email.
         </p>
         <div className="mt-8">
           <BoardingRequestForm />
@@ -337,7 +335,10 @@ function BoardingPage() {
           </Link>
           .
         </p>
+        <GalleryPoliciesLinks />
       </section>
+
+      <FaqSection title="Boarding FAQs" faqs={FAQS} />
     </main>
   );
 }

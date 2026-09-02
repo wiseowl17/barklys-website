@@ -1,5 +1,7 @@
 export const SERVICE_AREAS = [
   { name: "Charlotte", state: "NC" },
+  { name: "South End", state: "NC" },
+  { name: "South Charlotte", state: "NC" },
   { name: "Tega Cay", state: "SC" },
   { name: "Fort Mill", state: "SC" },
   { name: "Ballantyne", state: "NC" },
@@ -32,12 +34,12 @@ export const SITE = {
   tiktok: "https://www.tiktok.com/@barklysclt",
   handle: "@barklysclt",
   area: SERVICE_AREA_NAMES,
+  googleReviewHref:
+    "https://search.google.com/local/writereview?placeid=ChIJs8QZe9U3T2oRHlr8iUjUr0M",
 } as const;
 
 export type NavLink = { to: string; label: string };
-export type NavItem =
-  | NavLink
-  | { label: string; children: readonly NavLink[] };
+export type NavItem = NavLink | { label: string; children: readonly NavLink[] };
 
 export const NAV: readonly NavItem[] = [
   { to: "/", label: "Home" },
@@ -89,22 +91,19 @@ export const SERVICES = [
   {
     slug: "grooming",
     title: "Full Grooming",
-    blurb:
-      "Breed-appropriate haircut, bath, dry, ears, and nails — at your dog’s pace.",
+    blurb: "Breed-appropriate haircut, bath, dry, ears, and nails — at your dog’s pace.",
     href: "/grooming",
   },
   {
     slug: "baths",
     title: "Baths",
-    blurb:
-      "Gentle wash, conditioner, and fluffy dry with coat-specific shampoos.",
+    blurb: "Gentle wash, conditioner, and fluffy dry with coat-specific shampoos.",
     href: "/grooming",
   },
   {
     slug: "boarding",
     title: "Boarding",
-    blurb:
-      "Overnight stay in our calm home — structure, rest, and Fear-Free care.",
+    blurb: "Overnight stay in our calm home — structure, rest, and Fear-Free care.",
     href: "/boarding",
   },
   {
@@ -117,26 +116,102 @@ export const SERVICES = [
 ] as const;
 
 export const GALLERY = [
-  { src: "/gallery/angel-aussie.jpg", alt: "Angel, a merle Australian Shepherd in a blue paw-print bandana", name: "Angel" },
-  { src: "/gallery/pom-fluff.jpg", alt: "Fluffy Pomeranian after a full groom", name: "Pomeranian" },
-  { src: "/gallery/goldendoodle.jpg", alt: "Goldendoodle in a star bandana after a tidy trim", name: "Doodle" },
-  { src: "/gallery/yorkie.jpg", alt: "Yorkshire Terrier in a purple bow after grooming", name: "Yorkie" },
-  { src: "/gallery/doodle-brown-sit.jpg", alt: "Brown doodle puppy in a corgi bandana", name: "Doodle pup" },
-  { src: "/gallery/pom-bowtie.jpg", alt: "Pomeranian wearing a blue paw-print bowtie", name: "Bowtie Pom" },
-  { src: "/gallery/bernedoodle.jpg", alt: "Bernedoodle in an Easter carrot bandana", name: "Bernedoodle" },
-  { src: "/gallery/aussie-pink-sit.jpg", alt: "Tri-color Australian Shepherd in a pink paw bandana", name: "Aussie" },
-  { src: "/gallery/doodle-ribbons.jpg", alt: "Cream doodle with pink hair ribbons", name: "Ribbon doodle" },
-  { src: "/gallery/pom-stars.jpg", alt: "Pomeranian in a navy stars-and-stripes bandana", name: "Stars Pom" },
-  { src: "/gallery/black-bowtie.jpg", alt: "Black doodle mix in a plaid bowtie", name: "Plaid bowtie" },
-  { src: "/gallery/doodle-watermelon.jpg", alt: "Red-and-white doodle in a watermelon bandana", name: "Summer doodle" },
-  { src: "/gallery/pom-usa.jpg", alt: "Pomeranian in a red USA fireworks bandana", name: "Patriot Pom" },
+  {
+    src: "/gallery/angel-aussie.jpg",
+    alt: "Angel, a merle Australian Shepherd in a blue paw-print bandana",
+    name: "Angel",
+  },
+  {
+    src: "/gallery/pom-fluff.jpg",
+    alt: "Fluffy Pomeranian after a full groom",
+    name: "Pomeranian",
+  },
+  {
+    src: "/gallery/goldendoodle.jpg",
+    alt: "Goldendoodle in a star bandana after a tidy trim",
+    name: "Doodle",
+  },
+  {
+    src: "/gallery/yorkie.jpg",
+    alt: "Yorkshire Terrier in a purple bow after grooming",
+    name: "Yorkie",
+  },
+  {
+    src: "/gallery/doodle-brown-sit.jpg",
+    alt: "Brown doodle puppy in a corgi bandana",
+    name: "Doodle pup",
+  },
+  {
+    src: "/gallery/pom-bowtie.jpg",
+    alt: "Pomeranian wearing a blue paw-print bowtie",
+    name: "Bowtie Pom",
+  },
+  {
+    src: "/gallery/bernedoodle.jpg",
+    alt: "Bernedoodle in an Easter carrot bandana",
+    name: "Bernedoodle",
+  },
+  {
+    src: "/gallery/aussie-pink-sit.jpg",
+    alt: "Tri-color Australian Shepherd in a pink paw bandana",
+    name: "Aussie",
+  },
+  {
+    src: "/gallery/doodle-ribbons.jpg",
+    alt: "Cream doodle with pink hair ribbons",
+    name: "Ribbon doodle",
+  },
+  {
+    src: "/gallery/pom-stars.jpg",
+    alt: "Pomeranian in a navy stars-and-stripes bandana",
+    name: "Stars Pom",
+  },
+  {
+    src: "/gallery/black-bowtie.jpg",
+    alt: "Black doodle mix in a plaid bowtie",
+    name: "Plaid bowtie",
+  },
+  {
+    src: "/gallery/doodle-watermelon.jpg",
+    alt: "Red-and-white doodle in a watermelon bandana",
+    name: "Summer doodle",
+  },
+  {
+    src: "/gallery/pom-usa.jpg",
+    alt: "Pomeranian in a red USA fireworks bandana",
+    name: "Patriot Pom",
+  },
   { src: "/gallery/chow.jpg", alt: "Chow Chow puppy in a blue bandana", name: "Chow pup" },
-  { src: "/gallery/doodle-small.jpg", alt: "Small chocolate doodle after a tidy face trim", name: "Chocolate doodle" },
-  { src: "/gallery/mixed-easter.jpg", alt: "Happy mixed-breed dog in an Easter bandana", name: "Easter smile" },
-  { src: "/gallery/pom-blue.jpg", alt: "Smiling Pomeranian in a light blue bandana", name: "Blue Pom" },
-  { src: "/gallery/doodle-brown-stand.jpg", alt: "Brown doodle standing after a bath and fluff", name: "Fluff stand" },
-  { src: "/gallery/brindle-stars.jpg", alt: "Brindle pup in patriotic star headband and bandana", name: "Star pup" },
-  { src: "/gallery/aussie-pink-side.jpg", alt: "Australian Shepherd sitting in profile after a groom", name: "Aussie profile" },
+  {
+    src: "/gallery/doodle-small.jpg",
+    alt: "Small chocolate doodle after a tidy face trim",
+    name: "Chocolate doodle",
+  },
+  {
+    src: "/gallery/mixed-easter.jpg",
+    alt: "Happy mixed-breed dog in an Easter bandana",
+    name: "Easter smile",
+  },
+  {
+    src: "/gallery/pom-blue.jpg",
+    alt: "Smiling Pomeranian in a light blue bandana",
+    name: "Blue Pom",
+  },
+  {
+    src: "/gallery/doodle-brown-stand.jpg",
+    alt: "Brown doodle standing after a bath and fluff",
+    name: "Fluff stand",
+  },
+  {
+    src: "/gallery/brindle-stars.jpg",
+    alt: "Brindle pup in patriotic star headband and bandana",
+    name: "Star pup",
+  },
+  {
+    src: "/gallery/aussie-pink-side.jpg",
+    alt: "Australian Shepherd sitting in profile after a groom",
+    name: "Aussie profile",
+  },
 ] as const;
 
 export const HERO_SLIDES = [
