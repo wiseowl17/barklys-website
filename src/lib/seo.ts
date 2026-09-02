@@ -20,11 +20,12 @@ type PageHeadInput = {
   title: string;
   description: string;
   path: string;
-  jsonLd?: unknown;
+  jsonLd?: unknown | readonly unknown[];
 };
 
 export function pageHead({ title, description, path, jsonLd }: PageHeadInput) {
   const url = canonicalUrl(path);
+  const jsonLdItems = jsonLd == null ? [] : Array.isArray(jsonLd) ? jsonLd : [jsonLd];
   return {
     meta: [
       { title },
@@ -43,9 +44,10 @@ export function pageHead({ title, description, path, jsonLd }: PageHeadInput) {
       { name: "twitter:image", content: OG_IMAGE_URL },
     ],
     links: [{ rel: "canonical", href: url }],
-    scripts: jsonLd
-      ? [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }]
-      : [],
+    scripts: jsonLdItems.map((item) => ({
+      type: "application/ld+json",
+      children: JSON.stringify(item),
+    })),
   };
 }
 
@@ -65,7 +67,7 @@ export function localBusinessJsonLd() {
     "@type": ["LocalBusiness", "PetGroomer"],
     "@id": `${CANONICAL_ORIGIN}/#business`,
     name: SITE.name,
-    alternateName: "Barkly's Charlotte",
+    alternateName: ["Barkly's Charlotte", "Barkly's Grooming & Boarding"],
     description:
       "Fear-Free dog grooming, boarding, daycare, and in-home dog sitting serving Charlotte NC and nearby towns.",
     url: canonicalUrl("/"),
@@ -131,3 +133,53 @@ export function serviceJsonLd(input: {
     areaServed,
   };
 }
+
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+export function faqPageJsonLd(faqs: readonly FaqItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+
+export function breadcrumbJsonLd(
+  crumbs: readonly { name: string; path: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: canonicalUrl(crumb.path),
+    })),
+  };
+}
+
+export function collectionPageJsonLd(input: {
+  name: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: input.name,
+    description: input.description,
+    url: canonicalUrl(input.path),
+  };
+}
+

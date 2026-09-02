@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart, X } from "lucide-react";
-import { pageHead } from "@/lib/seo";
+import { breadcrumbJsonLd, collectionPageJsonLd, pageHead } from "@/lib/seo";
 import { GALLERY } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +13,18 @@ export const Route = createFileRoute("/gallery")({
       description:
         "Real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails.",
       path: "/gallery",
+      jsonLd: [
+        collectionPageJsonLd({
+          name: "Fluff & friends from the Charlotte table",
+          description:
+            "Real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails.",
+          path: "/gallery",
+        }),
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Gallery", path: "/gallery" },
+        ]),
+      ],
     }),
 });
 
@@ -59,12 +71,12 @@ function GalleryPage() {
         Fresh from the table
       </p>
       <h1 className="relative mt-3 font-display text-4xl sm:text-5xl">
-        Fluff & friends
+        Fluff & friends from the Charlotte table
       </h1>
       <p className="relative mx-auto mt-4 flex max-w-xl items-center justify-center gap-2 text-muted">
         <Heart className="size-4 fill-pink text-pink" />
-        A little scrapbook of real Barkly’s clients — bows, bandanas, and
-        happy tails.
+        A little scrapbook of real Barkly’s grooms — bows, bandanas, and happy
+        tails after Fear-Free visits.
         <Heart className="size-4 fill-pink text-pink" />
       </p>
 

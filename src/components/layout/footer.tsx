@@ -9,16 +9,15 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div className="flex flex-col items-center">
           <BrandLogo decorative className="mx-auto mb-4 h-28 w-auto drop-shadow-md" />
+          <p className="mt-2 text-sm font-medium text-paper">Barkly’s Grooming & Boarding</p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky">
-            Fear-Free dog grooming, boarding, daycare, and dog sitting for{" "}
-            {SITE.area}. Home-based, by appointment.
+            Fear-Free dog grooming, boarding, daycare, and dog sitting for {SITE.area}. Home-based
+            studio. Open {SITE.hoursDisplay}.
           </p>
         </div>
 
         <div className="flex flex-col items-center">
-          <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
-            Visit
-          </p>
+          <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">Visit</p>
           <ul className="mt-4 space-y-2 text-sm">
             {navLinks().map((item) => (
               <li key={item.to}>
@@ -31,9 +30,7 @@ export function Footer() {
         </div>
 
         <div className="flex flex-col items-center">
-          <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">
-            Contact
-          </p>
+          <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">Contact</p>
           <ul className="mt-4 space-y-2 text-sm text-sky">
             <li>
               <a href={SITE.phoneHref} className="hover:text-paper">
@@ -43,6 +40,16 @@ export function Footer() {
             <li>
               <a href={`mailto:${SITE.email}`} className="hover:text-paper">
                 {SITE.email}
+              </a>
+            </li>
+            <li>
+              <a
+                href={SITE.googleReviewHref}
+                className="hover:text-paper"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Leave a Google review
               </a>
             </li>
           </ul>
@@ -58,8 +65,7 @@ export function Footer() {
             ))}
           </ul>
           <p className="mt-4 max-w-xs text-xs leading-relaxed text-sky/80">
-            Serving {SITE.area}. Exact studio address is shared after your
-            appointment is confirmed.
+            Serving {SITE.area}. Exact studio address is shared after your appointment is confirmed.
           </p>
         </div>
       </div>
