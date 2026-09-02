@@ -153,3 +153,33 @@ export function faqPageJsonLd(faqs: readonly FaqItem[]) {
     })),
   };
 }
+
+export function breadcrumbJsonLd(
+  crumbs: readonly { name: string; path: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: canonicalUrl(crumb.path),
+    })),
+  };
+}
+
+export function collectionPageJsonLd(input: {
+  name: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: input.name,
+    description: input.description,
+    url: canonicalUrl(input.path),
+  };
+}
+

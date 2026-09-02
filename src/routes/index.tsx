@@ -30,7 +30,7 @@ function HomePage() {
       <section className="relative overflow-hidden">
         <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-12 sm:px-6 lg:py-16">
           <h1 className="font-display text-4xl leading-[1.1] text-navy-deep sm:text-5xl lg:text-6xl">
-            Fear-Free grooming in the Charlotte area
+            Groom, play, and stay at your dog’s pace
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
             Barkly’s is a calm, home-based studio for dog grooming, boarding, daycare, and dog
@@ -45,7 +45,9 @@ function HomePage() {
               <Link to="/grooming">See services</Link>
             </Button>
           </div>
-          <p className="mt-6 text-sm text-muted">Serving {SITE.area} · By appointment only</p>
+          <p className="mt-6 text-sm text-muted">
+            Serving {SITE.area}. Open {SITE.hoursDisplay}.
+          </p>
           <HeroCarousel />
         </div>
       </section>

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { pageHead, serviceJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, pageHead, serviceJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
+import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { SocialLinks } from "@/components/social-links";
 
 const TITLE = "Book Dog Grooming in Charlotte NC | Barkly's";
@@ -14,12 +15,18 @@ export const Route = createFileRoute("/book")({
       title: TITLE,
       description: DESCRIPTION,
       path: "/book",
-      jsonLd: serviceJsonLd({
-        name: "Book dog grooming",
-        description: DESCRIPTION,
-        path: "/book",
-        serviceType: "Pet grooming appointment",
-      }),
+      jsonLd: [
+        serviceJsonLd({
+          name: "Book dog grooming",
+          description: DESCRIPTION,
+          path: "/book",
+          serviceType: "Pet grooming appointment",
+        }),
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Book", path: "/book" },
+        ]),
+      ],
     }),
 });
 
@@ -50,6 +57,7 @@ function BookPage() {
         </Link>
         .
       </p>
+      <GalleryPoliciesLinks />
 
       <div className="mt-10 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
         <iframe

@@ -3,7 +3,13 @@ import { Droplets, Scissors } from "lucide-react";
 import { FaqSection } from "@/components/faq-section";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { Button } from "@/components/ui/button";
-import { faqPageJsonLd, pageHead, serviceJsonLd, type FaqItem } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  faqPageJsonLd,
+  pageHead,
+  serviceJsonLd,
+  type FaqItem,
+} from "@/lib/seo";
 import { ADD_ONS, GROOM_PRICES, SITE } from "@/lib/site";
 
 const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Salon";
@@ -23,7 +29,7 @@ const FAQS: readonly FaqItem[] = [
   },
   {
     question: "How do I book a grooming appointment?",
-    answer: `Book online on our Book page, call ${SITE.phoneDisplay}, or message us on WhatsApp. We’re open Sunday 9–5, Monday–Friday 6–9pm, and Saturday 9–5.`,
+    answer: `Book online on our Book page, call ${SITE.phoneDisplay}, or message us on WhatsApp. We’re open ${SITE.hoursDisplay}.`,
   },
   {
     question: "Do you groom all breeds?",
@@ -52,6 +58,10 @@ export const Route = createFileRoute("/grooming")({
           serviceType: "Pet grooming",
         }),
         faqPageJsonLd(FAQS),
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Grooming", path: "/grooming" },
+        ]),
       ],
     }),
 });
@@ -67,6 +77,13 @@ function GroomingPage() {
         <p className="mx-auto mt-4 max-w-2xl text-muted">
           Full grooms, baths, and add-ons for dogs in {SITE.area}. All breeds welcome, with extra
           fluency in poodles, schnauzers, and doodles.
+        </p>
+        <p className="mx-auto mt-3 max-w-2xl text-sm text-muted">
+          Fort Mill SC dogs are welcome for Fear-Free grooms at our Charlotte studio — book online
+          or by phone.
+        </p>
+        <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
+          Matthews NC families can book the same full grooms, baths, and breed-specific cuts.
         </p>
 
         <div className="mx-auto mt-6 flex max-w-md justify-center gap-2 rounded-full border border-line bg-paper p-1">

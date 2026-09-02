@@ -1,7 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeartHandshake, Home } from "lucide-react";
-import { faqPageJsonLd, pageHead, serviceJsonLd, type FaqItem } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  faqPageJsonLd,
+  pageHead,
+  serviceJsonLd,
+  type FaqItem,
+} from "@/lib/seo";
 import { BOARDING_RATES, SITE } from "@/lib/site";
 import { FaqSection } from "@/components/faq-section";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
@@ -44,6 +50,10 @@ export const Route = createFileRoute("/boarding")({
           serviceType: "Pet boarding",
         }),
         faqPageJsonLd(FAQS),
+        breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Boarding", path: "/boarding" },
+        ]),
       ],
     }),
 });

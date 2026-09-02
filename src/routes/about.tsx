@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { Button } from "@/components/ui/button";
-import { pageHead } from "@/lib/seo";
+import { breadcrumbJsonLd, pageHead } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
 const TITLE = "Meet Vanessa | Fear-Free Dog Groomer in Charlotte | Barkly's";
@@ -14,6 +15,10 @@ export const Route = createFileRoute("/about")({
       title: TITLE,
       description: DESCRIPTION,
       path: "/about",
+      jsonLd: breadcrumbJsonLd([
+        { name: "Home", path: "/" },
+        { name: "Meet the Groomer", path: "/about" },
+      ]),
     }),
 });
 
@@ -24,7 +29,9 @@ function AboutPage() {
         <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
           Meet the groomer
         </p>
-        <h1 className="mt-3 font-display text-4xl sm:text-5xl">Vanessa</h1>
+        <h1 className="mt-3 font-display text-4xl sm:text-5xl">
+          The Fear-Free groomer behind Barkly’s
+        </h1>
 
         <div className="relative mt-10 flex flex-col items-center">
           <div
@@ -76,6 +83,7 @@ function AboutPage() {
             In the studio — every appointment at the dog’s pace.
           </figcaption>
         </figure>
+        <GalleryPoliciesLinks />
       </section>
 
       <section className="bg-paper">
