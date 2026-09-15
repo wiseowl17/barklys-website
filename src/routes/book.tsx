@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { breadcrumbJsonLd, pageHead, serviceJsonLd } from "@/lib/seo";
 import { SITE } from "@/lib/site";
@@ -36,6 +37,8 @@ const SQUARE_BOOK =
   "https://app.squareup.com/appointments/book/d5mbi8xeslrg3x/LFEEJ4985GGP9/start";
 
 function BookPage() {
+  const [frameReady, setFrameReady] = useState(false);
+
   return (
     <main className="mx-auto flex max-w-3xl flex-col items-center px-4 py-14 text-center sm:px-6">
       <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
@@ -59,13 +62,22 @@ function BookPage() {
       </p>
       <GalleryPoliciesLinks />
 
-      <div className="mt-10 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
+      <div className="relative mt-10 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
+        {!frameReady ? (
+          <div
+            className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-cream-deep"
+            role="status"
+          >
+            <span className="size-10 animate-spin rounded-full border-2 border-sky border-t-teal-deep" />
+            <p className="text-sm text-muted">Loading the booking calendar…</p>
+          </div>
+        ) : null}
         <iframe
           title="Book a grooming appointment with Barkly's"
           src={SQUARE_WIDGET}
           allow="payment"
           className="h-[820px] w-full border-0"
-          loading="lazy"
+          onLoad={() => setFrameReady(true)}
         />
       </div>
 

@@ -85,6 +85,11 @@ function GroomingPage() {
         <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
           Matthews NC families can book the same full grooms, baths, and breed-specific cuts.
         </p>
+        <div className="mt-6">
+          <Button asChild size="lg">
+            <Link to="/book">Book a groom</Link>
+          </Button>
+        </div>
 
         <div className="mx-auto mt-6 flex max-w-md justify-center gap-2 rounded-full border border-line bg-paper p-1">
           <span className="flex-1 rounded-full bg-sky/40 px-4 py-2 text-sm font-semibold text-navy">

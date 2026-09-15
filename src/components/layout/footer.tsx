@@ -11,8 +11,8 @@ export function Footer() {
           <BrandLogo decorative className="mx-auto mb-4 h-28 w-auto drop-shadow-md" />
           <p className="mt-2 text-sm font-medium text-paper">Barkly’s Grooming & Boarding</p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky">
-            Fear-Free dog grooming, boarding, daycare, and dog sitting for {SITE.area}. Home-based
-            studio. Open {SITE.hoursDisplay}.
+            Fear-Free dog grooming, boarding, and daycare for {SITE.area}. {SITE.studioNote} Open{" "}
+            {SITE.hoursDisplay}.
           </p>
         </div>
 
@@ -32,6 +32,7 @@ export function Footer() {
         <div className="flex flex-col items-center">
           <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">Contact</p>
           <ul className="mt-4 space-y-2 text-sm text-sky">
+            <li>{SITE.locality}</li>
             <li>
               <a href={SITE.phoneHref} className="hover:text-paper">
                 {SITE.phoneDisplay}
@@ -70,7 +71,20 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-paper/10 py-5 text-xs text-sky/80">
-        © {new Date().getFullYear()} Barkly’s. All rights reserved.
+        <p>
+          © {new Date().getFullYear()} Barkly’s. All rights reserved.
+        </p>
+        <p className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+          <Link to="/privacy" className="hover:text-paper">
+            Privacy
+          </Link>
+          <Link to="/terms" className="hover:text-paper">
+            Terms
+          </Link>
+          <Link to="/policies" className="hover:text-paper">
+            Policies
+          </Link>
+        </p>
       </div>
     </footer>
   );

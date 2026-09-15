@@ -16,7 +16,10 @@ import { Route as BookRouteImport } from './routes/book'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as GroomingRouteImport } from './routes/grooming'
 import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ThanksRouteImport } from './routes/thanks'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -53,9 +56,24 @@ const PoliciesRoute = PoliciesRouteImport.update({
   path: '/policies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThanksRoute = ThanksRouteImport.update({
+  id: '/thanks',
+  path: '/thanks',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -67,7 +85,10 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
+  '/thanks': typeof ThanksRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -77,7 +98,10 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
+  '/thanks': typeof ThanksRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -88,7 +112,10 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/grooming': typeof GroomingRoute
   '/policies': typeof PoliciesRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
+  '/terms': typeof TermsRoute
+  '/thanks': typeof ThanksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -100,7 +127,10 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/grooming'
     | '/policies'
+    | '/privacy'
     | '/services'
+    | '/terms'
+    | '/thanks'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -110,7 +140,10 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/grooming'
     | '/policies'
+    | '/privacy'
     | '/services'
+    | '/terms'
+    | '/thanks'
   id:
     | '__root__'
     | '/'
@@ -120,7 +153,10 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/grooming'
     | '/policies'
+    | '/privacy'
     | '/services'
+    | '/terms'
+    | '/thanks'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,7 +167,10 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   GroomingRoute: typeof GroomingRoute
   PoliciesRoute: typeof PoliciesRoute
+  PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
+  TermsRoute: typeof TermsRoute
+  ThanksRoute: typeof ThanksRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -185,11 +224,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thanks': {
+      id: '/thanks'
+      path: '/thanks'
+      fullPath: '/thanks'
+      preLoaderRoute: typeof ThanksRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -203,7 +263,10 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   GroomingRoute: GroomingRoute,
   PoliciesRoute: PoliciesRoute,
+  PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
+  TermsRoute: TermsRoute,
+  ThanksRoute: ThanksRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

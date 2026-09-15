@@ -15,7 +15,7 @@ export function WhatsAppBubble() {
       target="_blank"
       rel="noreferrer"
       aria-label="Chat with Barkly's on WhatsApp"
-      className="group fixed right-4 bottom-4 z-50 flex items-center gap-3 sm:right-6 sm:bottom-6"
+      className="group fixed right-4 bottom-20 z-50 flex items-center gap-3 sm:right-6 lg:bottom-6"
     >
       <span className="hidden rounded-full bg-navy px-3.5 py-2 text-sm font-medium text-paper opacity-0 shadow-card transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 sm:block">
         Chat on WhatsApp

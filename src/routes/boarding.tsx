@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { HeartHandshake, Home } from "lucide-react";
 import {
   breadcrumbJsonLd,
@@ -92,17 +92,27 @@ function RateCard({
 }
 
 function BoardingRequestForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
   const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
     setSending(true);
+    setError("");
+
+    const name = String(data.get("name") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    if (!name || !phone || !email) {
+      setError("Please add your name, phone, and email so we can confirm the stay.");
+      setSending(false);
+      return;
+    }
 
     try {
-      // FormSubmit delivers to the business email without a backend.
       const res = await fetch(`https://formsubmit.co/ajax/${SITE.email}`, {
         method: "POST",
         headers: {
@@ -112,48 +122,21 @@ function BoardingRequestForm() {
       });
 
       if (!res.ok) throw new Error("send failed");
-      setSubmitted(true);
-      form.reset();
+      void navigate({ to: "/thanks" });
     } catch {
-      // Fallback: open mail client with the request details.
-      const entries = Object.fromEntries(data.entries());
-      const body = Object.entries(entries)
-        .filter(([k]) => !k.startsWith("_"))
-        .map(([k, v]) => `${k}: ${v}`)
-        .join("\n");
-      window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(
-        "Boarding / daycare request",
-      )}&body=${encodeURIComponent(body)}`;
-      setSubmitted(true);
+      setError(
+        `We couldn’t send that just now. Call ${SITE.phoneDisplay} or email ${SITE.email}, then try again.`,
+      );
     } finally {
       setSending(false);
     }
-  }
-
-  if (submitted) {
-    return (
-      <div className="rounded-2xl border border-line bg-cream-deep px-6 py-10 text-center">
-        <h3 className="font-display text-2xl text-navy">Request received</h3>
-        <p className="mx-auto mt-3 max-w-md text-sm text-muted">
-          Thanks! We’ll review availability and get back to you to confirm your boarding or daycare
-          dates.
-        </p>
-        <Button
-          type="button"
-          className="mt-6"
-          variant="outline"
-          onClick={() => setSubmitted(false)}
-        >
-          Send another request
-        </Button>
-      </div>
-    );
   }
 
   return (
     <form
       onSubmit={onSubmit}
       className="mx-auto max-w-xl space-y-4 rounded-2xl border border-line bg-paper p-6 text-left shadow-card sm:p-8"
+      noValidate
     >
       <input type="hidden" name="_subject" value="Barkly's boarding / daycare request" />
       <input type="hidden" name="_template" value="table" />
@@ -250,6 +233,14 @@ function BoardingRequestForm() {
       <Button type="submit" className="w-full" disabled={sending}>
         {sending ? "Sending…" : "Send boarding request"}
       </Button>
+      {error ? (
+        <p
+          role="alert"
+          className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-800"
+        >
+          {error}
+        </p>
+      ) : null}
     </form>
   );
 }

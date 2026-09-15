@@ -4,14 +4,17 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppBubble } from "@/components/whatsapp-bubble";
+import { CookieBanner } from "@/components/cookie-banner";
+import { MobileCta } from "@/components/mobile-cta";
+import { NotFoundPage } from "@/components/not-found";
+import { PendingScreen } from "@/components/pending-screen";
 import { localBusinessJsonLd, OG_IMAGE_URL } from "@/lib/seo";
 import appCss from "../styles.css?url";
 
 const FALLBACK_TITLE =
   "Barkly's | Fear-Free Dog Grooming, Boarding & Daycare in Charlotte";
 const FALLBACK_DESCRIPTION =
-  "Fear-Free dog grooming, boarding, daycare, and dog sitting in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC.";
-const GA_ID = "G-GRS5XQS6NT";
+  "Fear-Free dog grooming, boarding, and daycare in Charlotte, Fort Mill, Tega Cay, and nearby towns.";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -33,9 +36,9 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "apple-touch-icon", href: "/logo.png" },
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
-      { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -45,21 +48,13 @@ export const Route = createRootRoute({
     ],
     scripts: [
       {
-        async: true,
-        src: `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`,
-      },
-      {
-        children: `window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_ID}');`,
-      },
-      {
         type: "application/ld+json",
         children: JSON.stringify(localBusinessJsonLd()),
       },
     ],
   }),
+  notFoundComponent: NotFoundPage,
+  pendingComponent: PendingScreen,
   component: RootLayout,
 });
 
@@ -69,13 +64,15 @@ function RootLayout() {
       <head>
         <HeadContent />
       </head>
-      <body className="flex min-h-svh flex-col bg-cream text-ink">
+      <body className="flex min-h-svh flex-col bg-cream pb-20 text-ink lg:pb-0">
         <PreviewHostBridge />
         <AuthProvider>
           <Header />
           <Outlet />
           <Footer />
           <WhatsAppBubble />
+          <MobileCta />
+          <CookieBanner />
         </AuthProvider>
         <Scripts />
       </body>

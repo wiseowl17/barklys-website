@@ -21,15 +21,17 @@ type PageHeadInput = {
   description: string;
   path: string;
   jsonLd?: unknown | readonly unknown[];
+  noIndex?: boolean;
 };
 
-export function pageHead({ title, description, path, jsonLd }: PageHeadInput) {
+export function pageHead({ title, description, path, jsonLd, noIndex }: PageHeadInput) {
   const url = canonicalUrl(path);
   const jsonLdItems = jsonLd == null ? [] : Array.isArray(jsonLd) ? jsonLd : [jsonLd];
   return {
     meta: [
       { title },
       { name: "description", content: description },
+      ...(noIndex ? [{ name: "robots", content: "noindex, nofollow" }] : []),
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:url", content: url },

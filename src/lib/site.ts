@@ -37,6 +37,9 @@ export const SITE = {
   googleReviewHref:
     "https://search.google.com/local/writereview?placeid=ChIJs8QZe9U3T2oRHlr8iUjUr0M",
   hoursDisplay: "Sunday 9–5, Monday–Friday 6–9pm, Saturday 9–5",
+  locality: "Charlotte, NC",
+  studioNote:
+    "Home-based studio in Charlotte, NC. Exact address is shared after your appointment is confirmed.",
 } as const;
 
 export type NavLink = { to: string; label: string };
