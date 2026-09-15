@@ -46,105 +46,119 @@ function AboutPage() {
   ];
 
   return (
-    <main className="text-center">
-      <section className="mx-auto flex max-w-3xl flex-col items-center px-4 py-14 sm:px-6 lg:py-20">
-        <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
-          Meet the groomer
-        </p>
-        <h1 className="mt-3 font-display text-4xl sm:text-5xl">
-          {cmsText(copy, "about.headline", "The Fear-Free groomer behind Barkly’s")}
-        </h1>
-
-        <div className="relative mt-10 flex w-full flex-col items-center">
-          <div
-            className="pointer-events-none absolute inset-x-4 -top-6 h-64 rounded-full bg-gold/25 blur-3xl sm:h-80"
-            aria-hidden
-          />
-          <figure className="relative mx-auto w-full max-w-xs sm:max-w-sm">
-            <div className="rounded-2xl bg-gold p-1.5 shadow-soft">
-              <div className="overflow-hidden rounded-[1.15rem] bg-navy p-1">
-                <img
-                  src="/vanessa-headshot.jpg"
-                  alt="Vanessa Cordova, Fear Free certified professional groomer at Barkly’s"
-                  width={960}
-                  height={1344}
-                  className="mx-auto block h-auto w-full rounded-[1.05rem] object-cover object-top"
-                  decoding="async"
-                  fetchPriority="high"
-                />
-              </div>
-            </div>
-          </figure>
-          <p className="relative mt-6 font-display text-3xl text-navy">Vanessa Cordova</p>
-          <p className="relative mt-1 text-sm text-muted">
-            Fear Free Certified Professional · Groomer
+    <main>
+      <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:py-20">
+        <header className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
+            Meet the groomer
           </p>
+          <h1 className="mt-3 font-display text-4xl sm:text-5xl">
+            {cmsText(copy, "about.headline", "The Fear-Free groomer behind Barkly’s")}
+          </h1>
+        </header>
+
+        <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <figure className="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-none">
+            <img
+              src="/vanessa-headshot.jpg"
+              alt="Vanessa Cordova, Fear Free certified professional groomer at Barkly’s"
+              width={960}
+              height={1344}
+              className="block h-auto w-full rounded-2xl shadow-card"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </figure>
+          <div className="text-center lg:text-left">
+            <p className="font-display text-3xl text-navy sm:text-4xl">Vanessa Cordova</p>
+            <p className="mt-1 text-sm text-muted">
+              Fear Free Certified Professional · Groomer
+            </p>
+            <p className="mt-6 text-lg leading-relaxed text-muted">
+              {cmsText(
+                copy,
+                "about.intro",
+                `Nearly two decades in animal care, a veterinary education from Venezuela, and five years as a professional dog groomer — with a Fear Free certification at the center of every appointment. Vanessa welcomes dogs from ${site.area}.`,
+              )}
+            </p>
+            <ul className="mt-8 space-y-3 text-[15px] leading-relaxed text-ink">
+              {bullets.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-lg border border-line bg-paper px-4 py-3 lg:text-left"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <p className="mt-8 text-lg leading-relaxed text-muted">
-          {cmsText(
-            copy,
-            "about.intro",
-            `Nearly two decades in animal care, a veterinary education from Venezuela, and five years as a professional dog groomer — with a Fear Free certification at the center of every appointment. Vanessa welcomes dogs from ${site.area}.`,
-          )}
-        </p>
-        <ul className="mt-8 w-full space-y-4 text-[15px] leading-relaxed text-ink">
-          {bullets.map((item) => (
-            <li key={item} className="rounded-lg border border-line bg-paper px-4 py-3">
-              {item}
-            </li>
-          ))}
-        </ul>
-
-        <figure className="mt-12 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-card">
+        <figure className="mt-16">
           <img
-            src="/vanessa.jpg"
-            alt="Vanessa with a golden retriever on the grooming table"
-            className="mx-auto w-full object-cover"
+            src="/vanessa-studio.jpg"
+            alt="Vanessa at the Barkly’s grooming table with scissors, clippers, and brushes ready"
+            width={1600}
+            height={1143}
+            className="block h-auto w-full rounded-2xl shadow-card"
+            decoding="async"
           />
-          <figcaption className="px-5 py-4 text-sm text-muted">
-            In the studio — every appointment at the dog’s pace.
+          <figcaption className="mt-4 text-center text-sm text-muted">
+            The home studio — calm, equipped, and ready when your pup is.
           </figcaption>
         </figure>
-        <GalleryPoliciesLinks />
-      </section>
 
-      <section className="bg-paper">
-        <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-16 sm:px-6">
-          <h2 className="font-display text-3xl">Why Fear Free matters</h2>
-          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted">
-            <p>
-              Fear Free is a science-based certification that trains professionals to recognize and
-              reduce fear, anxiety, and stress in pets. It focuses on reading subtle body language,
-              gentle positive handling, environmental adjustments, and desensitizing pets to
-              grooming tools.
-            </p>
-            <p>
-              The result is a calmer, safer experience for the dog and greater peace of mind for
-              owners. At Barkly’s every appointment prioritizes your pet’s emotional well-being —
-              the haircut never comes before the animal in the chair.
-            </p>
-            <p>
-              If your dog needs extra time, breaks, or a slower introduction to the table, dryer, or
-              clippers, that is the plan — not an inconvenience.
+        <div className="mt-16 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <figure className="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-none">
+            <img
+              src="/vanessa-grooming.jpg"
+              alt="Vanessa gently grooming a small white dog on the table"
+              width={960}
+              height={1344}
+              className="block h-auto w-full rounded-2xl shadow-card"
+              decoding="async"
+            />
+            <figcaption className="mt-4 text-center text-sm text-muted lg:text-left">
+              In the studio — every appointment at the dog’s pace.
+            </figcaption>
+          </figure>
+          <div className="text-center lg:text-left">
+            <h2 className="font-display text-3xl">Why Fear Free matters</h2>
+            <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-muted">
+              <p>
+                Fear Free is a science-based certification that trains professionals to recognize
+                and reduce fear, anxiety, and stress in pets. It focuses on reading subtle body
+                language, gentle positive handling, environmental adjustments, and desensitizing
+                pets to grooming tools.
+              </p>
+              <p>
+                The result is a calmer, safer experience for the dog and greater peace of mind for
+                owners. At Barkly’s every appointment prioritizes your pet’s emotional well-being —
+                the haircut never comes before the animal in the chair.
+              </p>
+              <p>
+                If your dog needs extra time, breaks, or a slower introduction to the table, dryer,
+                or clippers, that is the plan — not an inconvenience.
+              </p>
+            </div>
+            <Button asChild className="mt-8">
+              <Link to="/book">Book with Vanessa</Link>
+            </Button>
+            <p className="mt-6 text-sm text-muted">
+              If Vanessa took good care of your pup,{" "}
+              <a
+                href={SITE.googleReviewHref}
+                className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
+                target="_blank"
+                rel="noreferrer"
+              >
+                leave a Google review
+              </a>
+              .
             </p>
           </div>
-          <Button asChild className="mt-8">
-            <Link to="/book">Book with Vanessa</Link>
-          </Button>
-          <p className="mt-6 text-sm text-muted">
-            If Vanessa took good care of your pup,{" "}
-            <a
-              href={SITE.googleReviewHref}
-              className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
-              target="_blank"
-              rel="noreferrer"
-            >
-              leave a Google review
-            </a>
-            .
-          </p>
         </div>
+        <GalleryPoliciesLinks className="mx-auto mt-12 max-w-xl text-center text-sm text-muted" />
       </section>
     </main>
   );
