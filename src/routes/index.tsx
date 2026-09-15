@@ -27,8 +27,7 @@ const ICONS = {
 } as const;
 
 function HomePage() {
-  const { copy, gallery } = useCms();
-  const hero = gallery.slice(0, 8);
+  const { copy, hero } = useCms();
 
   return (
     <main className="text-center">

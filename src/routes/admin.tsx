@@ -1,7 +1,7 @@
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ImagePlus, KeyRound, LogOut, PencilLine } from "lucide-react";
+import { ChevronDown, ChevronUp, ImagePlus, Images, KeyRound, LogOut, PencilLine } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
@@ -15,6 +15,7 @@ import {
   type AddonPrice,
   type BoardingPrice,
   type GroomPrice,
+  type MediaCollection,
 } from "@/lib/cms";
 import { compressImage } from "@/lib/cms-image";
 import {
@@ -23,6 +24,7 @@ import {
   deleteStudioPhoto,
   getAdminSession,
   getStudioData,
+  reorderStudioPhotos,
   saveStudioCopy,
   toggleBuiltinPhoto,
   uploadStudioPhoto,
@@ -141,7 +143,7 @@ function LoginCard() {
 function StudioDesk({ studio }: { studio: Studio }) {
   const router = useRouter();
   const logout = useServerFn(adminLogout);
-  const [tab, setTab] = useState<"photos" | "copy">("photos");
+  const [tab, setTab] = useState<"gallery" | "hero" | "copy">("gallery");
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6">
@@ -152,8 +154,8 @@ function StudioDesk({ studio }: { studio: Studio }) {
           </p>
           <h1 className="mt-1 font-display text-3xl sm:text-4xl">Studio desk</h1>
           <p className="mt-2 max-w-xl text-sm text-muted">
-            Changes go live on the public site as soon as you save. This page is
-            not linked in the menu.
+            Gallery photos, homepage showcase photos, and copy save here. Saves
+            from this preview publish to barklysclt.com — no GitHub key needed.
           </p>
         </div>
         <Button
@@ -170,10 +172,28 @@ function StudioDesk({ studio }: { studio: Studio }) {
         </Button>
       </div>
 
-      <div className="mt-8 flex justify-center gap-2 rounded-full border border-line bg-paper p-1 sm:justify-start">
-        <TabButton active={tab === "photos"} onClick={() => setTab("photos")}>
+      {studio.persistMode === "blocked" || !studio.dbOk ? (
+        <p role="alert" className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          This live website cannot store copy yet. A GitHub key is not what it
+          needs. Add a free database in Vercel (Storage → Create Database →
+          Postgres, connect Barkly’s, then Redeploy). Until then, save from the
+          Grok preview and it will publish to barklysclt.com automatically.
+        </p>
+      ) : studio.persistMode === "preview" ? (
+        <p className="mt-6 rounded-xl border border-sky/60 bg-sky/20 px-4 py-3 text-sm text-navy">
+          Saves from this desk publish to barklysclt.com in about a minute. You
+          do not need a GitHub key.
+        </p>
+      ) : null}
+
+      <div className="mt-8 flex flex-wrap justify-center gap-2 rounded-full border border-line bg-paper p-1 sm:justify-start">
+        <TabButton active={tab === "gallery"} onClick={() => setTab("gallery")}>
           <ImagePlus className="size-4" />
-          Photos
+          Gallery
+        </TabButton>
+        <TabButton active={tab === "hero"} onClick={() => setTab("hero")}>
+          <Images className="size-4" />
+          Homepage photos
         </TabButton>
         <TabButton active={tab === "copy"} onClick={() => setTab("copy")}>
           <PencilLine className="size-4" />
@@ -182,11 +202,25 @@ function StudioDesk({ studio }: { studio: Studio }) {
       </div>
 
       <div className="mt-8">
-        {tab === "photos" ? (
-          <PhotosPanel photos={studio.photos} />
-        ) : (
-          <CopyPanel initial={studio.copy} />
-        )}
+        {tab === "gallery" ? (
+          <PhotosPanel
+            collection="gallery"
+            photos={studio.gallery}
+            dbOk={studio.dbOk}
+            title="Gallery"
+            hint="These photos appear on the Gallery page. Use Up and Down to change the order. New uploads land first."
+          />
+        ) : null}
+        {tab === "hero" ? (
+          <PhotosPanel
+            collection="hero"
+            photos={studio.hero}
+            dbOk={studio.dbOk}
+            title="Homepage showcase"
+            hint="These photos scroll on the home page. Upload new ones or reorder the current set — this is separate from the Gallery."
+          />
+        ) : null}
+        {tab === "copy" ? <CopyPanel initial={studio.copy} dbOk={studio.dbOk} /> : null}
       </div>
     </main>
   );
@@ -215,11 +249,24 @@ function TabButton({
   );
 }
 
-function PhotosPanel({ photos }: { photos: Studio["photos"] }) {
+function PhotosPanel({
+  collection,
+  photos,
+  dbOk,
+  title,
+  hint,
+}: {
+  collection: MediaCollection
+  photos: Studio["gallery"]
+  dbOk: boolean
+  title: string
+  hint: string
+}) {
   const router = useRouter();
   const upload = useServerFn(uploadStudioPhoto);
   const remove = useServerFn(deleteStudioPhoto);
   const toggle = useServerFn(toggleBuiltinPhoto);
+  const reorder = useServerFn(reorderStudioPhotos);
   const [name, setName] = useState("");
   const [alt, setAlt] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -227,8 +274,32 @@ function PhotosPanel({ photos }: { photos: Studio["photos"] }) {
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
-  const uploads = photos.filter((photo) => photo.kind === "upload");
-  const builtins = photos.filter((photo) => photo.kind === "builtin");
+  async function saveOrder(next: Studio["gallery"]) {
+    await reorder({
+      data: { collection, srcs: next.map((photo) => photo.src) },
+    });
+    await router.invalidate({ sync: true });
+  }
+
+  async function move(index: number, direction: -1 | 1) {
+    const target = index + direction;
+    if (target < 0 || target >= photos.length) return;
+    const next = [...photos];
+    const current = next[index];
+    const swap = next[target];
+    if (!current || !swap) return;
+    next[index] = swap;
+    next[target] = current;
+    setError("");
+    setStatus("Saving order…");
+    try {
+      await saveOrder(next);
+      setStatus("Order updated.");
+    } catch (err) {
+      setStatus("");
+      setError(err instanceof Error ? err.message : "Could not reorder those photos.");
+    }
+  }
 
   async function onUpload(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -248,12 +319,13 @@ function PhotosPanel({ photos }: { photos: Studio["photos"] }) {
           alt: alt.trim(),
           mime: compressed.mime,
           dataBase64: compressed.base64,
+          collection,
         },
       });
       setName("");
       setAlt("");
       setFile(null);
-      setStatus("Photo added to the gallery.");
+      setStatus(`Photo added to the ${collection === "hero" ? "homepage showcase" : "gallery"}.`);
       await router.invalidate({ sync: true });
     } catch (err) {
       setStatus("");
@@ -272,44 +344,47 @@ function PhotosPanel({ photos }: { photos: Studio["photos"] }) {
         <h2 className="font-display text-2xl">Add a photo</h2>
         <p className="mt-1 text-sm text-muted">
           JPEG, PNG, or HEIC from your phone is fine — we’ll shrink it before it
-          saves. New photos appear first in the gallery.
+          saves. New photos appear first.
         </p>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
-            <Label htmlFor="photo-file" className="text-left">
+            <Label htmlFor={`${collection}-photo-file`} className="text-left">
               Photo
             </Label>
             <Input
-              id="photo-file"
+              id={`${collection}-photo-file`}
               type="file"
               accept="image/*"
               className="text-left file:mr-3 file:rounded-md file:border-0 file:bg-sky/40 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-navy"
               onChange={(event) => setFile(event.target.files?.[0] ?? null)}
               required
+              disabled={!dbOk || pending}
             />
           </div>
           <div>
-            <Label htmlFor="photo-name" className="text-left">
-              Name on the gallery
+            <Label htmlFor={`${collection}-photo-name`} className="text-left">
+              Name
             </Label>
             <Input
-              id="photo-name"
+              id={`${collection}-photo-name`}
               value={name}
               onChange={(event) => setName(event.target.value)}
               className="text-left"
               placeholder="Angel"
+              disabled={!dbOk || pending}
             />
           </div>
           <div>
-            <Label htmlFor="photo-alt" className="text-left">
+            <Label htmlFor={`${collection}-photo-alt`} className="text-left">
               Short description
             </Label>
             <Input
-              id="photo-alt"
+              id={`${collection}-photo-alt`}
               value={alt}
               onChange={(event) => setAlt(event.target.value)}
               className="text-left"
               placeholder="Merle Aussie in a blue bandana"
+              disabled={!dbOk || pending}
             />
           </div>
         </div>
@@ -319,87 +394,120 @@ function PhotosPanel({ photos }: { photos: Studio["photos"] }) {
           </p>
         ) : null}
         {status ? <p className="mt-4 text-sm text-teal-deep">{status}</p> : null}
-        <Button type="submit" className="mt-5" disabled={pending}>
-          {pending ? "Uploading…" : "Add to gallery"}
+        <Button type="submit" className="mt-5" disabled={pending || !dbOk}>
+          {pending ? "Uploading…" : `Add to ${title.toLowerCase()}`}
         </Button>
       </form>
 
       <section>
-        <h2 className="font-display text-2xl">Your uploads</h2>
-        {uploads.length === 0 ? (
-          <p className="mt-3 text-sm text-muted">No new photos yet.</p>
+        <h2 className="font-display text-2xl">{title} order</h2>
+        <p className="mt-1 text-sm text-muted">{hint}</p>
+        {photos.length === 0 ? (
+          <p className="mt-3 text-sm text-muted">No photos in this set yet.</p>
         ) : (
-          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {uploads.map((photo) => (
+          <ol className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {photos.map((photo, index) => (
               <li
                 key={photo.src}
-                className="overflow-hidden rounded-2xl border border-line bg-paper shadow-card"
+                className={cn(
+                  "overflow-hidden rounded-2xl border border-line bg-paper shadow-card",
+                  photo.hidden && "opacity-50",
+                )}
               >
                 <img src={photo.src} alt={photo.alt} className="aspect-[4/5] w-full object-cover" />
                 <div className="p-3 text-center">
                   <p className="font-display text-lg italic">{photo.name}</p>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="mt-3"
-                    onClick={async () => {
-                      if (photo.id == null) return;
-                      if (!window.confirm(`Remove ${photo.name} from the gallery?`)) return;
-                      await remove({ data: { id: photo.id } });
-                      await router.invalidate({ sync: true });
-                    }}
-                  >
-                    Remove
-                  </Button>
+                  <p className="mt-1 text-xs text-muted">
+                    {index + 1} of {photos.length}
+                    {photo.kind === "builtin" ? " · original" : " · uploaded"}
+                    {photo.hidden ? " · hidden" : ""}
+                  </p>
+                  <div className="mt-3 flex flex-wrap justify-center gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={!dbOk || index === 0}
+                      aria-label={`Move ${photo.name} earlier`}
+                      onClick={() => move(index, -1)}
+                    >
+                      <ChevronUp className="size-4" />
+                      Up
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={!dbOk || index === photos.length - 1}
+                      aria-label={`Move ${photo.name} later`}
+                      onClick={() => move(index, 1)}
+                    >
+                      <ChevronDown className="size-4" />
+                      Down
+                    </Button>
+                  </div>
+                  {photo.kind === "upload" ? (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="mt-2"
+                      disabled={!dbOk}
+                      onClick={async () => {
+                        if (!window.confirm(`Remove ${photo.name}?`)) return;
+                        setError("");
+                        try {
+                          await remove({
+                            data: {
+                              ...(photo.id != null ? { id: photo.id } : {}),
+                              src: photo.src,
+                            },
+                          });
+                          await router.invalidate({ sync: true });
+                        } catch (err) {
+                          setError(err instanceof Error ? err.message : "Could not remove that photo.");
+                        }
+                      }}
+                    >
+                      Remove
+                    </Button>
+                  ) : (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="mt-2"
+                      disabled={!dbOk}
+                      onClick={async () => {
+                        setError("");
+                        try {
+                          await toggle({
+                            data: {
+                              src: photo.src,
+                              hidden: !photo.hidden,
+                              collection,
+                            },
+                          });
+                          await router.invalidate({ sync: true });
+                        } catch (err) {
+                          setError(err instanceof Error ? err.message : "Could not update that photo.");
+                        }
+                      }}
+                    >
+                      {photo.hidden ? "Show again" : "Hide"}
+                    </Button>
+                  )}
                 </div>
               </li>
             ))}
-          </ul>
+          </ol>
         )}
-      </section>
-
-      <section>
-        <h2 className="font-display text-2xl">Original gallery</h2>
-        <p className="mt-1 text-sm text-muted">
-          Hide a built-in photo if you no longer want it on the public gallery.
-        </p>
-        <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {builtins.map((photo) => (
-            <li
-              key={photo.src}
-              className={cn(
-                "overflow-hidden rounded-2xl border border-line bg-paper shadow-card",
-                photo.hidden && "opacity-50",
-              )}
-            >
-              <img src={photo.src} alt={photo.alt} className="aspect-[4/5] w-full object-cover" />
-              <div className="p-3 text-center">
-                <p className="font-display text-lg italic">{photo.name}</p>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="mt-3"
-                  onClick={async () => {
-                    await toggle({
-                      data: { src: photo.src, hidden: !photo.hidden },
-                    });
-                    await router.invalidate({ sync: true });
-                  }}
-                >
-                  {photo.hidden ? "Show again" : "Hide"}
-                </Button>
-              </div>
-            </li>
-          ))}
-        </ul>
       </section>
     </div>
   );
 }
 
-function CopyPanel({ initial }: { initial: Record<string, string> }) {
+function CopyPanel({ initial, dbOk }: { initial: Record<string, string>; dbOk: boolean }) {
   const router = useRouter();
   const save = useServerFn(saveStudioCopy);
   const defaults = useMemo(() => defaultCopyMap(), []);
@@ -429,8 +537,12 @@ function CopyPanel({ initial }: { initial: Record<string, string> }) {
         "prices.addons": JSON.stringify(addons),
         "prices.boarding": JSON.stringify(boarding),
       };
-      await save({ data: { entries } });
-      setStatus("Saved. The public pages now use this copy.");
+      const result = await save({ data: { entries } });
+      setStatus(
+        result.pushed
+          ? "Saved. barklysclt.com will show this in a minute or two."
+          : "Saved. The public pages now use this copy.",
+      );
       await router.invalidate({ sync: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save copy.");
@@ -609,7 +721,7 @@ function CopyPanel({ initial }: { initial: Record<string, string> }) {
       {status ? <p className="text-sm text-teal-deep">{status}</p> : null}
 
       <div className="sticky bottom-4 z-10">
-        <Button type="submit" size="lg" className="w-full shadow-soft sm:w-auto" disabled={pending}>
+        <Button type="submit" size="lg" className="w-full shadow-soft sm:w-auto" disabled={pending || !dbOk}>
           {pending ? "Saving…" : "Save copy"}
         </Button>
       </div>

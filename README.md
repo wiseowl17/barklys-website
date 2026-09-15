@@ -44,7 +44,20 @@ Appointments are booked through Square Appointments on `/book`.
 
 ### 5. Environment
 
-No secrets are required for the public marketing site. The studio desk at `/admin` uses a hashed password in code. Optional overrides:
+The public marketing pages work with no secrets. The studio desk at `/admin` uses a hashed password in code.
+
+Saves from the Grok preview publish straight to GitHub, and Vercel updates barklysclt.com — no GitHub key is required.
+
+To make **barklysclt.com/admin** save on its own (without the preview):
+
+1. Open the Barkly’s project on Vercel
+2. Go to **Storage → Create Database → Postgres** (Neon)
+3. Connect it to `barklys-website`
+4. Redeploy
+
+That adds `DATABASE_URL` automatically. A GitHub key is not involved.
+
+Optional overrides:
 
 - `ADMIN_EMAIL` — sign-in email (defaults to barklysclt@gmail.com)
 - `ADMIN_PASSWORD` — overrides the hashed studio password

@@ -3,8 +3,11 @@ import {
   BOARDING_RATES,
   GALLERY,
   GROOM_PRICES,
+  HERO_SLIDES,
   SITE,
 } from "@/lib/site";
+
+export type MediaCollection = "gallery" | "hero"
 
 export type GalleryItem = {
   src: string
@@ -19,6 +22,8 @@ export type StudioPhoto = {
   alt: string
   kind: "upload" | "builtin"
   hidden: boolean
+  collection: MediaCollection
+  sort_order: number
 }
 
 export type GroomPrice = { size: string; range: string; price: string }
@@ -28,6 +33,7 @@ export type BoardingPrice = { name: string; price: string; note: string }
 export type PublicCms = {
   copy: Record<string, string>
   gallery: GalleryItem[]
+  hero: GalleryItem[]
   prices: {
     groom: GroomPrice[]
     addons: AddonPrice[]
@@ -236,20 +242,15 @@ export function parseBoardingPrices(copy: Record<string, string>): BoardingPrice
 
 export function buildPublicCms(
   stored: Record<string, string>,
-  uploaded: GalleryItem[],
-  hidden: readonly string[],
+  gallery: GalleryItem[],
+  hero: GalleryItem[],
 ): PublicCms {
   const copy = { ...defaultCopyMap(), ...stored }
-  const hiddenSet = new Set(hidden)
-  const builtin = GALLERY.filter((photo) => !hiddenSet.has(photo.src)).map((photo) => ({
-    src: photo.src,
-    alt: photo.alt,
-    name: photo.name,
-  }))
   const phoneDisplay = cmsText(copy, "site.phone", SITE.phoneDisplay)
   return {
     copy,
-    gallery: [...uploaded, ...builtin],
+    gallery,
+    hero,
     prices: {
       groom: parseGroomPrices(copy),
       addons: parseAddonPrices(copy),
@@ -266,8 +267,26 @@ export function buildPublicCms(
   }
 }
 
+export function builtinStudioPhotos(collection: MediaCollection): StudioPhoto[] {
+  const source = collection === "hero" ? HERO_SLIDES : GALLERY
+  return source.map((photo, index) => ({
+    id: null,
+    src: photo.src,
+    name: photo.name,
+    alt: photo.alt,
+    kind: "builtin" as const,
+    hidden: false,
+    collection,
+    sort_order: index,
+  }))
+}
+
 export function fallbackPublicCms(): PublicCms {
-  return buildPublicCms({}, [], [])
+  return buildPublicCms(
+    {},
+    GALLERY.map((photo) => ({ src: photo.src, alt: photo.alt, name: photo.name })),
+    HERO_SLIDES.map((photo) => ({ src: photo.src, alt: photo.alt, name: photo.name })),
+  )
 }
 
 export function photoUrl(id: number): string {
