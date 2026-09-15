@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { pageHead } from "@/lib/seo";
-import { REVIEWS, SERVICES, SITE } from "@/lib/site";
+import { REVIEWS, SERVICES } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -46,7 +46,8 @@ function HomePage() {
             </Button>
           </div>
           <p className="mt-6 text-sm text-muted">
-            Serving {SITE.area}. Open {SITE.hoursDisplay}.
+            Serving Charlotte, Fort Mill, Tega Cay, and nearby towns · By
+            appointment only
           </p>
           <HeroCarousel />
         </div>

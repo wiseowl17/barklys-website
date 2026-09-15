@@ -33,7 +33,7 @@ export const SITE = {
   instagram: "https://instagram.com/barklysclt",
   tiktok: "https://www.tiktok.com/@barklysclt",
   handle: "@barklysclt",
-  area: SERVICE_AREA_NAMES,
+  area: "Charlotte, Fort Mill, Tega Cay, and nearby towns",
   googleReviewHref:
     "https://search.google.com/local/writereview?placeid=ChIJs8QZe9U3T2oRHlr8iUjUr0M",
   hoursDisplay: "Sunday 9–5, Monday–Friday 6–9pm, Saturday 9–5",
