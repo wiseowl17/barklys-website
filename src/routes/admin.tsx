@@ -59,6 +59,7 @@ function AdminPage() {
 function LoginCard() {
   const router = useRouter();
   const login = useServerFn(adminLogin);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
@@ -68,9 +69,9 @@ function LoginCard() {
     setPending(true);
     setError("");
     try {
-      const result = await login({ data: { password } });
+      const result = await login({ data: { email, password } });
       if (!result.ok) {
-        setError(result.error ?? "That password does not match.");
+        setError(result.error ?? "That email or password does not match.");
         return;
       }
       if (result.token) writeStudioToken(result.token);
@@ -94,6 +95,20 @@ function LoginCard() {
           Add gallery photos and edit website copy. Visitors never see this page.
         </p>
         <form onSubmit={onSubmit} className="mt-6 space-y-4 text-left">
+          <div>
+            <Label htmlFor="studio-email" className="text-left">
+              Email
+            </Label>
+            <Input
+              id="studio-email"
+              type="email"
+              autoComplete="username"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="text-left"
+              required
+            />
+          </div>
           <div>
             <Label htmlFor="studio-password" className="text-left">
               Password

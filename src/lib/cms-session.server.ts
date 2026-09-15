@@ -8,9 +8,10 @@ import {
 
 export const STUDIO_COOKIE = "barklys_studio";
 const MAX_AGE_SEC = 60 * 60 * 24 * 14;
-/** SHA-256 of the preview fallback password. Overridden by ADMIN_PASSWORD. */
+const FALLBACK_EMAIL = "barklysclt@gmail.com";
+/** SHA-256 of the studio desk password. Overridden by ADMIN_PASSWORD. */
 const FALLBACK_PASSWORD_SHA256 =
-  "84a2cb6dc8158068f7141777a458dcb20fd3de9ba04961e6ce9e40491b15bd7a";
+  "e1c63b0a18bbf8889a1adc3b5fb1bf4f7889775b8b84932fc39b32292d149209";
 
 function sha256Hex(value: string): string {
   return createHash("sha256").update(value, "utf8").digest("hex");
@@ -19,6 +20,10 @@ function sha256Hex(value: string): string {
 function passwordDigest(): string {
   const env = process.env.ADMIN_PASSWORD?.trim();
   return env ? sha256Hex(env) : FALLBACK_PASSWORD_SHA256;
+}
+
+function expectedEmail(): string {
+  return (process.env.ADMIN_EMAIL?.trim() || FALLBACK_EMAIL).toLowerCase();
 }
 
 function signingKey(): string {
@@ -39,6 +44,16 @@ function equalHex(left: string, right: string): boolean {
 
 export function passwordMatches(input: string): boolean {
   return equalHex(sha256Hex(input), passwordDigest());
+}
+
+export function emailMatches(input: string): boolean {
+  return equalHex(sha256Hex(input.trim().toLowerCase()), sha256Hex(expectedEmail()));
+}
+
+export function credentialsMatch(email: string, password: string): boolean {
+  const emailOk = emailMatches(email);
+  const passwordOk = passwordMatches(password);
+  return emailOk && passwordOk;
 }
 
 function sign(payload: string): string {

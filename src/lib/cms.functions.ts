@@ -31,12 +31,17 @@ export const getAdminSession = createServerFn({ method: "GET" })
   });
 
 export const adminLogin = createServerFn({ method: "POST" })
-  .validator(z.object({ password: z.string().min(1).max(200) }))
+  .validator(
+    z.object({
+      email: z.string().min(1).max(200),
+      password: z.string().min(1).max(200),
+    }),
+  )
   .handler(async ({ data }): Promise<{ ok: boolean; error?: string; token?: string }> => {
-    const { passwordMatches, writeAdminSession } = await import("./cms-session.server");
-    if (!passwordMatches(data.password)) {
+    const { credentialsMatch, writeAdminSession } = await import("./cms-session.server");
+    if (!credentialsMatch(data.email, data.password)) {
       await new Promise((resolve) => setTimeout(resolve, 400));
-      return { ok: false, error: "That password does not match." };
+      return { ok: false, error: "That email or password does not match." };
     }
     const token = writeAdminSession();
     return { ok: true, token };

@@ -44,7 +44,13 @@ Appointments are booked through Square Appointments on `/book`.
 
 ### 5. Environment
 
-No secrets are required for the marketing site. Do not commit `.env` files.
+No secrets are required for the public marketing site. The studio desk at `/admin` uses a hashed password in code. Optional overrides:
+
+- `ADMIN_EMAIL` — sign-in email (defaults to barklysclt@gmail.com)
+- `ADMIN_PASSWORD` — overrides the hashed studio password
+- `ADMIN_SECRET` — extra signing secret for studio sessions
+
+Do not commit `.env` files or plaintext passwords.
 
 ## Contact
 
