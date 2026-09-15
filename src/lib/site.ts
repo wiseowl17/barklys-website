@@ -36,6 +36,8 @@ export const SITE = {
   area: "Charlotte, Fort Mill, Tega Cay, and nearby towns",
   googleReviewHref:
     "https://search.google.com/local/writereview?placeid=ChIJs8QZe9U3T2oRHlr8iUjUr0M",
+  googleReviewsHref:
+    "https://www.google.com/maps/place/?q=place_id:ChIJs8QZe9U3T2oRHlr8iUjUr0M",
   hoursDisplay: "Sunday 9–5, Monday–Friday 6–9pm, Saturday 9–5",
   locality: "Charlotte, NC",
   studioNote:
@@ -231,27 +233,39 @@ export const HERO_SLIDES = [
 
 export const REVIEWS = [
   {
-    name: "Lauren M.",
-    area: "South End, Charlotte",
+    name: "Manuel",
+    area: "Loki · Reviewed on Google",
     quote:
-      "Vanessa took her time with our anxious doodle and never rushed a single step. He hopped in the car looking proud, not stressed.",
+      "Vanessa is hands down the best dog groomer in the Charlotte area! Loki looked and smelled phenomenal after his appointment, you can immediately tell the care and attention to detail that went into his groom. The Fear-Free approach is so evident in how calm and happy he was. It gives such peace of mind knowing your pup is in gentle, capable hands. We will definitely be back!",
   },
   {
-    name: "Chris & Maya",
-    area: "Fort Mill",
+    name: "Claudia",
+    area: "Golden · Reviewed on Google",
     quote:
-      "We’ve been through three salons. This is the first time our schnauzer didn’t hide after a groom. The Fear Free approach is real.",
+      "It’s always a pleasure to leave Golden in her care. She is warm, gentle, and very professional. You can truly see the love and attention she puts into every detail, and Golden always looks absolutely beautiful. Highly recommended!",
   },
   {
-    name: "Priya S.",
-    area: "Tega Cay",
+    name: "Jennifer",
+    area: "Reviewed on Google",
     quote:
-      "Clear communication, beautiful finish, and she treated our senior Pom like royalty. We’ll only book here from now on.",
+      "I had a wonderful experience there! Vanessa was very friendly, professional, and caring. She did an amazing job. My pet looked so clean, happy, and adorable. I’m very happy with the service and will definitely be coming back.",
   },
   {
-    name: "Daniel R.",
-    area: "Ballantyne",
+    name: "Raiza",
+    area: "Cooper · Reviewed on Google",
     quote:
-      "Home-based and still more professional than the big shops. Our Aussie came home calm, fluffy, and actually happy.",
+      "Vanessa is an excellent dog groomer. I took my dog Cooper and he looked perfect: bath, haircut, and drying were all spot on. She’s very professional, careful, and you can tell she truly loves animals. The place is calm and Cooper came out super happy. Highly recommended, we’ll definitely be back.",
+  },
+  {
+    name: "Yany",
+    area: "Reviewed on Google",
+    quote:
+      "I absolutely love our groomer. She is so sweet, gentle, and caring with my dogs. You can truly tell that she loves animals and treats them as if they were her own. My dogs are always happy and look absolutely adorable when they come back.",
+  },
+  {
+    name: "Karla",
+    area: "Reviewed on Google",
+    quote:
+      "I had a great experience with Vanessa! She was so sweet, patient, and gentle with my dog. You can really tell she loves what she does and genuinely cares about the dogs she works with. My dog looked amazing and happy after his grooming! I’m so glad I found someone I can trust. We’ll definitely be coming back. Highly recommend!",
   },
 ] as const;

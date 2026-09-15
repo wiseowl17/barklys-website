@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { HeartHandshake, Home, Scissors, Sparkles } from "lucide-react";
+import { HeartHandshake, Home, Scissors, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
 import { pageHead } from "@/lib/seo";
-import { REVIEWS, SERVICES } from "@/lib/site";
+import { REVIEWS, SERVICES, SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -98,12 +98,18 @@ function HomePage() {
           <h2 className="mt-2 font-display text-3xl sm:text-4xl">
             Families in Charlotte already trust us
           </h2>
+          <p className="mt-3 text-sm text-muted">5.0 on Google from families who booked with Vanessa</p>
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {REVIEWS.map((review) => (
               <blockquote
                 key={review.name}
                 className="rounded-xl border border-line bg-paper p-6 shadow-card"
               >
+                <div className="mb-3 flex justify-center gap-0.5" aria-label="5 stars on Google">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="size-3.5 fill-gold text-gold" />
+                  ))}
+                </div>
                 <p className="text-[15px] leading-relaxed text-ink">“{review.quote}”</p>
                 <footer className="mt-5 text-sm">
                   <span className="font-semibold text-navy">{review.name}</span>
@@ -111,6 +117,18 @@ function HomePage() {
                 </footer>
               </blockquote>
             ))}
+          </div>
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <Button asChild size="lg" variant="outline">
+              <a href={SITE.googleReviewsHref} target="_blank" rel="noreferrer">
+                Read all reviews on Google
+              </a>
+            </Button>
+            <Button asChild size="lg">
+              <a href={SITE.googleReviewHref} target="_blank" rel="noreferrer">
+                Leave a Google review
+              </a>
+            </Button>
           </div>
         </div>
       </section>
