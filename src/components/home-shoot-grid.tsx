@@ -3,45 +3,82 @@ import { cn } from "@/lib/utils";
 
 const TAPES = ["bg-pink", "bg-gold", "bg-sky", "bg-teal"] as const;
 
-export function HomeShootGrid() {
+function Polaroid({
+  photo,
+  tape,
+  rotate,
+  featured = false,
+  priority = false,
+}: {
+  photo: (typeof HOME_SHOOT)[number];
+  tape: (typeof TAPES)[number];
+  rotate: string;
+  featured?: boolean;
+  priority?: boolean;
+}) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5">
-      {HOME_SHOOT.map((photo, i) => {
-        const tape = TAPES[i % TAPES.length];
-        const last = i === HOME_SHOOT.length - 1;
-        return (
-          <figure
+    <figure
+      className={cn(
+        "relative rounded-[1.35rem] bg-paper shadow-card ring-1 ring-line/70 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft",
+        featured ? "p-3 pb-4 sm:p-3.5 sm:pb-5" : "p-2.5 pb-3",
+      )}
+    >
+      <span
+        aria-hidden
+        className={cn(
+          "absolute -top-2 left-1/2 z-10 -translate-x-1/2 rounded-[2px] opacity-80 shadow-sm",
+          featured ? "h-5 w-14" : "h-4 w-11",
+          tape,
+          rotate,
+        )}
+      />
+      <span className="relative block aspect-[4/5] overflow-hidden rounded-[1rem] bg-cream-deep">
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          width={1000}
+          height={1400}
+          className="h-full w-full object-cover object-[center_18%]"
+          decoding={priority ? "sync" : "async"}
+          fetchPriority={priority ? "high" : "low"}
+        />
+      </span>
+      <figcaption
+        className={cn(
+          "mt-2.5 text-center font-display italic text-navy",
+          featured ? "text-base sm:text-lg" : "text-[13px] sm:text-sm",
+        )}
+      >
+        {photo.name}
+      </figcaption>
+    </figure>
+  );
+}
+
+export function HomeShootGrid() {
+  const [featured, ...rest] = HOME_SHOOT;
+
+  return (
+    <div>
+      <div className="mx-auto w-full max-w-sm sm:max-w-md lg:max-w-lg">
+        <Polaroid
+          photo={featured}
+          tape={TAPES[0]}
+          rotate="-rotate-3"
+          featured
+          priority
+        />
+      </div>
+      <div className="mt-5 grid grid-cols-2 gap-3 sm:mt-6 sm:grid-cols-3 sm:gap-5">
+        {rest.map((photo, i) => (
+          <Polaroid
             key={photo.src}
-            className={cn(
-              "relative rounded-[1.35rem] bg-paper p-2.5 pb-3 shadow-card ring-1 ring-line/70 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft",
-              last && "col-span-2 mx-auto w-full max-w-[16.5rem] sm:col-span-1 sm:col-start-2 sm:max-w-none",
-            )}
-          >
-            <span
-              aria-hidden
-              className={cn(
-                "absolute -top-2 left-1/2 z-10 h-4 w-11 -translate-x-1/2 rounded-[2px] opacity-80 shadow-sm",
-                tape,
-                i % 2 === 0 ? "-rotate-6" : "rotate-6",
-              )}
-            />
-            <span className="relative block aspect-[4/5] overflow-hidden rounded-[1rem] bg-cream-deep">
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                width={1000}
-                height={1400}
-                className="h-full w-full object-cover object-[center_18%]"
-                decoding={i === 0 ? "sync" : "async"}
-                fetchPriority={i === 0 ? "high" : "low"}
-              />
-            </span>
-            <figcaption className="mt-2.5 text-center font-display text-[13px] italic text-navy sm:text-sm">
-              {photo.name}
-            </figcaption>
-          </figure>
-        );
-      })}
+            photo={photo}
+            tape={TAPES[(i + 1) % TAPES.length]}
+            rotate={i % 2 === 0 ? "rotate-6" : "-rotate-6"}
+          />
+        ))}
+      </div>
     </div>
   );
 }
