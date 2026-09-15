@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <title>Barkly's Business Card</title>
+  <style>
+    @font-face {
+      font-family: "Fraunces";
+      font-style: italic;
+      font-weight: 500;
+      src: url("/fonts/fraunces-italic-500.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Fraunces";
+      font-style: normal;
+      font-weight: 500;
+      src: url("/fonts/fraunces-500.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Outfit";
+      font-style: normal;
+      font-weight: 400 600;
+      src: url("/fonts/outfit.woff2") format("woff2");
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #1a3a4c; }
+    [data-document-role="page"] {
+      width: 1050px;
+      height: 600px;
+      position: relative;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .front {
+      background: #fbf7f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .front .inset {
+      position: absolute;
+      inset: 28px;
+      border: 1px solid #e4b77c;
+    }
+    .front img { width: 280px; height: auto; position: relative; }
+    .front .tag {
+      position: relative;
+      margin-top: 22px;
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 20px;
+      color: #2c5a71;
+    }
+    .back {
+      background: #1a3a4c;
+      color: #fbf7f0;
+      padding: 64px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .back .inset {
+      position: absolute;
+      inset: 28px;
+      border: 1px solid color-mix(in oklab, #e4b77c 55%, transparent);
+    }
+    .name {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 42px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      position: relative;
+    }
+    .role {
+      font-family: "Outfit", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #e4b77c;
+      margin-top: 8px;
+      position: relative;
+    }
+    .lines {
+      font-family: "Outfit", sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #fbf7f0;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <section class="front" data-document-role="page" data-label="Front">
+    <div class="inset"></div>
+    <img src="/logo.png" alt="Barkly's" />
+    <p class="tag">Groom · Play · Stay</p>
+  </section>
+  <section class="back" data-document-role="page" data-label="Back">
+    <div class="inset"></div>
+    <div>
+      <p class="name">Vanessa Cordova</p>
+      <p class="role">Owner & Groomer</p>
+    </div>
+    <div class="lines">
+      (980) 320-0502<br />
+      barklysclt@gmail.com<br />
+      barklysclt.com · Charlotte, NC
+    </div>
+  </section>
+</body>
+</html>

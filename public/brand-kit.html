@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="robots" content="noindex" />
+  <title>Barkly's Brand Book</title>
+  <style>
+    @font-face {
+      font-family: "Fraunces";
+      font-style: normal;
+      font-weight: 500 700;
+      src: url("/fonts/fraunces-500.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Fraunces";
+      font-style: italic;
+      font-weight: 500;
+      src: url("/fonts/fraunces-italic-500.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Outfit";
+      font-style: normal;
+      font-weight: 400 600;
+      src: url("/fonts/outfit.woff2") format("woff2");
+    }
+
+    :root {
+      --cream: #fbf7f0;
+      --cream-deep: #f3eadb;
+      --gold: #e4b77c;
+      --sky: #aec6cf;
+      --teal: #54a0b5;
+      --teal-deep: #3d8296;
+      --navy: #2c5a71;
+      --navy-deep: #1a3a4c;
+      --pink: #f5b0cb;
+      --ink: #1a3344;
+      --muted: #5a7383;
+      --paper: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--navy-deep);
+      color: var(--ink);
+      font-family: "Outfit", ui-sans-serif, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    [data-document-role="page"] {
+      width: 1920px;
+      height: 1080px;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+      color: var(--ink);
+    }
+
+    .kicker {
+      font-family: "Outfit", sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--teal-deep);
+    }
+    .display {
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 500;
+      color: var(--navy-deep);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+    .body {
+      font-family: "Outfit", sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+    .muted { color: var(--muted); }
+    .hairline { height: 1px; background: var(--gold); }
+
+    .page-index {
+      position: absolute;
+      top: 56px;
+      right: 72px;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .page-foot {
+      position: absolute;
+      bottom: 48px;
+      left: 72px;
+      right: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Cover */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .cover .frame {
+      position: absolute;
+      inset: 48px;
+      border: 1px solid color-mix(in oklab, var(--gold) 70%, transparent);
+      pointer-events: none;
+    }
+    .cover .logo {
+      width: 268px;
+      height: auto;
+      margin-bottom: 48px;
+    }
+    .cover h1 {
+      font-size: 72px;
+      margin-bottom: 18px;
+    }
+    .cover .sub {
+      font-size: 22px;
+      color: var(--muted);
+      max-width: 520px;
+    }
+    .cover .rule {
+      width: 72px;
+      height: 1px;
+      background: var(--gold);
+      margin: 36px auto;
+    }
+    .cover .tag {
+      font-family: "Fraunces", serif;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--navy);
+    }
+    .cover .where {
+      position: absolute;
+      top: 72px;
+      left: 0;
+      right: 0;
+    }
+
+    /* Mark */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100%;
+      padding: 120px 72px 88px;
+      gap: 72px;
+    }
+    .logo-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      height: 100%;
+    }
+    .stage {
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .stage img { width: 78%; height: auto; }
+    .stage.cream { background: var(--paper); box-shadow: 0 18px 50px color-mix(in oklab, var(--navy) 10%, transparent); }
+    .stage.navy { background: var(--navy-deep); }
+    .stage label {
+      position: absolute;
+      display: none;
+    }
+    .rules { display: flex; flex-direction: column; justify-content: center; gap: 28px; padding-right: 24px; }
+    .rules h2 { font-size: 64px; }
+    .rules p { max-width: 520px; }
+    .do-list { list-style: none; display: grid; gap: 14px; margin-top: 8px; }
+    .do-list li {
+      font-size: 18px;
+      color: var(--ink);
+      padding-left: 22px;
+      position: relative;
+    }
+    .do-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--teal);
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+    }
+
+    /* Palette */
+    .palette { padding: 110px 72px 88px; }
+    .palette h2 { font-size: 64px; margin: 10px 0 36px; }
+    .heroes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      height: 430px;
+      margin-bottom: 22px;
+    }
+    .swatch {
+      border-radius: 22px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 0;
+    }
+    .swatch .name {
+      font-family: "Fraunces", serif;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+    .swatch .hex {
+      font-family: "Outfit", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      font-variant-numeric: tabular-nums;
+      opacity: 0.9;
+    }
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 14px;
+    }
+    .chip {
+      border-radius: 16px;
+      min-height: 148px;
+      padding: 16px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .chip .name { font-size: 15px; font-weight: 500; }
+    .chip .hex { font-size: 13px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+    .on-dark { color: #fbf7f0; }
+    .on-light { color: var(--navy-deep); }
+    .chip.paper { border: 1px solid color-mix(in oklab, var(--navy) 14%, transparent); }
+
+    /* Type */
+    .type-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      height: 100%;
+      padding: 120px 72px 88px;
+      gap: 0;
+    }
+    .type-left { padding-right: 64px; border-right: 1px solid color-mix(in oklab, var(--gold) 80%, transparent); }
+    .type-right { padding-left: 64px; display: flex; flex-direction: column; justify-content: center; }
+    .giant {
+      font-family: "Fraunces", serif;
+      font-size: 132px;
+      line-height: 0.9;
+      color: var(--navy-deep);
+      letter-spacing: -0.04em;
+      margin: 18px 0 20px;
+    }
+    .italic-sample {
+      font-family: "Fraunces", serif;
+      font-style: italic;
+      font-size: 36px;
+      color: var(--navy);
+      margin-bottom: 28px;
+    }
+    .meta-row { display: flex; gap: 36px; margin-top: 28px; }
+    .meta-row div .label { font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal-deep); margin-bottom: 6px; }
+    .meta-row div .val { font-size: 18px; color: var(--ink); }
+
+    /* Photo */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      height: 100%;
+      padding: 110px 72px 88px;
+      gap: 56px;
+      align-items: center;
+    }
+    .polaroid {
+      background: var(--paper);
+      border-radius: 28px;
+      padding: 18px 18px 28px;
+      box-shadow: 0 22px 50px color-mix(in oklab, var(--navy) 12%, transparent);
+      transform: rotate(-2.4deg);
+      position: relative;
+      max-width: 620px;
+      width: 100%;
+    }
+    .polaroid .tape {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 92px;
+      height: 28px;
+      background: var(--pink);
+      transform: translateX(-50%) rotate(-3deg);
+      opacity: 0.85;
+      border-radius: 2px;
+    }
+    .polaroid img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 18%;
+      border-radius: 18px;
+      display: block;
+      background: var(--cream-deep);
+    }
+    .polaroid figcaption {
+      font-family: "Fraunces", serif;
+      font-style: italic;
+      text-align: center;
+      color: var(--navy);
+      font-size: 22px;
+      margin-top: 14px;
+    }
+    .voice h2 { font-size: 56px; margin: 8px 0 22px; }
+    .voice p { max-width: 560px; margin-bottom: 22px; }
+    .voice-list { list-style: none; display: grid; gap: 10px; }
+    .voice-list li { font-size: 18px; color: var(--ink); }
+    .contact {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid color-mix(in oklab, var(--gold) 80%, transparent);
+      display: grid;
+      gap: 4px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <section class="cover" data-document-role="page" data-label="Cover">
+    <div class="frame"></div>
+    <p class="kicker where">Charlotte, North Carolina</p>
+    <img class="logo" src="/logo.png" alt="Barkly's" />
+    <h1 class="display">Brand Book</h1>
+    <p class="sub body">Identity for a Fear-Free home studio. Quiet, warm, and exact.</p>
+    <div class="rule"></div>
+    <p class="tag">Groom · Play · Stay</p>
+  </section>
+
+  <section data-document-role="page" data-label="Mark">
+    <p class="page-index">02 / Mark</p>
+    <div class="split">
+      <div class="logo-stage">
+        <div class="stage cream"><img src="/logo.png" alt="Barkly's logo on cream" /></div>
+        <div class="stage navy"><img src="/logo.png" alt="Barkly's logo on navy" /></div>
+      </div>
+      <div class="rules">
+        <p class="kicker">The mark</p>
+        <h2 class="display">Keep the frame.</h2>
+        <p class="body muted">White doodle, blue bowtie, gold scallop, script Barkly’s, GROOM · PLAY · STAY. The lockup is the brand — not a clip-art dog.</p>
+        <ul class="do-list">
+          <li>Use the official PNG. Never redraw or recolor.</li>
+          <li>Give it air. Do not crop the gold frame.</li>
+          <li>Do not stretch, outline, or drop the bowtie.</li>
+          <li>Cream or navy fields only. Never on busy photos.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-foot"><span>Barkly’s</span><span>Charlotte, NC</span></div>
+  </section>
+
+  <section class="palette" data-document-role="page" data-label="Palette">
+    <p class="page-index">03 / Color</p>
+    <p class="kicker">Palette</p>
+    <h2 class="display">These hexes. Nothing else.</h2>
+    <div class="heroes">
+      <div class="swatch on-dark" style="background:#1A3A4C">
+        <div class="name">Navy Deep</div>
+        <div class="hex">#1A3A4C · headlines</div>
+      </div>
+      <div class="swatch on-dark" style="background:#54A0B5">
+        <div class="name">Teal</div>
+        <div class="hex">#54A0B5 · buttons</div>
+      </div>
+      <div class="swatch on-light" style="background:#E4B77C">
+        <div class="name">Gold</div>
+        <div class="hex">#E4B77C · frames</div>
+      </div>
+      <div class="swatch on-light" style="background:#FBF7F0; border:1px solid color-mix(in oklab, #2C5A71 14%, transparent)">
+        <div class="name">Cream</div>
+        <div class="hex">#FBF7F0 · page</div>
+      </div>
+    </div>
+    <div class="chips">
+      <div class="chip on-dark" style="background:#2C5A71"><span class="name">Navy</span><span class="hex">#2C5A71</span></div>
+      <div class="chip on-dark" style="background:#3D8296"><span class="name">Teal Deep</span><span class="hex">#3D8296</span></div>
+      <div class="chip on-light" style="background:#AEC6CF"><span class="name">Sky</span><span class="hex">#AEC6CF</span></div>
+      <div class="chip on-light" style="background:#F5B0CB"><span class="name">Pink · accent</span><span class="hex">#F5B0CB</span></div>
+      <div class="chip on-dark" style="background:#1A3344"><span class="name">Ink</span><span class="hex">#1A3344</span></div>
+      <div class="chip on-dark" style="background:#5A7383"><span class="name">Muted</span><span class="hex">#5A7383</span></div>
+      <div class="chip on-light paper" style="background:#FFFFFF"><span class="name">Paper</span><span class="hex">#FFFFFF</span></div>
+      <div class="chip on-light" style="background:#F3EADB"><span class="name">Cream Deep</span><span class="hex">#F3EADB</span></div>
+    </div>
+  </section>
+
+  <section data-document-role="page" data-label="Type">
+    <p class="page-index">04 / Type</p>
+    <div class="type-grid">
+      <div class="type-left">
+        <p class="kicker">Display · Fraunces</p>
+        <p class="giant">Barkly’s</p>
+        <p class="italic-sample">Groom, Play & Stay</p>
+        <p class="body" style="max-width:640px">Headlines only. Weights 500–700. Slight italic for captions and polaroid names. Never use it for long body copy.</p>
+        <div class="meta-row">
+          <div><div class="label">Family</div><div class="val">Fraunces</div></div>
+          <div><div class="label">Fallback</div><div class="val">Georgia</div></div>
+          <div><div class="label">Use</div><div class="val">H1–H4, captions</div></div>
+        </div>
+      </div>
+      <div class="type-right">
+        <p class="kicker">Body · Outfit</p>
+        <p class="display" style="font-family:'Outfit',sans-serif; font-size:42px; letter-spacing:-0.02em; margin:16px 0 20px;">Calm on the page.</p>
+        <p class="body muted">Fear-Free grooming, boarding, and daycare in a Charlotte home. One dog at a time. No warehouse floor, no frantic energy.</p>
+        <div class="meta-row">
+          <div><div class="label">Family</div><div class="val">Outfit</div></div>
+          <div><div class="label">Weights</div><div class="val">400 / 500 / 600</div></div>
+          <div><div class="label">Use</div><div class="val">UI, letters, cards</div></div>
+        </div>
+        <p class="body" style="margin-top:36px; font-size:16px; max-width:420px;">Buttons and letters sit in Outfit 16. Captions in 13, color Muted. Never mix a third family.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-document-role="page" data-label="Photography">
+    <p class="page-index">05 / People</p>
+    <div class="photo-grid">
+      <figure class="polaroid">
+        <span class="tape"></span>
+        <img src="/shoot/vanessa-portrait.jpg" alt="Vanessa and Bubbles" />
+        <figcaption>Vanessa and Bubbles</figcaption>
+      </figure>
+      <div class="voice">
+        <p class="kicker">Voice & photography</p>
+        <h2 class="display">Soft, not cutesy.</h2>
+        <p class="body muted">Shoot like the studio: cream light, real hands, real dogs. Polaroids with a sliver of tape. Vanessa and Bubbles is the hero people photo.</p>
+        <ul class="voice-list">
+          <li>Warm and professional. Never frantic. Never clinic-cold.</li>
+          <li>Say Fear-Free, home-based, Charlotte — not “pet spa vibes.”</li>
+          <li>Owners: Manuel Cruz and Vanessa Cordova. Groomer: Vanessa.</li>
+        </ul>
+        <div class="contact">
+          <span>barklysclt.com</span>
+          <span>barklysclt@gmail.com · (980) 320-0502</span>
+          <span>Charlotte, NC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
