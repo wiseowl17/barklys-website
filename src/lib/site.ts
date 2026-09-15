@@ -283,6 +283,45 @@ export const HERO_SLIDES = [
   GALLERY[11],
 ] as const;
 
+/** Studio photoshoot — homepage grid (not the client gallery). */
+export const HOME_SHOOT = [
+  {
+    src: "/shoot/vanessa-portrait.jpg",
+    alt: "Vanessa Cordova sitting with a small white dog in a sprinkle bandana after a Fear-Free groom",
+    name: "Vanessa & friend",
+  },
+  {
+    src: "/shoot/vanessa-table-bandana.jpg",
+    alt: "Vanessa brushing a small white dog on the grooming table",
+    name: "At the table",
+  },
+  {
+    src: "/shoot/vanessa-brush.jpg",
+    alt: "Vanessa gently brushing a small white dog, gold comb and shears on the table",
+    name: "Gentle hands",
+  },
+  {
+    src: "/shoot/vanessa-scissors.jpg",
+    alt: "Vanessa finishing a groom with gold shears on a small white dog",
+    name: "The finishing cut",
+  },
+  {
+    src: "/shoot/vanessa-floor.jpg",
+    alt: "Vanessa sitting on the studio floor with a freshly groomed small white dog",
+    name: "After the groom",
+  },
+  {
+    src: "/shoot/vanessa-treat.jpg",
+    alt: "Vanessa offering a treat to a small white dog sitting with her",
+    name: "Treat time",
+  },
+  {
+    src: "/shoot/vanessa-trick.jpg",
+    alt: "A small white dog standing on hind legs for a treat from Vanessa",
+    name: "Good pup",
+  },
+] as const;
+
 export const REVIEWS = [
   {
     name: "Manuel",

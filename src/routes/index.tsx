@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HeartHandshake, Home, Scissors, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { HeroCarousel } from "@/components/hero-carousel";
+import { HomeShootGrid } from "@/components/home-shoot-grid";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
@@ -27,12 +27,12 @@ const ICONS = {
 } as const;
 
 function HomePage() {
-  const { copy, hero } = useCms();
+  const { copy } = useCms();
 
   return (
     <main className="text-center">
       <section className="relative overflow-hidden">
-        <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-12 sm:px-6 lg:py-16">
+        <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-12 sm:px-6 lg:pb-8 lg:pt-16">
           <h1 className="font-display text-4xl leading-[1.1] text-navy-deep sm:text-5xl lg:text-6xl">
             {cmsText(copy, "home.headline", "Groom, play, and stay at your dog’s pace")}
           </h1>
@@ -64,7 +64,15 @@ function HomePage() {
               "Serving Charlotte, Fort Mill, Tega Cay, and nearby towns · By appointment only",
             )}
           </p>
-          <HeroCarousel slides={hero} />
+        </div>
+        <div className="mx-auto max-w-5xl px-4 pb-14 sm:px-6 lg:pb-20">
+          <HomeShootGrid />
+          <div className="mt-8 flex flex-col items-center gap-3">
+            <p className="text-sm text-muted">More happy tails from the table</p>
+            <Button asChild size="lg" variant="outline">
+              <Link to="/gallery">See the gallery</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
