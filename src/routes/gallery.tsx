@@ -29,31 +29,20 @@ export const Route = createFileRoute("/gallery")({
 });
 
 const TAPES = ["bg-pink", "bg-gold", "bg-sky", "bg-teal"] as const;
-const ROTATES = [
-  "-rotate-2",
-  "rotate-2",
-  "-rotate-1",
-  "rotate-3",
-  "rotate-1",
-  "-rotate-3",
-  "rotate-[2.5deg]",
-  "-rotate-[1.5deg]",
+const ASPECTS = [
+  "aspect-[4/5]",
+  "aspect-square",
+  "aspect-[3/4]",
+  "aspect-[5/6]",
+  "aspect-[4/5]",
+  "aspect-[3/4]",
 ] as const;
-
-function spanFor(i: number) {
-  const n = i % 8;
-  if (n === 0) return "sm:col-span-2 sm:row-span-2";
-  if (n === 3) return "sm:col-span-2";
-  if (n === 5) return "sm:row-span-2";
-  if (n === 6) return "lg:col-span-2";
-  return "";
-}
 
 function GalleryPage() {
   const [active, setActive] = useState<(typeof GALLERY)[number] | null>(null);
 
   return (
-    <main className="relative overflow-hidden px-4 py-14 text-center sm:px-6">
+    <main className="relative px-4 py-14 text-center sm:px-6 lg:px-10">
       <div
         aria-hidden
         className="pointer-events-none absolute -top-16 left-[-4rem] size-56 rounded-full bg-pink/25 blur-3xl"
@@ -80,37 +69,38 @@ function GalleryPage() {
         <Heart className="size-4 fill-pink text-pink" />
       </p>
 
-      <div className="relative mx-auto mt-12 grid max-w-6xl grid-cols-2 items-start gap-3 sm:grid-cols-4 sm:gap-4 lg:grid-cols-6 lg:gap-5">
+      <div className="relative mx-auto mt-12 max-w-6xl columns-2 gap-3 sm:columns-3 sm:gap-5 lg:columns-4 lg:gap-6">
         {GALLERY.map((photo, i) => {
           const tape = TAPES[i % TAPES.length];
-          const rotate = ROTATES[i % ROTATES.length];
+          const aspect = ASPECTS[i % ASPECTS.length];
           return (
             <button
               key={photo.src}
               type="button"
               onClick={() => setActive(photo)}
-              className={cn(
-                "group relative z-0 h-full w-full origin-center rounded-[1.35rem] bg-paper p-2 pb-9 text-left shadow-card ring-1 ring-line/70 transition-all duration-300 hover:z-20 hover:rotate-0 hover:-translate-y-1 hover:shadow-soft",
-                rotate,
-                spanFor(i),
-              )}
+              className="group relative mb-3 inline-block w-full break-inside-avoid rounded-[1.35rem] bg-paper p-2.5 pb-3 text-left shadow-card ring-1 ring-line/70 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft sm:mb-5 lg:mb-6"
             >
               <span
                 aria-hidden
                 className={cn(
-                  "absolute -top-2 left-1/2 z-10 h-4 w-11 -translate-x-1/2 rotate-6 rounded-[2px] opacity-80 shadow-sm",
+                  "absolute -top-2 left-1/2 z-10 h-4 w-11 -translate-x-1/2 rounded-[2px] opacity-80 shadow-sm",
                   tape,
                   i % 2 === 0 ? "-rotate-6" : "rotate-6",
                 )}
               />
-              <span className="block h-full min-h-[9.5rem] overflow-hidden rounded-[1rem] sm:min-h-[11rem]">
+              <span
+                className={cn(
+                  "relative block overflow-hidden rounded-[1rem]",
+                  aspect,
+                )}
+              >
                 <img
                   src={photo.src}
                   alt={photo.alt}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </span>
-              <span className="absolute inset-x-2 bottom-2 truncate text-center font-display text-[13px] italic text-navy sm:text-sm">
+              <span className="mt-3 block truncate text-center font-display text-[13px] italic text-navy sm:text-sm">
                 {photo.name}
               </span>
             </button>
@@ -135,13 +125,13 @@ function GalleryPage() {
             <X className="mx-auto size-5" />
           </button>
           <figure
-            className="max-w-[min(92vw,40rem)] rotate-1 rounded-[1.6rem] bg-paper p-3 pb-12 shadow-soft"
+            className="w-full max-w-[min(92vw,52rem)] rounded-[1.6rem] bg-paper p-3 pb-10 shadow-soft sm:p-4 sm:pb-12"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={active.src}
               alt={active.alt}
-              className="max-h-[72vh] w-full rounded-[1.15rem] object-contain"
+              className="max-h-[78vh] w-full rounded-[1.15rem] object-contain"
             />
             <figcaption className="mt-4 text-center font-display text-xl italic text-navy">
               {active.name}
