@@ -1,7 +1,7 @@
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ChevronDown, ChevronUp, ImagePlus, Images, KeyRound, LogOut, PencilLine } from "lucide-react";
+import { ChevronDown, ChevronUp, ChevronsDown, ChevronsUp, ImagePlus, Images, KeyRound, LogOut, PencilLine } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
@@ -154,8 +154,9 @@ function StudioDesk({ studio }: { studio: Studio }) {
           </p>
           <h1 className="mt-1 font-display text-3xl sm:text-4xl">Studio desk</h1>
           <p className="mt-2 max-w-xl text-sm text-muted">
-            Gallery photos, homepage showcase photos, and copy save here. Saves
-            from this preview publish to barklysclt.com — no GitHub key needed.
+            Gallery photos, homepage showcase, and copy. Upload and reorder
+            both photo sets here — the Gallery page and the home-page scroller
+            are separate.
           </p>
         </div>
         <Button
@@ -198,7 +199,7 @@ function StudioDesk({ studio }: { studio: Studio }) {
         </TabButton>
         <TabButton active={tab === "hero"} onClick={() => setTab("hero")}>
           <Images className="size-4" />
-          Homepage photos
+          Homepage showcase
         </TabButton>
         <TabButton active={tab === "copy"} onClick={() => setTab("copy")}>
           <PencilLine className="size-4" />
@@ -213,7 +214,7 @@ function StudioDesk({ studio }: { studio: Studio }) {
             photos={studio.gallery}
             dbOk={studio.dbOk}
             title="Gallery"
-            hint="These photos appear on the Gallery page. Use Up and Down to change the order. New uploads land first."
+            hint="These photos appear on the Gallery page. Use Top / Up / Down / Bottom to set the order. New uploads land first."
           />
         ) : null}
         {tab === "hero" ? (
@@ -222,7 +223,7 @@ function StudioDesk({ studio }: { studio: Studio }) {
             photos={studio.hero}
             dbOk={studio.dbOk}
             title="Homepage showcase"
-            hint="These photos scroll on the home page. Upload new ones or reorder the current set — this is separate from the Gallery."
+            hint="These photos scroll on the home page. Upload new ones and reorder them here — this set is separate from the Gallery."
           />
         ) : null}
         {tab === "copy" ? <CopyPanel initial={studio.copy} dbOk={studio.dbOk} /> : null}
@@ -287,14 +288,15 @@ function PhotosPanel({
   }
 
   async function move(index: number, direction: -1 | 1) {
-    const target = index + direction;
-    if (target < 0 || target >= photos.length) return;
+    await moveTo(index, index + direction);
+  }
+
+  async function moveTo(index: number, target: number) {
+    if (target < 0 || target >= photos.length || target === index) return;
     const next = [...photos];
-    const current = next[index];
-    const swap = next[target];
-    if (!current || !swap) return;
-    next[index] = swap;
-    next[target] = current;
+    const [current] = next.splice(index, 1);
+    if (!current) return;
+    next.splice(target, 0, current);
     setError("");
     setStatus("Saving order…");
     try {
@@ -433,6 +435,17 @@ function PhotosPanel({
                       variant="outline"
                       size="sm"
                       disabled={!dbOk || index === 0}
+                      aria-label={`Move ${photo.name} to the top`}
+                      onClick={() => moveTo(index, 0)}
+                    >
+                      <ChevronsUp className="size-4" />
+                      Top
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={!dbOk || index === 0}
                       aria-label={`Move ${photo.name} earlier`}
                       onClick={() => move(index, -1)}
                     >
@@ -449,6 +462,17 @@ function PhotosPanel({
                     >
                       <ChevronDown className="size-4" />
                       Down
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={!dbOk || index === photos.length - 1}
+                      aria-label={`Move ${photo.name} to the bottom`}
+                      onClick={() => moveTo(index, photos.length - 1)}
+                    >
+                      <ChevronsDown className="size-4" />
+                      Bottom
                     </Button>
                   </div>
                   {photo.kind === "upload" ? (

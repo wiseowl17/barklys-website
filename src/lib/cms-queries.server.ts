@@ -100,7 +100,20 @@ function assembleStudio(
   const ordered: StudioPhoto[] = [];
   const seen = new Set<string>();
   for (const slot of slots) {
-    const photo = bySrc.get(slot.src);
+    let photo = bySrc.get(slot.src);
+    if (!photo && slot.src.startsWith("/studio/")) {
+      photo = {
+        id: null,
+        src: slot.src,
+        name: slot.src.slice("/studio/".length).replace(/\.[^.]+$/, "") || "Upload",
+        alt: "Studio photo",
+        kind: "upload",
+        hidden: false,
+        collection,
+        sort_order: Number(slot.sort_order),
+      };
+      bySrc.set(slot.src, photo);
+    }
     if (!photo) continue;
     ordered.push({
       ...photo,

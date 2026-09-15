@@ -2,41 +2,73 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import {
   builtinStudioPhotos,
+  buildPublicCms,
   defaultCopyMap,
   fallbackPublicCms,
+  type GalleryItem,
   type MediaCollection,
   type PublicCms,
 } from "@/lib/cms";
 import {
   bucketFor,
+  mergeStudioPhotos,
   publicFromStudioFile,
   setBucket,
   studioPhotosFromFile,
   type PersistMode,
 } from "@/lib/cms-file";
 import { studioMiddleware, studioTokenMiddleware } from "@/lib/cms-middleware";
+import { hasDatabaseUrl } from "@/lib/db-url";
 
 const copyRecord = z.record(z.string(), z.string());
 
 function canUseDb(): boolean {
-  return Boolean(process.env.DATABASE_URL?.trim());
+  return hasDatabaseUrl();
 }
 
 const dbUnavailable =
-  "The live website cannot store copy yet. Save from this preview, or add a free database under Vercel → Storage. A GitHub key is not required.";
+  "The studio desk needs the live site database before photos and copy can save. The public pages still work.";
+
+function mergePublic(fileCms: PublicCms, dbCms: PublicCms): PublicCms {
+  const mergeItems = (preferred: GalleryItem[], extra: GalleryItem[]) => {
+    const seen = new Set(preferred.map((item) => item.src));
+    return [...extra.filter((item) => !seen.has(item.src)), ...preferred];
+  };
+  const dbGalleryEmpty = dbCms.gallery.every((item) =>
+    builtinStudioPhotos("gallery").some((photo) => photo.src === item.src),
+  );
+  const dbHeroEmpty = dbCms.hero.every((item) =>
+    builtinStudioPhotos("hero").some((photo) => photo.src === item.src),
+  );
+  return buildPublicCms(
+    { ...fileCms.copy, ...dbCms.copy },
+    dbGalleryEmpty
+      ? mergeItems(fileCms.gallery, dbCms.gallery)
+      : mergeItems(dbCms.gallery, fileCms.gallery),
+    dbHeroEmpty ? mergeItems(fileCms.hero, dbCms.hero) : mergeItems(dbCms.hero, fileCms.hero),
+  );
+}
+
+function dbPhotosLookDefault(photos: { kind: string; hidden: boolean }[]): boolean {
+  return photos.every((photo) => photo.kind === "builtin" && !photo.hidden);
+}
 
 export const getPublicContent = createServerFn({ method: "GET" }).handler(
   async (): Promise<PublicCms> => {
-    if (canUseDb()) {
-      const { loadPublicCmsSafe } = await import("./cms-queries.server");
-      return loadPublicCmsSafe();
-    }
+    let fileCms: PublicCms = fallbackPublicCms();
     try {
       const { readStudioFile } = await import("./cms-publish.server");
-      return publicFromStudioFile(await readStudioFile());
+      fileCms = publicFromStudioFile(await readStudioFile());
     } catch (err) {
       console.error("[cms] published load failed", err);
-      return fallbackPublicCms();
+    }
+    if (!canUseDb()) return fileCms;
+    try {
+      const { loadPublicCms } = await import("./cms-queries.server");
+      return mergePublic(fileCms, await loadPublicCms());
+    } catch (err) {
+      console.error("[cms] neon load failed", err);
+      return fileCms;
     }
   },
 );
@@ -76,14 +108,33 @@ export const getStudioData = createServerFn({ method: "GET" })
   .handler(async () => {
     const { persistMode, canPersist, readStudioFile } = await import("./cms-publish.server");
     const mode: PersistMode = persistMode();
+    let fromFile = {
+      copy: defaultCopyMap(),
+      gallery: builtinStudioPhotos("gallery"),
+      hero: builtinStudioPhotos("hero"),
+    };
+    try {
+      const file = await readStudioFile();
+      fromFile = {
+        copy: { ...defaultCopyMap(), ...file.copy },
+        gallery: studioPhotosFromFile(file, "gallery"),
+        hero: studioPhotosFromFile(file, "hero"),
+      };
+    } catch (err) {
+      console.error("[cms] published studio load failed", err);
+    }
     if (canUseDb()) {
-      const { loadStudioData } = await import("./cms-queries.server");
       try {
+        const { loadStudioData } = await import("./cms-queries.server");
         const studio = await loadStudioData();
         return {
-          copy: { ...defaultCopyMap(), ...studio.copy },
-          gallery: studio.gallery,
-          hero: studio.hero,
+          copy: { ...fromFile.copy, ...studio.copy },
+          gallery: dbPhotosLookDefault(studio.gallery)
+            ? mergeStudioPhotos(fromFile.gallery, studio.gallery)
+            : mergeStudioPhotos(studio.gallery, fromFile.gallery),
+          hero: dbPhotosLookDefault(studio.hero)
+            ? mergeStudioPhotos(fromFile.hero, studio.hero)
+            : mergeStudioPhotos(studio.hero, fromFile.hero),
           dbOk: true,
           persistMode: mode,
         };
@@ -91,25 +142,11 @@ export const getStudioData = createServerFn({ method: "GET" })
         console.error("[cms] studio load failed", err);
       }
     }
-    try {
-      const file = await readStudioFile();
-      return {
-        copy: { ...defaultCopyMap(), ...file.copy },
-        gallery: studioPhotosFromFile(file, "gallery"),
-        hero: studioPhotosFromFile(file, "hero"),
-        dbOk: canPersist(),
-        persistMode: mode,
-      };
-    } catch (err) {
-      console.error("[cms] published studio load failed", err);
-      return {
-        copy: defaultCopyMap(),
-        gallery: builtinStudioPhotos("gallery"),
-        hero: builtinStudioPhotos("hero"),
-        dbOk: false,
-        persistMode: mode,
-      };
-    }
+    return {
+      ...fromFile,
+      dbOk: canPersist(),
+      persistMode: mode,
+    };
   });
 
 async function persistFileAndPublish() {

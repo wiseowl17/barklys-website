@@ -144,6 +144,33 @@ export function publicFromStudioFile(file: StudioFile): PublicCms {
   );
 }
 
+export function mergeStudioPhotos(
+  preferred: StudioPhoto[],
+  extra: StudioPhoto[],
+): StudioPhoto[] {
+  const bySrc = new Map<string, StudioPhoto>();
+  for (const photo of extra) bySrc.set(photo.src, photo);
+  for (const photo of preferred) {
+    const previous = bySrc.get(photo.src);
+    bySrc.set(photo.src, previous ? { ...previous, ...photo, id: photo.id ?? previous.id } : photo);
+  }
+  const seen = new Set<string>();
+  const ordered: StudioPhoto[] = [];
+  for (const photo of preferred) {
+    const next = bySrc.get(photo.src);
+    if (!next || seen.has(next.src)) continue;
+    ordered.push(next);
+    seen.add(next.src);
+  }
+  const prepend: StudioPhoto[] = [];
+  for (const photo of extra) {
+    if (seen.has(photo.src)) continue;
+    prepend.push(bySrc.get(photo.src) ?? photo);
+    seen.add(photo.src);
+  }
+  return [...prepend, ...ordered].map((photo, index) => ({ ...photo, sort_order: index }));
+}
+
 export function orderFromPhotos(photos: StudioPhoto[]): Pick<StudioBucket, "hidden" | "order"> {
   return {
     order: photos.map((photo) => photo.src),

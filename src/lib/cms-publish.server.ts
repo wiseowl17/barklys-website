@@ -2,6 +2,7 @@ import { execFile } from "node:child_process";
 import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { promisify } from "node:util";
+import { hasDatabaseUrl } from "@/lib/db-url";
 import {
   emptyStudioFile,
   parseStudioFile,
@@ -15,8 +16,9 @@ const STUDIO_JSON = join(process.cwd(), "src/content/studio.json");
 const STUDIO_DIR = join(process.cwd(), "public/studio");
 
 export function persistMode(): PersistMode {
-  if (process.env.DATABASE_URL?.trim()) return "live";
-  if (process.env.VERCEL) return "blocked";
+  if (hasDatabaseUrl()) return "live";
+  const vercel = typeof process !== "undefined" ? process.env["VERCEL"] : undefined;
+  if (vercel) return "blocked";
   return "preview";
 }
 
@@ -99,8 +101,6 @@ async function pushToGithub(): Promise<{ pushed: boolean }> {
     return { pushed: true };
   } catch (err) {
     console.error("[cms] publish failed", err);
-    throw new Error(
-      "Saved in this preview, but the live website did not update. Please try Save again in a moment.",
-    );
+    return { pushed: false };
   }
 }
