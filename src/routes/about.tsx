@@ -55,20 +55,26 @@ function AboutPage() {
           {cmsText(copy, "about.headline", "The Fear-Free groomer behind Barkly’s")}
         </h1>
 
-        <div className="relative mt-10 flex flex-col items-center">
+        <div className="relative mt-10 flex w-full flex-col items-center">
           <div
-            className="pointer-events-none absolute inset-x-8 -top-4 h-72 rounded-full bg-gold/25 blur-3xl sm:h-96"
+            className="pointer-events-none absolute inset-x-4 -top-6 h-64 rounded-full bg-gold/25 blur-3xl sm:h-80"
             aria-hidden
           />
-          <div className="relative size-56 rounded-full bg-gold p-1.5 shadow-soft sm:size-72">
-            <div className="size-full rounded-full bg-navy p-1">
-              <img
-                src="/vanessa-headshot.jpg"
-                alt="Vanessa Cordova, Fear Free certified professional groomer"
-                className="size-full rounded-full object-cover object-[center_18%]"
-              />
+          <figure className="relative mx-auto w-full max-w-xs sm:max-w-sm">
+            <div className="rounded-2xl bg-gold p-1.5 shadow-soft">
+              <div className="overflow-hidden rounded-[1.15rem] bg-navy p-1">
+                <img
+                  src="/vanessa-headshot.jpg"
+                  alt="Vanessa Cordova, Fear Free certified professional groomer at Barkly’s"
+                  width={960}
+                  height={1344}
+                  className="mx-auto block h-auto w-full rounded-[1.05rem] object-cover object-top"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              </div>
             </div>
-          </div>
+          </figure>
           <p className="relative mt-6 font-display text-3xl text-navy">Vanessa Cordova</p>
           <p className="relative mt-1 text-sm text-muted">
             Fear Free Certified Professional · Groomer
