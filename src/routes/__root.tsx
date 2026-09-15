@@ -16,7 +16,7 @@ import appCss from "../styles.css?url";
 const FALLBACK_TITLE =
   "Barkly's | Fear-Free Dog Grooming, Boarding & Daycare in Charlotte";
 const FALLBACK_DESCRIPTION =
-  "Fear-Free dog grooming, boarding, and daycare in Charlotte, Fort Mill, Tega Cay, and nearby towns.";
+  "A real home, not a kennel — Fear-Free dog grooming, boarding, and daycare in Charlotte, Fort Mill, Tega Cay, and nearby towns.";
 
 export const Route = createRootRoute({
   loader: () => getPublicContent(),

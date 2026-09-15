@@ -62,6 +62,12 @@ const areaServed = SERVICE_AREAS.map((area) => ({
   },
 }));
 
+const OPENING_HOURS = [
+  { dayOfWeek: "Sunday", opens: "09:00", closes: "17:00" },
+  { dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "18:00", closes: "21:00" },
+  { dayOfWeek: "Saturday", opens: "09:00", closes: "17:00" },
+] as const;
+
 /** Home-based: locality only — no public street address. */
 export function localBusinessJsonLd() {
   return {
@@ -70,8 +76,9 @@ export function localBusinessJsonLd() {
     "@id": `${CANONICAL_ORIGIN}/#business`,
     name: SITE.name,
     alternateName: ["Barkly's Charlotte", "Barkly's Grooming & Boarding"],
+    slogan: SITE.tagline,
     description:
-      "Fear-Free dog grooming, boarding, daycare, and in-home dog sitting serving Charlotte NC and nearby towns.",
+      "Fear-Free dog grooming, boarding, daycare, and in-home dog sitting serving Charlotte NC and nearby towns — a home-based studio, not a chain salon or kennel.",
     url: canonicalUrl("/"),
     telephone: SITE.phoneHref.replace("tel:", ""),
     email: SITE.email,
@@ -84,7 +91,25 @@ export function localBusinessJsonLd() {
       addressCountry: "US",
     },
     areaServed,
+    openingHoursSpecification: OPENING_HOURS.map((slot) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: slot.dayOfWeek,
+      opens: slot.opens,
+      closes: slot.closes,
+    })),
     sameAs: [SITE.instagram, SITE.tiktok],
+    founder: {
+      "@type": "Person",
+      name: "Vanessa Cordova",
+      jobTitle: "Dog Groomer",
+      description:
+        "Fear Free Certified Professional groomer with a veterinary education from Venezuela and five years of professional grooming experience.",
+      hasCredential: {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "certification",
+        name: "Fear Free Certified Professional",
+      },
+    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Barkly's services",

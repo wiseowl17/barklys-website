@@ -16,7 +16,7 @@ import { SITE } from "@/lib/site";
 
 const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Salon";
 const DESCRIPTION =
-  "Fear-Free dog grooming in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Full grooms, baths, and breed-specific cuts at your pup's pace.";
+  "Fear-Free dog grooming at your pup's pace — full grooms, baths & breed-specific cuts in a calm home studio serving Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC & Gastonia NC.";
 
 const FAQS: readonly FaqItem[] = [
   {
@@ -27,7 +27,7 @@ const FAQS: readonly FaqItem[] = [
   {
     question: "Do you groom dogs from Fort Mill and Matthews?",
     answer:
-      "Yes. Barkly’s grooms dogs from Charlotte NC, South End, South Charlotte, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Fort Mill and Matthews families book the same way as everyone else — online or by phone.",
+      "Yes. Barkly’s grooms dogs from Charlotte, South End, South Charlotte, Tega Cay, Fort Mill, Ballantyne, Matthews, Belmont, and Gastonia. Fort Mill and Matthews families book the same way as everyone else — online or by phone.",
   },
   {
     question: "How do I book a grooming appointment?",
@@ -84,13 +84,6 @@ function GroomingPage() {
             "grooming.intro",
             `Full grooms, baths, and add-ons for dogs in ${site.area}. All breeds welcome, with extra fluency in poodles, schnauzers, and doodles.`,
           )}
-        </p>
-        <p className="mx-auto mt-3 max-w-2xl text-sm text-muted">
-          Fort Mill SC dogs are welcome for Fear-Free grooms at our Charlotte studio — book online
-          or by phone.
-        </p>
-        <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-          Matthews NC families can book the same full grooms, baths, and breed-specific cuts.
         </p>
         <div className="mt-6">
           <Button asChild size="lg">

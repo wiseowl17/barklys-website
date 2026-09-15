@@ -7,7 +7,7 @@ import { SocialLinks } from "@/components/social-links";
 
 const TITLE = "Book Dog Grooming in Charlotte NC | Barkly's";
 const DESCRIPTION =
-  "Book a Fear-Free dog grooming appointment in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Boarding, daycare, and dog sitting by request.";
+  "Book a Fear-Free dog grooming appointment online in seconds — serving Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC & Gastonia NC. Boarding and daycare by request.";
 
 export const Route = createFileRoute("/book")({
   component: BookPage,
@@ -47,7 +47,7 @@ function BookPage() {
       </p>
       <h1 className="mt-3 font-display text-4xl sm:text-5xl">Book grooming</h1>
       <p className="mt-4 max-w-xl leading-relaxed text-muted">
-        Pick a grooming service and time below. We’ll follow up if we need
+        Pick a service and time below — it takes less than a minute. We’ll follow up if we need
         anything for a calm, Fear-Free visit.
       </p>
 

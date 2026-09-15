@@ -70,14 +70,14 @@ export const COPY_FIELDS: readonly CopyField[] = [
     group: "Home",
     multiline: true,
     defaultValue:
-      "Barkly’s is a calm, home-based studio for dog grooming, boarding, daycare, and dog sitting. Every appointment is paced to your dog — especially the sensitive, senior, and first-time guests.",
+      "No cages, no crowded kennel runs, no rushing your dog through a haircut. Barkly’s is a calm, home-based studio for grooming, boarding, daycare, and dog sitting — built for dogs who need a little more patience, especially the sensitive, senior, and first-time guests.",
   },
   {
     key: "home.serving",
     label: "Home serving line",
     group: "Home",
     defaultValue:
-      "Serving Charlotte, Fort Mill, Tega Cay, and nearby towns · By appointment only",
+      "Serving the greater Charlotte area, Fort Mill, Tega Cay, and nearby towns · By appointment only",
   },
   {
     key: "home.cta_title",
@@ -91,7 +91,7 @@ export const COPY_FIELDS: readonly CopyField[] = [
     group: "Home",
     multiline: true,
     defaultValue:
-      "Pick a time that works. We’ll take it from there — coat notes, Fear-Free handling, and a calm visit for your pup.",
+      "Pick a time that works for you. We’ll handle the rest — coat notes, Fear-Free pacing, and a calm visit, every time.",
   },
   {
     key: "about.headline",
@@ -105,7 +105,7 @@ export const COPY_FIELDS: readonly CopyField[] = [
     group: "About",
     multiline: true,
     defaultValue:
-      "Nearly two decades in animal care, a veterinary education from Venezuela, and five years as a professional dog groomer — with a Fear Free certification at the center of every appointment. Vanessa welcomes dogs from Charlotte, Fort Mill, Tega Cay, and nearby towns.",
+      "Nearly two decades in animal care, a veterinary education from Venezuela, and five years as a professional dog groomer — Vanessa brings a vet’s eye for a dog’s body language to every appointment, with a Fear Free certification at the center of it. She welcomes dogs from the greater Charlotte area and nearby towns.",
   },
   {
     key: "about.bullet_1",
@@ -117,7 +117,7 @@ export const COPY_FIELDS: readonly CopyField[] = [
     key: "about.bullet_2",
     label: "About highlight 2",
     group: "About",
-    defaultValue: "Currently studying to revalidate her veterinary degree in the United States",
+    defaultValue: "Continuing her veterinary education in the U.S. alongside her grooming practice",
   },
   {
     key: "about.bullet_3",
@@ -144,7 +144,7 @@ export const COPY_FIELDS: readonly CopyField[] = [
     group: "Grooming",
     multiline: true,
     defaultValue:
-      "Full grooms, baths, and add-ons for dogs in Charlotte, Fort Mill, Tega Cay, and nearby towns. All breeds welcome, with extra fluency in poodles, schnauzers, and doodles.",
+      "Full grooms, baths, and add-ons in a quiet home studio — not a loud salon floor. Every dog gets one-on-one attention at their own pace, with extra fluency in poodles, schnauzers, and doodles. All breeds welcome, from Charlotte to Fort Mill, Tega Cay, and nearby towns.",
   },
   {
     key: "boarding.headline",
@@ -158,7 +158,7 @@ export const COPY_FIELDS: readonly CopyField[] = [
     group: "Boarding",
     multiline: true,
     defaultValue:
-      "Overnight dog boarding, in-home dog sitting, and daytime daycare in our calm home — structure, rest, and familiar faces for families in Charlotte, Fort Mill, Tega Cay, and nearby towns.",
+      "A real home, not a kennel — overnight boarding, in-home dog sitting, and daytime daycare with structure, rest, and familiar faces instead of a row of runs. For families in Charlotte, Fort Mill, Tega Cay, and nearby towns.",
   },
   {
     key: "site.area",

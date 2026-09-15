@@ -9,23 +9,23 @@ import {
 
 const TITLE = "Grooming & Boarding Policies | Barkly's Charlotte";
 const DESCRIPTION =
-  "Cancellation, vaccine, pick-up, and Fear-Free handling policies for dog grooming, boarding, and daycare at Barkly's in Charlotte NC.";
+  "Cancellation, vaccine, pick-up, and Fear-Free handling policies for dog grooming, boarding, and daycare at Barkly's in Charlotte NC — written to keep every appointment calm and on time.";
 
 const POLICIES: readonly FaqItem[] = [
   {
     question: "What is the cancellation policy?",
     answer:
-      "Please cancel at least 2 days before your appointment. Late cancellations keep another dog from taking that time.",
+      "Please cancel at least 2 days before your appointment. Late cancellations keep another dog from taking that time slot.",
   },
   {
     question: "What happens if I am late or miss a grooming appointment?",
     answer:
-      "There is a 15-minute grace period for grooming. After 15 minutes the appointment is forfeited and a no-show fee applies. Three no-shows mean we will not book future appointments.",
+      "There’s a 15-minute grace period for grooming. After that, the appointment is forfeited and a no-show fee applies (confirmed when you book). Three no-shows and we won’t be able to book future appointments.",
   },
   {
     question: "When should I pick up my dog?",
     answer:
-      "Please pick up within one hour of your dog being ready. After that, a boarding fee applies.",
+      "Please pick up within one hour of your dog being ready. After that, a boarding fee applies — asking early if you’re running late helps us plan around it.",
   },
   {
     question: "What vaccines and health requirements apply?",

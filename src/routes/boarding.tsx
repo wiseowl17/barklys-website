@@ -18,7 +18,7 @@ import { Input, Label, Textarea } from "@/components/ui/input";
 
 const TITLE = "Dog Boarding, Daycare & Dog Sitting in Charlotte NC | Barkly's";
 const DESCRIPTION =
-  "In-home dog boarding, daycare, and dog sitting in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC. Calm overnight stays with Fear-Free care.";
+  "A real home, not a kennel — in-home dog boarding, daycare, and dog sitting with Fear-Free care in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC & Gastonia NC.";
 
 const FAQS: readonly FaqItem[] = [
   {
@@ -28,7 +28,7 @@ const FAQS: readonly FaqItem[] = [
   },
   {
     question: "How do I request boarding or daycare?",
-    answer: `Fill out the request form on this page with dates, number of dogs, and notes. Every stay is confirmed manually by phone or email. You can also call ${SITE.phoneDisplay}.`,
+    answer: `Fill out the request form on this page with dates, number of dogs, and notes. Vanessa or Manuel personally confirms every stay by phone or email. You can also call ${SITE.phoneDisplay}.`,
   },
   {
     question: "What vaccines does my dog need?",
@@ -146,7 +146,7 @@ function BoardingRequestForm() {
       <input type="hidden" name="_captcha" value="false" />
 
       <p className="text-center text-sm text-muted">
-        This is a request only — all stays are confirmed manually based on availability.
+        This is a request only — Vanessa or Manuel will personally confirm your stay based on availability.
       </p>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -265,14 +265,6 @@ function BoardingPage() {
             `Overnight dog boarding, in-home dog sitting, and daytime daycare in our calm home — structure, rest, and familiar faces for families in ${site.area}.`,
           )}
         </p>
-        <p className="mx-auto mt-3 max-w-2xl text-sm text-muted">
-          Fort Mill SC families are welcome for overnight boarding and daytime sitting in our
-          Charlotte-area home.
-        </p>
-        <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-          Matthews NC dogs can request the same in-home boarding and daycare — we’ll confirm
-          availability by phone or email.
-        </p>
 
         <div className="mx-auto mt-6 flex max-w-md justify-center gap-2 rounded-full border border-line bg-paper p-1">
           <Link
@@ -319,6 +311,9 @@ function BoardingPage() {
           <div className="mt-8">
             <RateCard title="Boarding" subtitle="In our home" rows={prices.boarding} />
           </div>
+          <p className="mx-auto mt-4 max-w-xl text-xs text-muted">
+            Extended care and holiday pricing are confirmed when you book — no surprises at pick-up.
+          </p>
           <p className="mx-auto mt-8 max-w-xl rounded-xl border border-line bg-cream px-5 py-4 text-sm text-muted">
             <span className="font-medium text-navy">Daycare & dog sitting</span> is daytime only and
             quoted per visit. Need someone to watch your dog while you work, run errands, or travel

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heart, X } from "lucide-react";
 import { useCms } from "@/lib/cms-context";
 import type { GalleryItem } from "@/lib/cms";
 import { breadcrumbJsonLd, collectionPageJsonLd, pageHead } from "@/lib/seo";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/gallery")({
@@ -12,13 +13,13 @@ export const Route = createFileRoute("/gallery")({
     pageHead({
       title: "Dog Grooming Gallery | Barkly's Charlotte",
       description:
-        "Real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails.",
+        "See real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails. Book your dog's own before-and-after.",
       path: "/gallery",
       jsonLd: [
         collectionPageJsonLd({
           name: "Fluff & friends from the Charlotte table",
           description:
-            "Real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails.",
+            "See real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails. Book your dog's own before-and-after.",
           path: "/gallery",
         }),
         breadcrumbJsonLd([
@@ -108,6 +109,13 @@ function GalleryPage() {
             </button>
           );
         })}
+      </div>
+
+      <div className="relative mx-auto mt-12 max-w-xl">
+        <p className="text-muted">Want your pup on this wall?</p>
+        <Button asChild size="lg" className="mt-4">
+          <Link to="/book">Book a groom</Link>
+        </Button>
       </div>
 
       {active ? (

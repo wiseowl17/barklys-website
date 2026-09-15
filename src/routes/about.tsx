@@ -25,7 +25,7 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
-  const { copy, site } = useCms();
+  const { copy } = useCms();
   const bullets = [
     cmsText(copy, "about.bullet_1", "Trained as a veterinary doctor in Venezuela"),
     cmsText(
@@ -78,7 +78,7 @@ function AboutPage() {
               {cmsText(
                 copy,
                 "about.intro",
-                `Nearly two decades in animal care, a veterinary education from Venezuela, and five years as a professional dog groomer — with a Fear Free certification at the center of every appointment. Vanessa welcomes dogs from ${site.area}.`,
+                "Nearly two decades in animal care, a veterinary education from Venezuela, and five years as a professional dog groomer — with a Fear Free certification at the center of every appointment. Vanessa welcomes dogs from the greater Charlotte area and nearby towns.",
               )}
             </p>
             <ul className="mt-8 space-y-3 text-[15px] leading-relaxed text-ink">
