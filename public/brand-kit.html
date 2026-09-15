@@ -338,6 +338,84 @@
       gap: 4px;
       font-size: 18px;
     }
+
+    /* Applications */
+    .apps {
+      padding: 110px 72px 88px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 64px;
+      height: 100%;
+      align-items: center;
+    }
+    .card-row {
+      display: grid;
+      gap: 28px;
+    }
+    .bc {
+      width: 100%;
+      max-width: 760px;
+      aspect-ratio: 3.5 / 2;
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 44px color-mix(in oklab, var(--navy) 12%, transparent);
+    }
+    .bc.front {
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .bc.front::after,
+    .bc.back::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid color-mix(in oklab, var(--gold) 70%, transparent);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    .bc.front img { width: 28%; height: auto; position: relative; }
+    .bc.front .tag {
+      font-family: "Fraunces", serif;
+      font-style: italic;
+      color: var(--navy);
+      font-size: 18px;
+      margin-top: 14px;
+      position: relative;
+    }
+    .bc.back {
+      background: var(--navy-deep);
+      color: var(--cream);
+      padding: 40px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .bc.back .who {
+      font-family: "Fraunces", serif;
+      font-size: 32px;
+      letter-spacing: -0.03em;
+      position: relative;
+    }
+    .bc.back .role {
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 6px;
+      position: relative;
+    }
+    .bc.back .info {
+      font-size: 16px;
+      line-height: 1.7;
+      position: relative;
+    }
+    .apps-copy h2 { font-size: 56px; margin: 10px 0 20px; }
+    .apps-copy p { max-width: 420px; margin-bottom: 18px; }
+
   </style>
 </head>
 <body>
@@ -460,5 +538,36 @@
       </div>
     </div>
   </section>
+
+  <section data-document-role="page" data-label="Applications">
+    <p class="page-index">06 / Applications</p>
+    <div class="apps">
+      <div class="card-row">
+        <div class="bc front">
+          <img src="/logo.png" alt="Barkly's" />
+          <p class="tag">Groom · Play · Stay</p>
+        </div>
+        <div class="bc back">
+          <div>
+            <p class="who">Vanessa Cordova</p>
+            <p class="role">Owner & Groomer</p>
+          </div>
+          <p class="info">(980) 320-0502<br />barklysclt@gmail.com<br />barklysclt.com · Charlotte, NC</p>
+        </div>
+      </div>
+      <div class="apps-copy">
+        <p class="kicker">Print & social</p>
+        <h2 class="display">Same kit, every surface.</h2>
+        <p class="body muted">Cards print at 3.5 × 2 in. Cream front, navy back, gold hairline. Social uses the polaroid of Vanessa and Bubbles on cream — never a stock model.</p>
+        <ul class="do-list">
+          <li>Fraunces for names. Outfit for phone and web.</li>
+          <li>Pink tape only on photos, never as a fill.</li>
+          <li>No extra colors. No clip-art paws.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-foot"><span>Barkly’s Brand Kit</span><span>2026</span></div>
+  </section>
 </body>
 </html>
+
