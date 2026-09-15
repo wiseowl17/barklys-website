@@ -6,7 +6,7 @@ import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
 import { pageHead } from "@/lib/seo";
-import { REVIEWS, SERVICES, SITE } from "@/lib/site";
+import { REVIEWS, SERVICE_AREA_NOTES, SERVICES, SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -51,7 +51,13 @@ function HomePage() {
               <Link to="/grooming">See services</Link>
             </Button>
           </div>
-          <p className="mt-6 text-sm text-muted">
+          <p className="mt-4 text-sm font-medium text-navy">
+            Full grooms start at $75{" "}
+            <Link to="/grooming" className="text-teal-deep underline decoration-sky underline-offset-2">
+              see the price table
+            </Link>
+          </p>
+          <p className="mt-3 text-sm text-muted">
             {cmsText(
               copy,
               "home.serving",
@@ -130,6 +136,32 @@ function HomePage() {
               </a>
             </Button>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-paper">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
+            Service areas
+          </p>
+          <h2 className="mt-2 font-display text-3xl sm:text-4xl">Close enough to come to us</h2>
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-muted">
+            Home-based in Charlotte. Address shared after your appointment is confirmed.
+          </p>
+          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICE_AREA_NOTES.map((area) => (
+              <li
+                key={`${area.name}-${area.state}`}
+                className="rounded-xl border border-line bg-cream p-5 text-left shadow-card"
+              >
+                <p className="font-display text-xl text-navy">
+                  {area.name}{" "}
+                  <span className="text-sm font-sans font-medium text-muted">{area.state}</span>
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{area.note}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

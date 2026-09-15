@@ -98,6 +98,13 @@ export function localBusinessJsonLd() {
       closes: slot.closes,
     })),
     sameAs: [SITE.instagram, SITE.tiktok],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: SITE.googleRatingValue,
+      reviewCount: SITE.googleReviewCount,
+      bestRating: "5",
+      worstRating: "1",
+    },
     founder: {
       "@type": "Person",
       name: "Vanessa Cordova",
@@ -120,6 +127,11 @@ export function localBusinessJsonLd() {
             "@type": "Service",
             name: "Dog grooming",
             url: canonicalUrl("/grooming"),
+          },
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            priceCurrency: "USD",
+            minPrice: 75,
           },
         },
         {
@@ -209,4 +221,3 @@ export function collectionPageJsonLd(input: {
     url: canonicalUrl(input.path),
   };
 }
-

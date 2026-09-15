@@ -10,6 +10,55 @@ export const SERVICE_AREAS = [
   { name: "Gastonia", state: "NC" },
 ] as const;
 
+/** One unique sentence per named area — used on the homepage, not a repeated name list. */
+export const SERVICE_AREA_NOTES = [
+  {
+    name: "Charlotte",
+    state: "NC",
+    note: "Home studio for Charlotte families who want one-on-one Fear-Free grooming instead of a busy salon floor.",
+  },
+  {
+    name: "South End",
+    state: "NC",
+    note: "South End owners book weekday evenings after work — drop-off, a paced groom, and a calm pickup.",
+  },
+  {
+    name: "South Charlotte",
+    state: "NC",
+    note: "South Charlotte doodles, schnauzers, and seniors get extra time on the table, not a rushed slot.",
+  },
+  {
+    name: "Tega Cay",
+    state: "SC",
+    note: "Tega Cay families drive in for boarding and grooming in a real home, not a kennel run.",
+  },
+  {
+    name: "Fort Mill",
+    state: "SC",
+    note: "Fort Mill pups are regulars — same booking flow, same Fear-Free handling as Charlotte clients.",
+  },
+  {
+    name: "Ballantyne",
+    state: "NC",
+    note: "Ballantyne owners who want a quiet first groom or a senior-safe bath book here by appointment.",
+  },
+  {
+    name: "Matthews",
+    state: "NC",
+    note: "Matthews families use Barkly’s for full grooms and overnight stays without a warehouse daycare vibe.",
+  },
+  {
+    name: "Belmont",
+    state: "NC",
+    note: "Belmont is an easy hop for weekday evening grooms when the corporate salons are already booked out.",
+  },
+  {
+    name: "Gastonia",
+    state: "NC",
+    note: "Gastonia clients make the drive for Vanessa’s Fear-Free approach with anxious and first-time dogs.",
+  },
+] as const;
+
 function joinList(items: readonly string[]): string {
   if (items.length === 0) return "";
   if (items.length === 1) return items[0]!;
@@ -42,6 +91,9 @@ export const SITE = {
   locality: "Charlotte, NC",
   studioNote:
     "Home-based studio in Charlotte, NC. Exact address is shared after your appointment is confirmed.",
+  /** Keep in lockstep with the live Google listing. */
+  googleRatingValue: "5.0",
+  googleReviewCount: 6,
 } as const;
 
 export type NavLink = { to: string; label: string };
@@ -118,154 +170,5 @@ export const SERVICES = [
     blurb:
       "Daytime dog sitting and companionship for pups who need play, rest, and a familiar face.",
     href: "/boarding",
-  },
-] as const;
-
-export const GALLERY = [
-  {
-    src: "/gallery/angel-aussie.jpg",
-    alt: "Angel, a merle Australian Shepherd in a blue paw-print bandana",
-    name: "Angel",
-  },
-  {
-    src: "/gallery/pom-fluff.jpg",
-    alt: "Fluffy Pomeranian after a full groom",
-    name: "Pomeranian",
-  },
-  {
-    src: "/gallery/goldendoodle.jpg",
-    alt: "Goldendoodle in a star bandana after a tidy trim",
-    name: "Doodle",
-  },
-  {
-    src: "/gallery/yorkie.jpg",
-    alt: "Yorkshire Terrier in a purple bow after grooming",
-    name: "Yorkie",
-  },
-  {
-    src: "/gallery/doodle-brown-sit.jpg",
-    alt: "Brown doodle puppy in a corgi bandana",
-    name: "Doodle pup",
-  },
-  {
-    src: "/gallery/pom-bowtie.jpg",
-    alt: "Pomeranian wearing a blue paw-print bowtie",
-    name: "Bowtie Pom",
-  },
-  {
-    src: "/gallery/bernedoodle.jpg",
-    alt: "Bernedoodle in an Easter carrot bandana",
-    name: "Bernedoodle",
-  },
-  {
-    src: "/gallery/aussie-pink-sit.jpg",
-    alt: "Tri-color Australian Shepherd in a pink paw bandana",
-    name: "Aussie",
-  },
-  {
-    src: "/gallery/doodle-ribbons.jpg",
-    alt: "Cream doodle with pink hair ribbons",
-    name: "Ribbon doodle",
-  },
-  {
-    src: "/gallery/pom-stars.jpg",
-    alt: "Pomeranian in a navy stars-and-stripes bandana",
-    name: "Stars Pom",
-  },
-  {
-    src: "/gallery/black-bowtie.jpg",
-    alt: "Black doodle mix in a plaid bowtie",
-    name: "Plaid bowtie",
-  },
-  {
-    src: "/gallery/doodle-watermelon.jpg",
-    alt: "Red-and-white doodle in a watermelon bandana",
-    name: "Summer doodle",
-  },
-  {
-    src: "/gallery/pom-usa.jpg",
-    alt: "Pomeranian in a red USA fireworks bandana",
-    name: "Patriot Pom",
-  },
-  { src: "/gallery/chow.jpg", alt: "Chow Chow puppy in a blue bandana", name: "Chow pup" },
-  {
-    src: "/gallery/doodle-small.jpg",
-    alt: "Small chocolate doodle after a tidy face trim",
-    name: "Chocolate doodle",
-  },
-  {
-    src: "/gallery/mixed-easter.jpg",
-    alt: "Happy mixed-breed dog in an Easter bandana",
-    name: "Easter smile",
-  },
-  {
-    src: "/gallery/pom-blue.jpg",
-    alt: "Smiling Pomeranian in a light blue bandana",
-    name: "Blue Pom",
-  },
-  {
-    src: "/gallery/doodle-brown-stand.jpg",
-    alt: "Brown doodle standing after a bath and fluff",
-    name: "Fluff stand",
-  },
-  {
-    src: "/gallery/brindle-stars.jpg",
-    alt: "Brindle pup in patriotic star headband and bandana",
-    name: "Star pup",
-  },
-  {
-    src: "/gallery/aussie-pink-side.jpg",
-    alt: "Australian Shepherd sitting in profile after a groom",
-    name: "Aussie profile",
-  },
-] as const;
-
-export const HERO_SLIDES = [
-  GALLERY[0],
-  GALLERY[1],
-  GALLERY[2],
-  GALLERY[3],
-  GALLERY[5],
-  GALLERY[6],
-  GALLERY[8],
-  GALLERY[11],
-] as const;
-
-export const REVIEWS = [
-  {
-    name: "Manuel",
-    area: "Loki · Reviewed on Google",
-    quote:
-      "Vanessa is hands down the best dog groomer in the Charlotte area! Loki looked and smelled phenomenal after his appointment, you can immediately tell the care and attention to detail that went into his groom. The Fear-Free approach is so evident in how calm and happy he was. It gives such peace of mind knowing your pup is in gentle, capable hands. We will definitely be back!",
-  },
-  {
-    name: "Claudia",
-    area: "Golden · Reviewed on Google",
-    quote:
-      "It’s always a pleasure to leave Golden in her care. She is warm, gentle, and very professional. You can truly see the love and attention she puts into every detail, and Golden always looks absolutely beautiful. Highly recommended!",
-  },
-  {
-    name: "Jennifer",
-    area: "Reviewed on Google",
-    quote:
-      "I had a wonderful experience there! Vanessa was very friendly, professional, and caring. She did an amazing job. My pet looked so clean, happy, and adorable. I’m very happy with the service and will definitely be coming back.",
-  },
-  {
-    name: "Raiza",
-    area: "Cooper · Reviewed on Google",
-    quote:
-      "Vanessa is an excellent dog groomer. I took my dog Cooper and he looked perfect: bath, haircut, and drying were all spot on. She’s very professional, careful, and you can tell she truly loves animals. The place is calm and Cooper came out super happy. Highly recommended, we’ll definitely be back.",
-  },
-  {
-    name: "Yany",
-    area: "Reviewed on Google",
-    quote:
-      "I absolutely love our groomer. She is so sweet, gentle, and caring with my dogs. You can truly tell that she loves animals and treats them as if they were her own. My dogs are always happy and look absolutely adorable when they come back.",
-  },
-  {
-    name: "Karla",
-    area: "Reviewed on Google",
-    quote:
-      "I had a great experience with Vanessa! She was so sweet, patient, and gentle with my dog. You can really tell she loves what she does and genuinely cares about the dogs she works with. My dog looked amazing and happy after his grooming! I’m so glad I found someone I can trust. We’ll definitely be coming back. Highly recommend!",
   },
 ] as const;
