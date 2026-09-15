@@ -132,6 +132,7 @@ export const saveStudioCopy = createServerFn({ method: "POST" })
     if (canUseDb()) {
       const { upsertCopy } = await import("./cms-queries.server");
       await upsertCopy(entries);
+      return { ok: true as const, pushed: false };
     }
     const file = await readStudioFile();
     await writeStudioFile({ ...file, copy: { ...file.copy, ...entries } });
@@ -155,6 +156,11 @@ export const uploadStudioPhoto = createServerFn({ method: "POST" })
       "./cms-publish.server"
     );
     if (!canPersist()) throw new Error(dbUnavailable);
+    if (canUseDb()) {
+      const { insertPhoto } = await import("./cms-queries.server");
+      const id = await insertPhoto(data);
+      return { ok: true as const, id: String(id), pushed: false };
+    }
     const cleaned = data.dataBase64.replace(/\s/g, "");
     if (!/^[A-Za-z0-9+/=]+$/.test(cleaned)) {
       throw new Error("That photo could not be read.");
@@ -181,14 +187,6 @@ export const uploadStudioPhoto = createServerFn({ method: "POST" })
       order: [src, ...bucket.order.filter((item) => item !== src)],
     });
     await writeStudioFile(next);
-    if (canUseDb()) {
-      try {
-        const { insertPhoto } = await import("./cms-queries.server");
-        await insertPhoto(data);
-      } catch (err) {
-        console.error("[cms] db photo insert skipped", err);
-      }
-    }
     const published = await persistFileAndPublish();
     return { ok: true as const, id, pushed: published.pushed };
   });
@@ -209,6 +207,7 @@ export const deleteStudioPhoto = createServerFn({ method: "POST" })
     if (canUseDb() && data.id) {
       const { removePhoto } = await import("./cms-queries.server");
       await removePhoto(data.id);
+      return { ok: true as const, pushed: false };
     }
     if (data.src) {
       const file = await readStudioFile();
@@ -251,6 +250,7 @@ export const toggleBuiltinPhoto = createServerFn({ method: "POST" })
     if (canUseDb()) {
       const { setBuiltinHidden } = await import("./cms-queries.server");
       await setBuiltinHidden(data.src, data.hidden, data.collection as MediaCollection);
+      return { ok: true as const, pushed: false };
     }
     const collection = data.collection as MediaCollection;
     const file = await readStudioFile();
@@ -283,6 +283,7 @@ export const reorderStudioPhotos = createServerFn({ method: "POST" })
     if (canUseDb()) {
       const { reorderMedia } = await import("./cms-queries.server");
       await reorderMedia(data.collection as MediaCollection, data.srcs);
+      return { ok: true as const, pushed: false };
     }
     const collection = data.collection as MediaCollection;
     const file = await readStudioFile();

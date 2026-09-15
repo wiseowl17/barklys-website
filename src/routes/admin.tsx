@@ -184,7 +184,12 @@ function StudioDesk({ studio }: { studio: Studio }) {
           Saves from this desk publish to barklysclt.com in about a minute. You
           do not need a GitHub key.
         </p>
-      ) : null}
+      ) : (
+        <p className="mt-6 rounded-xl border border-sky/60 bg-sky/20 px-4 py-3 text-sm text-navy">
+          The live database is connected. Save Copy, photos, and order here and
+          barklysclt.com updates right away.
+        </p>
+      )}
 
       <div className="mt-8 flex flex-wrap justify-center gap-2 rounded-full border border-line bg-paper p-1 sm:justify-start">
         <TabButton active={tab === "gallery"} onClick={() => setTab("gallery")}>

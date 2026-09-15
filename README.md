@@ -57,6 +57,11 @@ To make **barklysclt.com/admin** save on its own (without the preview):
 
 That adds `DATABASE_URL` automatically. A GitHub key is not involved.
 
+After connecting the database, click **Redeploy** once on the latest Production
+deployment so the live site picks up `DATABASE_URL`. After that, saves at
+[barklysclt.com/admin](https://barklysclt.com/admin) go straight to the
+database.
+
 Optional overrides:
 
 - `ADMIN_EMAIL` — sign-in email (defaults to barklysclt@gmail.com)
