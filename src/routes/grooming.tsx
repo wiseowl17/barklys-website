@@ -10,7 +10,9 @@ import {
   serviceJsonLd,
   type FaqItem,
 } from "@/lib/seo";
-import { ADD_ONS, GROOM_PRICES, SITE } from "@/lib/site";
+import { useCms } from "@/lib/cms-context";
+import { cmsText } from "@/lib/cms";
+import { SITE } from "@/lib/site";
 
 const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Salon";
 const DESCRIPTION =
@@ -67,16 +69,21 @@ export const Route = createFileRoute("/grooming")({
 });
 
 function GroomingPage() {
+  const { copy, site, prices } = useCms();
+
   return (
     <main className="text-center">
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">Services</p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">
-          Fear-Free dog grooming in Charlotte
+          {cmsText(copy, "grooming.headline", "Fear-Free dog grooming in Charlotte")}
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">
-          Full grooms, baths, and add-ons for dogs in {SITE.area}. All breeds welcome, with extra
-          fluency in poodles, schnauzers, and doodles.
+          {cmsText(
+            copy,
+            "grooming.intro",
+            `Full grooms, baths, and add-ons for dogs in ${site.area}. All breeds welcome, with extra fluency in poodles, schnauzers, and doodles.`,
+          )}
         </p>
         <p className="mx-auto mt-3 max-w-2xl text-sm text-muted">
           Fort Mill SC dogs are welcome for Fear-Free grooms at our Charlotte studio — book online
@@ -141,7 +148,7 @@ function GroomingPage() {
                 </tr>
               </thead>
               <tbody className="bg-paper">
-                {GROOM_PRICES.map((row) => (
+                {prices.groom.map((row) => (
                   <tr key={row.size} className="border-t border-line">
                     <td className="px-4 py-3 font-medium text-navy">{row.size}</td>
                     <td className="px-4 py-3 text-muted">{row.range}</td>
@@ -165,7 +172,7 @@ function GroomingPage() {
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <h2 className="font-display text-3xl">Add-ons</h2>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {ADD_ONS.map((item) => (
+          {prices.addons.map((item) => (
             <li
               key={item.name}
               className="flex flex-col items-center rounded-lg border border-line bg-cream px-4 py-3"

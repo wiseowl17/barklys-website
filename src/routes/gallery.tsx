@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart, X } from "lucide-react";
+import { useCms } from "@/lib/cms-context";
+import type { GalleryItem } from "@/lib/cms";
 import { breadcrumbJsonLd, collectionPageJsonLd, pageHead } from "@/lib/seo";
-import { GALLERY } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/gallery")({
@@ -39,7 +40,8 @@ const ASPECTS = [
 ] as const;
 
 function GalleryPage() {
-  const [active, setActive] = useState<(typeof GALLERY)[number] | null>(null);
+  const { gallery } = useCms();
+  const [active, setActive] = useState<GalleryItem | null>(null);
 
   return (
     <main className="relative px-4 py-14 text-center sm:px-6 lg:px-10">
@@ -70,7 +72,7 @@ function GalleryPage() {
       </p>
 
       <div className="relative mx-auto mt-12 max-w-6xl columns-2 gap-3 sm:columns-3 sm:gap-5 lg:columns-4 lg:gap-6">
-        {GALLERY.map((photo, i) => {
+        {gallery.map((photo, i) => {
           const tape = TAPES[i % TAPES.length];
           const aspect = ASPECTS[i % ASPECTS.length];
           return (

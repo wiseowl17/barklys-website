@@ -8,7 +8,9 @@ import {
   serviceJsonLd,
   type FaqItem,
 } from "@/lib/seo";
-import { BOARDING_RATES, SITE } from "@/lib/site";
+import { useCms } from "@/lib/cms-context";
+import { cmsText } from "@/lib/cms";
+import { SITE } from "@/lib/site";
 import { FaqSection } from "@/components/faq-section";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { Button } from "@/components/ui/button";
@@ -92,6 +94,7 @@ function RateCard({
 }
 
 function BoardingRequestForm() {
+  const { site } = useCms();
   const navigate = useNavigate();
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
@@ -113,7 +116,7 @@ function BoardingRequestForm() {
     }
 
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${SITE.email}`, {
+      const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -125,7 +128,7 @@ function BoardingRequestForm() {
       void navigate({ to: "/thanks" });
     } catch {
       setError(
-        `We couldn’t send that just now. Call ${SITE.phoneDisplay} or email ${SITE.email}, then try again.`,
+        `We couldn’t send that just now. Call ${site.phoneDisplay} or email ${site.email}, then try again.`,
       );
     } finally {
       setSending(false);
@@ -246,14 +249,21 @@ function BoardingRequestForm() {
 }
 
 function BoardingPage() {
+  const { copy, site, prices } = useCms();
+
   return (
     <main className="text-center">
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">Services</p>
-        <h1 className="mt-3 font-display text-4xl sm:text-5xl">Boarding, daycare & dog sitting</h1>
+        <h1 className="mt-3 font-display text-4xl sm:text-5xl">
+          {cmsText(copy, "boarding.headline", "Boarding, daycare & dog sitting")}
+        </h1>
         <p className="mx-auto mt-4 max-w-2xl text-muted">
-          Overnight dog boarding, in-home dog sitting, and daytime daycare in our calm home —
-          structure, rest, and familiar faces for families in {SITE.area}.
+          {cmsText(
+            copy,
+            "boarding.intro",
+            `Overnight dog boarding, in-home dog sitting, and daytime daycare in our calm home — structure, rest, and familiar faces for families in ${site.area}.`,
+          )}
         </p>
         <p className="mx-auto mt-3 max-w-2xl text-sm text-muted">
           Fort Mill SC families are welcome for overnight boarding and daytime sitting in our
@@ -307,7 +317,7 @@ function BoardingPage() {
             listed below.
           </p>
           <div className="mt-8">
-            <RateCard title="Boarding" subtitle="In our home" rows={BOARDING_RATES} />
+            <RateCard title="Boarding" subtitle="In our home" rows={prices.boarding} />
           </div>
           <p className="mx-auto mt-8 max-w-xl rounded-xl border border-line bg-cream px-5 py-4 text-sm text-muted">
             <span className="font-medium text-navy">Daycare & dog sitting</span> is daytime only and

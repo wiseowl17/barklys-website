@@ -3,6 +3,8 @@ import { HeartHandshake, Home, Scissors, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
+import { useCms } from "@/lib/cms-context";
+import { cmsText } from "@/lib/cms";
 import { pageHead } from "@/lib/seo";
 import { REVIEWS, SERVICES } from "@/lib/site";
 
@@ -25,17 +27,22 @@ const ICONS = {
 } as const;
 
 function HomePage() {
+  const { copy, gallery } = useCms();
+  const hero = gallery.slice(0, 8);
+
   return (
     <main className="text-center">
       <section className="relative overflow-hidden">
         <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-12 sm:px-6 lg:py-16">
           <h1 className="font-display text-4xl leading-[1.1] text-navy-deep sm:text-5xl lg:text-6xl">
-            Groom, play, and stay at your dog’s pace
+            {cmsText(copy, "home.headline", "Groom, play, and stay at your dog’s pace")}
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            Barkly’s is a calm, home-based studio for dog grooming, boarding, daycare, and dog
-            sitting. Every appointment is paced to your dog — especially the sensitive, senior, and
-            first-time guests.
+            {cmsText(
+              copy,
+              "home.subhead",
+              "Barkly’s is a calm, home-based studio for dog grooming, boarding, daycare, and dog sitting. Every appointment is paced to your dog — especially the sensitive, senior, and first-time guests.",
+            )}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg">
@@ -46,10 +53,13 @@ function HomePage() {
             </Button>
           </div>
           <p className="mt-6 text-sm text-muted">
-            Serving Charlotte, Fort Mill, Tega Cay, and nearby towns · By
-            appointment only
+            {cmsText(
+              copy,
+              "home.serving",
+              "Serving Charlotte, Fort Mill, Tega Cay, and nearby towns · By appointment only",
+            )}
           </p>
-          <HeroCarousel />
+          <HeroCarousel slides={hero} />
         </div>
       </section>
 
@@ -108,10 +118,15 @@ function HomePage() {
 
       <section className="bg-navy text-paper">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 px-4 py-16 sm:px-6">
-          <h2 className="font-display text-3xl">Ready when your pup is</h2>
+          <h2 className="font-display text-3xl">
+            {cmsText(copy, "home.cta_title", "Ready when your pup is")}
+          </h2>
           <p className="max-w-xl text-sky">
-            Pick a time that works. We’ll take it from there — coat notes, Fear-Free handling, and a
-            calm visit for your pup.
+            {cmsText(
+              copy,
+              "home.cta_body",
+              "Pick a time that works. We’ll take it from there — coat notes, Fear-Free handling, and a calm visit for your pup.",
+            )}
           </p>
           <Button
             asChild

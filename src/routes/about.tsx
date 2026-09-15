@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { Button } from "@/components/ui/button";
+import { useCms } from "@/lib/cms-context";
+import { cmsText } from "@/lib/cms";
 import { breadcrumbJsonLd, pageHead } from "@/lib/seo";
 import { SITE } from "@/lib/site";
 
@@ -23,6 +25,26 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
+  const { copy, site } = useCms();
+  const bullets = [
+    cmsText(copy, "about.bullet_1", "Trained as a veterinary doctor in Venezuela"),
+    cmsText(
+      copy,
+      "about.bullet_2",
+      "Currently studying to revalidate her veterinary degree in the United States",
+    ),
+    cmsText(
+      copy,
+      "about.bullet_3",
+      "Professional groomer with 5 years of hands-on salon experience",
+    ),
+    cmsText(
+      copy,
+      "about.bullet_4",
+      "Special care for poodles, schnauzers, doodles, and small breeds — all breeds welcome",
+    ),
+  ];
+
   return (
     <main className="text-center">
       <section className="mx-auto flex max-w-3xl flex-col items-center px-4 py-14 sm:px-6 lg:py-20">
@@ -30,7 +52,7 @@ function AboutPage() {
           Meet the groomer
         </p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl">
-          The Fear-Free groomer behind Barkly’s
+          {cmsText(copy, "about.headline", "The Fear-Free groomer behind Barkly’s")}
         </h1>
 
         <div className="relative mt-10 flex flex-col items-center">
@@ -54,23 +76,18 @@ function AboutPage() {
         </div>
 
         <p className="mt-8 text-lg leading-relaxed text-muted">
-          Nearly two decades in animal care, a veterinary education from Venezuela, and five years
-          as a professional dog groomer — with a Fear Free certification at the center of every
-          appointment. Vanessa welcomes dogs from {SITE.area}.
+          {cmsText(
+            copy,
+            "about.intro",
+            `Nearly two decades in animal care, a veterinary education from Venezuela, and five years as a professional dog groomer — with a Fear Free certification at the center of every appointment. Vanessa welcomes dogs from ${site.area}.`,
+          )}
         </p>
         <ul className="mt-8 w-full space-y-4 text-[15px] leading-relaxed text-ink">
-          <li className="rounded-lg border border-line bg-paper px-4 py-3">
-            Trained as a veterinary doctor in Venezuela
-          </li>
-          <li className="rounded-lg border border-line bg-paper px-4 py-3">
-            Currently studying to revalidate her veterinary degree in the United States
-          </li>
-          <li className="rounded-lg border border-line bg-paper px-4 py-3">
-            Professional groomer with 5 years of hands-on salon experience
-          </li>
-          <li className="rounded-lg border border-line bg-paper px-4 py-3">
-            Special care for poodles, schnauzers, doodles, and small breeds — all breeds welcome
-          </li>
+          {bullets.map((item) => (
+            <li key={item} className="rounded-lg border border-line bg-paper px-4 py-3">
+              {item}
+            </li>
+          ))}
         </ul>
 
         <figure className="mt-12 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-card">

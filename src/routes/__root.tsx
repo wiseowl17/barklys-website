@@ -1,4 +1,4 @@
-import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { Header } from "@/components/layout/header";
@@ -8,6 +8,8 @@ import { CookieBanner } from "@/components/cookie-banner";
 import { MobileCta } from "@/components/mobile-cta";
 import { NotFoundPage } from "@/components/not-found";
 import { PendingScreen } from "@/components/pending-screen";
+import { CmsProvider } from "@/lib/cms-context";
+import { getPublicContent } from "@/lib/cms.functions";
 import { localBusinessJsonLd, OG_IMAGE_URL } from "@/lib/seo";
 import appCss from "../styles.css?url";
 
@@ -17,6 +19,7 @@ const FALLBACK_DESCRIPTION =
   "Fear-Free dog grooming, boarding, and daycare in Charlotte, Fort Mill, Tega Cay, and nearby towns.";
 
 export const Route = createRootRoute({
+  loader: () => getPublicContent(),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -59,20 +62,32 @@ export const Route = createRootRoute({
 });
 
 function RootLayout() {
+  const cms = Route.useLoaderData();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isAdmin = pathname.startsWith("/admin");
+
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body className="flex min-h-svh flex-col bg-cream pb-20 text-ink lg:pb-0">
+      <body
+        className={
+          isAdmin
+            ? "flex min-h-svh flex-col bg-cream text-ink"
+            : "flex min-h-svh flex-col bg-cream pb-20 text-ink lg:pb-0"
+        }
+      >
         <PreviewHostBridge />
         <AuthProvider>
-          <Header />
-          <Outlet />
-          <Footer />
-          <WhatsAppBubble />
-          <MobileCta />
-          <CookieBanner />
+          <CmsProvider value={cms}>
+            {isAdmin ? null : <Header />}
+            <Outlet />
+            {isAdmin ? null : <Footer />}
+            {isAdmin ? null : <WhatsAppBubble />}
+            {isAdmin ? null : <MobileCta />}
+            {isAdmin ? null : <CookieBanner />}
+          </CmsProvider>
         </AuthProvider>
         <Scripts />
       </body>

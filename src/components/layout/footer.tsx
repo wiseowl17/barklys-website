@@ -1,9 +1,12 @@
 import { Link } from "@tanstack/react-router";
-import { navLinks, SERVICE_AREAS, SITE } from "@/lib/site";
+import { navLinks, SERVICE_AREAS } from "@/lib/site";
 import { BrandLogo } from "@/components/brand-logo";
 import { SocialLinks } from "@/components/social-links";
+import { useCms } from "@/lib/cms-context";
 
 export function Footer() {
+  const { site } = useCms();
+
   return (
     <footer className="mt-auto border-t border-line bg-navy text-center text-paper">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
@@ -11,8 +14,8 @@ export function Footer() {
           <BrandLogo decorative className="mx-auto mb-4 h-28 w-auto drop-shadow-md" />
           <p className="mt-2 text-sm font-medium text-paper">Barkly’s Grooming & Boarding</p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky">
-            Fear-Free dog grooming, boarding, and daycare for {SITE.area}. {SITE.studioNote} Open{" "}
-            {SITE.hoursDisplay}.
+            Fear-Free dog grooming, boarding, and daycare for {site.area}. {site.studioNote} Open{" "}
+            {site.hoursDisplay}.
           </p>
         </div>
 
@@ -32,20 +35,20 @@ export function Footer() {
         <div className="flex flex-col items-center">
           <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">Contact</p>
           <ul className="mt-4 space-y-2 text-sm text-sky">
-            <li>{SITE.locality}</li>
+            <li>Charlotte, NC</li>
             <li>
-              <a href={SITE.phoneHref} className="hover:text-paper">
-                {SITE.phoneDisplay}
+              <a href={site.phoneHref} className="hover:text-paper">
+                {site.phoneDisplay}
               </a>
             </li>
             <li>
-              <a href={`mailto:${SITE.email}`} className="hover:text-paper">
-                {SITE.email}
+              <a href={`mailto:${site.email}`} className="hover:text-paper">
+                {site.email}
               </a>
             </li>
             <li>
               <a
-                href={SITE.googleReviewHref}
+                href="https://search.google.com/local/writereview?placeid=ChIJs8QZe9U3T2oRHlr8iUjUr0M"
                 className="hover:text-paper"
                 target="_blank"
                 rel="noreferrer"
@@ -66,14 +69,12 @@ export function Footer() {
             ))}
           </ul>
           <p className="mt-4 max-w-xs text-xs leading-relaxed text-sky/80">
-            Serving {SITE.area}. Exact studio address is shared after your appointment is confirmed.
+            Serving {site.area}. Exact studio address is shared after your appointment is confirmed.
           </p>
         </div>
       </div>
       <div className="border-t border-paper/10 py-5 text-xs text-sky/80">
-        <p>
-          © {new Date().getFullYear()} Barkly’s. All rights reserved.
-        </p>
+        <p>© {new Date().getFullYear()} Barkly’s. All rights reserved.</p>
         <p className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <Link to="/privacy" className="hover:text-paper">
             Privacy

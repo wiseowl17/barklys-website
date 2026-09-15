@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { breadcrumbJsonLd, pageHead, serviceJsonLd } from "@/lib/seo";
-import { SITE } from "@/lib/site";
+import { useCms } from "@/lib/cms-context";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { SocialLinks } from "@/components/social-links";
 
@@ -37,6 +37,7 @@ const SQUARE_BOOK =
   "https://app.squareup.com/appointments/book/d5mbi8xeslrg3x/LFEEJ4985GGP9/start";
 
 function BookPage() {
+  const { site } = useCms();
   const [frameReady, setFrameReady] = useState(false);
 
   return (
@@ -98,16 +99,16 @@ function BookPage() {
         <div>
           <dt className="text-muted">Phone</dt>
           <dd>
-            <a className="font-medium text-navy" href={SITE.phoneHref}>
-              {SITE.phoneDisplay}
+            <a className="font-medium text-navy" href={site.phoneHref}>
+              {site.phoneDisplay}
             </a>
           </dd>
         </div>
         <div>
           <dt className="text-muted">Email</dt>
           <dd>
-            <a className="font-medium text-navy" href={`mailto:${SITE.email}`}>
-              {SITE.email}
+            <a className="font-medium text-navy" href={`mailto:${site.email}`}>
+              {site.email}
             </a>
           </dd>
         </div>

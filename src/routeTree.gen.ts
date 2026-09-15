@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as BoardingRouteImport } from './routes/boarding'
 import { Route as BookRouteImport } from './routes/book'
 import { Route as GalleryRouteImport } from './routes/gallery'
@@ -20,6 +21,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ThanksRouteImport } from './routes/thanks'
+import { Route as ApiGalleryPhotoIdRouteImport } from './routes/api/gallery-photo.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BoardingRoute = BoardingRouteImport.update({
@@ -76,10 +83,16 @@ const ThanksRoute = ThanksRouteImport.update({
   path: '/thanks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiGalleryPhotoIdRoute = ApiGalleryPhotoIdRouteImport.update({
+  id: '/api/gallery-photo/$id',
+  path: '/api/gallery-photo/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/boarding': typeof BoardingRoute
   '/book': typeof BookRoute
   '/gallery': typeof GalleryRoute
@@ -89,10 +102,12 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
   '/thanks': typeof ThanksRoute
+  '/api/gallery-photo/$id': typeof ApiGalleryPhotoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/boarding': typeof BoardingRoute
   '/book': typeof BookRoute
   '/gallery': typeof GalleryRoute
@@ -102,11 +117,13 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
   '/thanks': typeof ThanksRoute
+  '/api/gallery-photo/$id': typeof ApiGalleryPhotoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/boarding': typeof BoardingRoute
   '/book': typeof BookRoute
   '/gallery': typeof GalleryRoute
@@ -116,12 +133,14 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/terms': typeof TermsRoute
   '/thanks': typeof ThanksRoute
+  '/api/gallery-photo/$id': typeof ApiGalleryPhotoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/boarding'
     | '/book'
     | '/gallery'
@@ -131,10 +150,12 @@ export interface FileRouteTypes {
     | '/services'
     | '/terms'
     | '/thanks'
+    | '/api/gallery-photo/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/admin'
     | '/boarding'
     | '/book'
     | '/gallery'
@@ -144,10 +165,12 @@ export interface FileRouteTypes {
     | '/services'
     | '/terms'
     | '/thanks'
+    | '/api/gallery-photo/$id'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/boarding'
     | '/book'
     | '/gallery'
@@ -157,11 +180,13 @@ export interface FileRouteTypes {
     | '/services'
     | '/terms'
     | '/thanks'
+    | '/api/gallery-photo/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
   BoardingRoute: typeof BoardingRoute
   BookRoute: typeof BookRoute
   GalleryRoute: typeof GalleryRoute
@@ -171,6 +196,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   TermsRoute: typeof TermsRoute
   ThanksRoute: typeof ThanksRoute
+  ApiGalleryPhotoIdRoute: typeof ApiGalleryPhotoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -187,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/boarding': {
@@ -252,12 +285,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ThanksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/gallery-photo/$id': {
+      id: '/api/gallery-photo/$id'
+      path: '/api/gallery-photo/$id'
+      fullPath: '/api/gallery-photo/$id'
+      preLoaderRoute: typeof ApiGalleryPhotoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
   BoardingRoute: BoardingRoute,
   BookRoute: BookRoute,
   GalleryRoute: GalleryRoute,
@@ -267,6 +308,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   TermsRoute: TermsRoute,
   ThanksRoute: ThanksRoute,
+  ApiGalleryPhotoIdRoute: ApiGalleryPhotoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
