@@ -111,10 +111,10 @@ function AboutPage() {
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <figure className="mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-none">
             <img
-              src="/shoot/vanessa-table-groom.svg"
-              alt="Vanessa gently grooming a small white dog on the table"
-              width={480}
-              height={719}
+              src="/vanessa-grooming.jpg"
+              alt="Vanessa Fear-Free grooming a small white dog at the table with gold shears"
+              width={960}
+              height={1344}
               className="block h-auto w-full rounded-2xl shadow-card"
               decoding="async"
             />
