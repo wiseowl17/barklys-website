@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { breadcrumbJsonLd, pageHead, serviceJsonLd } from "@/lib/seo";
 import { useCms } from "@/lib/cms-context";
@@ -35,10 +35,29 @@ const SQUARE_WIDGET =
   "https://app.squareup.com/appointments/buyer/widget/d5mbi8xeslrg3x/LFEEJ4985GGP9";
 const SQUARE_BOOK =
   "https://app.squareup.com/appointments/book/d5mbi8xeslrg3x/LFEEJ4985GGP9/start";
+const SETMORE_BOOKING_URL = "https://barklysclt.setmore.com";
+/**
+ * Booking provider toggle. Square's widget code above is kept intact (not
+ * deleted) so this can be flipped back with one change if Setmore doesn't
+ * work out. Setmore's booking page embeds directly as an iframe (confirmed:
+ * no X-Frame-Options header, no frame-ancestors CSP directive), so it reuses
+ * the same iframe/loading-spinner treatment Square used — no separate widget
+ * script needed.
+ */
+const USE_SETMORE = true;
 
 function BookPage() {
   const { site } = useCms();
   const [frameReady, setFrameReady] = useState(false);
+  const [frameMounted, setFrameMounted] = useState(false);
+
+  useEffect(() => {
+    // Mount the iframe after hydration. Cross-origin load events are easy to
+    // miss on an SSR'd iframe (the document can finish before React attaches
+    // onLoad, and Strict Mode remounts skip a second load), which would leave
+    // the spinner overlay stuck on top of a fully-loaded calendar.
+    setFrameMounted(true);
+  }, []);
 
   return (
     <main className="mx-auto flex max-w-3xl flex-col items-center px-4 py-14 text-center sm:px-6">
@@ -63,7 +82,7 @@ function BookPage() {
       </p>
       <GalleryPoliciesLinks />
 
-      <div className="relative mt-10 w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
+      <div className="relative mt-10 min-h-[820px] w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
         {!frameReady ? (
           <div
             className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-cream-deep"
@@ -73,19 +92,21 @@ function BookPage() {
             <p className="text-sm text-muted">Loading the booking calendar…</p>
           </div>
         ) : null}
-        <iframe
-          title="Book a grooming appointment with Barkly's"
-          src={SQUARE_WIDGET}
-          allow="payment"
-          className="h-[820px] w-full border-0"
-          onLoad={() => setFrameReady(true)}
-        />
+        {frameMounted ? (
+          <iframe
+            title="Book a grooming appointment with Barkly's"
+            src={USE_SETMORE ? SETMORE_BOOKING_URL : SQUARE_WIDGET}
+            allow="payment"
+            className="h-[820px] w-full border-0"
+            onLoad={() => setFrameReady(true)}
+          />
+        ) : null}
       </div>
 
       <p className="mt-4 text-sm text-muted">
         Having trouble with the calendar?{" "}
         <a
-          href={SQUARE_BOOK}
+          href={USE_SETMORE ? SETMORE_BOOKING_URL : SQUARE_BOOK}
           className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
           target="_blank"
           rel="noreferrer"
