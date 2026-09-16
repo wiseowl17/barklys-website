@@ -113,8 +113,8 @@ function AboutPage() {
             <img
               src="/shoot/vanessa-table-groom.svg"
               alt="Vanessa gently grooming a small white dog on the table"
-              width={720}
-              height={1079}
+              width={480}
+              height={719}
               className="block h-auto w-full rounded-2xl shadow-card"
               decoding="async"
             />
