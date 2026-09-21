@@ -6,10 +6,11 @@ import {
   pageHead,
   type FaqItem,
 } from "@/lib/seo";
+import { SERVICE_AREA_NAMES, SITE } from "@/lib/site";
 
 const TITLE = "Grooming & Boarding Policies | Barkly's Charlotte";
 const DESCRIPTION =
-  "Cancellation, vaccine, pick-up, and Fear-Free handling policies for dog grooming, boarding, and daycare at Barkly's in Charlotte NC — written to keep every appointment calm and on time.";
+  "Cancellation, vaccine, pick-up, Fear-Free handling, booking, service areas, breeds, coat care, and boarding vs daycare FAQs for Barkly's home studio in Charlotte NC.";
 
 const POLICIES: readonly FaqItem[] = [
   {
@@ -41,6 +42,34 @@ const POLICIES: readonly FaqItem[] = [
     question: "Where is the studio, and how do visits work?",
     answer:
       "Barkly’s is home-based. The studio address is shared after confirmation. Please arrive on time, keep siblings and extra guests to a minimum, and follow any parking notes we send.",
+  },
+  {
+    question: "Which cities does Barkly's serve?",
+    answer: `We serve families across ${SERVICE_AREA_NAMES}. Fort Mill and Matthews families book the same way as Charlotte clients — online or by phone.`,
+  },
+  {
+    question: "How do I book grooming, boarding, or daycare?",
+    answer: `Book grooming online at barklysclt.com/book (Setmore). You can also call ${SITE.phoneDisplay} or message us on WhatsApp. We’re open ${SITE.hoursDisplay}. Boarding and daycare are by request — use the form on the Boarding page or call, and Vanessa or Manuel will confirm availability.`,
+  },
+  {
+    question: "How should I care for my dog’s coat between visits?",
+    answer:
+      "Brush regularly between appointments so mats don’t build up, especially on doodles and longer coats. Keep the coat at a comfortable length you can maintain at home, and book sooner if you notice tangles, skin irritation, or your dog seems uncomfortable. Extra time for matting or heavy coat work may be quoted at drop-off.",
+  },
+  {
+    question: "Do you use cages?",
+    answer:
+      "No. Barkly’s is a Fear-Free home studio — no cages, no crowded kennel runs, and no rushing your dog through a haircut. Dogs get one-on-one attention in a calm home setting.",
+  },
+  {
+    question: "What breeds do you groom?",
+    answer:
+      "All breeds are welcome. We have extra fluency in poodles, schnauzers, doodles, and small breeds, and we pace every visit to the dog in the chair.",
+  },
+  {
+    question: "What’s the difference between boarding and daycare?",
+    answer:
+      "Boarding is an overnight stay in our calm home. Daycare and dog sitting are daytime only — play, rest, and a familiar face while you’re at work or out for the day. Both use Fear-Free handling and are confirmed based on availability.",
   },
 ];
 
