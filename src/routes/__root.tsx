@@ -65,6 +65,7 @@ function RootLayout() {
   const cms = Route.useLoaderData();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isAdmin = pathname.startsWith("/admin");
+  const isBook = pathname === "/book";
 
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
@@ -75,7 +76,9 @@ function RootLayout() {
         className={
           isAdmin
             ? "flex min-h-svh flex-col bg-cream text-ink"
-            : "flex min-h-svh flex-col bg-cream pb-20 text-ink lg:pb-0"
+            : isBook
+              ? "flex min-h-svh flex-col bg-cream text-ink"
+              : "flex min-h-svh flex-col bg-cream pb-20 text-ink lg:pb-0"
         }
       >
         <PreviewHostBridge />
@@ -83,7 +86,13 @@ function RootLayout() {
           <CmsProvider value={cms}>
             {isAdmin ? null : <Header />}
             <Outlet />
-            {isAdmin ? null : <Footer />}
+            {isAdmin ? null : isBook ? (
+              <div className="hidden lg:block">
+                <Footer />
+              </div>
+            ) : (
+              <Footer />
+            )}
             {isAdmin ? null : <WhatsAppBubble />}
             {isAdmin ? null : <MobileCta />}
             {isAdmin ? null : <CookieBanner />}

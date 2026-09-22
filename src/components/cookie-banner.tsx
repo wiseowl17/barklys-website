@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
 const KEY = "barklys-cookie-consent";
@@ -25,6 +25,7 @@ gtag('config', '${GA_ID}');`;
 }
 
 export function CookieBanner() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -39,7 +40,9 @@ export function CookieBanner() {
     setVisible(false);
   }
 
-  if (!visible) return null;
+  // Booking is a full-height embed on phones — the banner sits on top of
+  // Setmore prices and fights iframe scrolling. Show it everywhere else.
+  if (pathname === "/book" || !visible) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-[60] border-t border-line bg-paper/95 px-4 py-4 shadow-soft backdrop-blur-md sm:px-6">

@@ -1,3 +1,4 @@
+import { useRouterState } from "@tanstack/react-router";
 import { SITE } from "@/lib/site";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -9,6 +10,9 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export function WhatsAppBubble() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  if (pathname === "/book") return null;
+
   return (
     <a
       href={SITE.whatsappHref}

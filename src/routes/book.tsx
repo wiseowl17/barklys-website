@@ -60,29 +60,44 @@ function BookPage() {
   }, []);
 
   return (
-    <main className="mx-auto flex max-w-3xl flex-col items-center px-4 py-14 text-center sm:px-6">
-      <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
-        Grooming
-      </p>
-      <h1 className="mt-3 font-display text-4xl sm:text-5xl">Book grooming</h1>
-      <p className="mt-4 max-w-xl leading-relaxed text-muted">
-        Pick a service and time below — it takes less than a minute. We’ll follow up if we need
-        anything for a calm, Fear-Free visit.
-      </p>
+    <main className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col items-center px-0 text-center lg:px-6 lg:py-14">
+      <div className="w-full shrink-0 px-4 pt-5 pb-3 sm:px-6 lg:px-0 lg:pt-0 lg:pb-0">
+        <p className="text-xs font-semibold tracking-[0.2em] text-teal-deep uppercase">
+          Grooming
+        </p>
+        <h1 className="mt-2 font-display text-3xl sm:mt-3 sm:text-4xl lg:text-5xl">Book grooming</h1>
+        <p className="mt-3 hidden max-w-xl mx-auto leading-relaxed text-muted sm:block lg:mt-4">
+          Pick a service and time below — it takes less than a minute. We’ll follow up if we need
+          anything for a calm, Fear-Free visit.
+        </p>
 
-      <p className="mt-4 max-w-xl rounded-xl border border-line bg-cream-deep px-4 py-3 text-sm text-muted">
-        Looking for overnight boarding or daycare?{" "}
-        <Link
-          to="/boarding"
-          className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
-        >
-          Request boarding or daycare here
-        </Link>
-        .
-      </p>
-      <GalleryPoliciesLinks />
+        <p className="mt-3 max-w-xl mx-auto rounded-xl border border-line bg-cream-deep px-4 py-3 text-sm text-muted lg:mt-4">
+          Looking for overnight boarding or daycare?{" "}
+          <Link
+            to="/boarding"
+            className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
+          >
+            Request boarding or daycare here
+          </Link>
+          .
+        </p>
+        <div className="hidden sm:block">
+          <GalleryPoliciesLinks />
+        </div>
+        <p className="mt-2 text-sm text-muted lg:hidden">
+          Having trouble?{" "}
+          <a
+            href={USE_SETMORE ? SETMORE_BOOKING_URL : SQUARE_BOOK}
+            className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open booking in a new tab
+          </a>
+        </p>
+      </div>
 
-      <div className="relative mt-10 min-h-[820px] w-full overflow-hidden rounded-2xl border border-line bg-paper shadow-soft">
+      <div className="relative min-h-[28rem] w-full flex-1 overflow-auto overscroll-contain [-webkit-overflow-scrolling:touch] bg-paper sm:mt-4 lg:mt-10 lg:min-h-[820px] lg:flex-none lg:overflow-hidden lg:rounded-2xl lg:border lg:border-line lg:shadow-soft">
         {!frameReady ? (
           <div
             className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-cream-deep"
@@ -97,13 +112,13 @@ function BookPage() {
             title="Book a grooming appointment with Barkly's"
             src={USE_SETMORE ? SETMORE_BOOKING_URL : SQUARE_WIDGET}
             allow="payment"
-            className="h-[820px] w-full border-0"
+            className="absolute inset-0 h-full w-full border-0"
             onLoad={() => setFrameReady(true)}
           />
         ) : null}
       </div>
 
-      <p className="mt-4 text-sm text-muted">
+      <p className="mt-4 hidden shrink-0 px-4 text-sm text-muted lg:block lg:px-0">
         Having trouble with the calendar?{" "}
         <a
           href={USE_SETMORE ? SETMORE_BOOKING_URL : SQUARE_BOOK}
@@ -116,7 +131,7 @@ function BookPage() {
         .
       </p>
 
-      <dl className="mt-10 space-y-3 text-sm">
+      <dl className="mt-10 hidden w-full space-y-3 px-4 text-sm lg:block lg:px-0">
         <div>
           <dt className="text-muted">Phone</dt>
           <dd>
@@ -140,7 +155,7 @@ function BookPage() {
           </dd>
         </div>
       </dl>
-      <p className="mt-8 rounded-lg border border-line bg-cream-deep p-4 text-sm text-muted">
+      <p className="mt-8 hidden rounded-lg border border-line bg-cream-deep p-4 text-sm text-muted lg:block">
         Home-based studio. The exact address is shared only after your
         appointment is confirmed.
       </p>
