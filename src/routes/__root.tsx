@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { WhatsAppBubble } from "@/components/whatsapp-bubble";
 import { CookieBanner } from "@/components/cookie-banner";
 import { MobileCta } from "@/components/mobile-cta";
+import { HalloweenDrift } from "@/components/halloween";
 import { NotFoundPage } from "@/components/not-found";
 import { PendingScreen } from "@/components/pending-screen";
 import { CmsProvider } from "@/lib/cms-context";
@@ -95,6 +96,7 @@ function RootLayout() {
             ) : (
               <Footer />
             )}
+            {isAdmin ? null : <HalloweenDrift />}
             {isAdmin ? null : <WhatsAppBubble />}
             {isAdmin ? null : <MobileCta />}
             {isAdmin ? null : <CookieBanner />}

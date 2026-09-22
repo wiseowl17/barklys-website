@@ -1,5 +1,6 @@
 import { HOME_SHOOT } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { HalloweenPolaroidHat } from "@/components/halloween";
 
 const TAPES = ["bg-pink", "bg-gold", "bg-sky", "bg-teal"] as const;
 
@@ -32,6 +33,7 @@ function Polaroid({
           rotate,
         )}
       />
+      {featured ? <HalloweenPolaroidHat /> : null}
       <span className="relative block aspect-[4/5] overflow-hidden rounded-[1rem] bg-cream-deep">
         <img
           src={photo.src}
