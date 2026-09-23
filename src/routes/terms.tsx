@@ -36,7 +36,7 @@ function TermsPage() {
         </p>
         <h2 className="font-display text-2xl">Appointments</h2>
         <p className="text-muted">
-          Grooming times booked through Square are requests until confirmed. Boarding and
+          Grooming times booked through Setmore are requests until confirmed. Boarding and
           daycare stays are request-only and must be accepted by us. {SITE.studioNote}
         </p>
         <h2 className="font-display text-2xl">Cancellations & no-shows</h2>

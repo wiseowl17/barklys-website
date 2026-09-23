@@ -34,13 +34,13 @@ function HomePage() {
       <section className="relative overflow-hidden">
         <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-12 sm:px-6 lg:pb-8 lg:pt-16">
           <h1 className="font-display text-4xl leading-[1.1] text-navy-deep sm:text-5xl lg:text-6xl">
-            {cmsText(copy, "home.headline", "Groom, play, and stay at your dog’s pace")}
+            {cmsText(copy, "home.headline", "Fear-Free dog grooming and boarding in a Charlotte home")}
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
             {cmsText(
               copy,
               "home.subhead",
-              "Barkly’s is a calm, home-based studio for dog grooming, boarding, daycare, and dog sitting. Every appointment is paced to your dog — especially the sensitive, senior, and first-time guests.",
+              "Vanessa is a vet-trained, Fear Free Certified groomer who works with one dog at a time in her Charlotte home studio. Nervous dogs, seniors, and first-timers get as much time as they need. We also offer overnight boarding, daycare, and dog sitting.",
             )}
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -52,16 +52,16 @@ function HomePage() {
             </Button>
           </div>
           <p className="mt-4 text-sm font-medium text-navy">
-            Full grooms start at $75{" "}
+            Full grooms start at $75.{" "}
             <Link to="/grooming" className="text-teal-deep underline decoration-sky underline-offset-2">
-              see the price table
+              See the price table
             </Link>
           </p>
           <p className="mt-3 text-sm text-muted">
             {cmsText(
               copy,
               "home.serving",
-              "Serving Charlotte, Fort Mill, Tega Cay, and nearby towns · By appointment only",
+              "Serving the greater Charlotte area, Fort Mill, Tega Cay, and nearby towns · By appointment only · Weeknights 6 to 9pm and weekends",
             )}
           </p>
         </div>
@@ -182,7 +182,7 @@ function HomePage() {
             {cmsText(
               copy,
               "home.cta_body",
-              "Pick a time that works. We’ll take it from there — coat notes, Fear-Free handling, and a calm visit for your pup.",
+              "Pick a time that works for you and tell us anything Vanessa should know about your dog. If your dog needs a break or a second visit to finish, that’s fine.",
             )}
           </p>
           <Button

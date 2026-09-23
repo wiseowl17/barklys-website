@@ -15,47 +15,47 @@ export const SERVICE_AREA_NOTES = [
   {
     name: "Charlotte",
     state: "NC",
-    note: "Home studio for Charlotte families who want one-on-one Fear-Free grooming instead of a busy salon floor.",
+    note: "Our home studio is in Charlotte, and Vanessa grooms one dog at a time.",
   },
   {
     name: "South End",
     state: "NC",
-    note: "South End owners book weekday evenings after work — drop-off, a paced groom, and a calm pickup.",
+    note: "South End owners can book weekday appointments from 6 to 9pm, after work.",
   },
   {
     name: "South Charlotte",
     state: "NC",
-    note: "South Charlotte doodles, schnauzers, and seniors get extra time on the table, not a rushed slot.",
+    note: "South Charlotte doodles, schnauzers, and senior dogs get extra time on the table when they need it.",
   },
   {
     name: "Tega Cay",
     state: "SC",
-    note: "Tega Cay families drive in for boarding and grooming in a real home, not a kennel run.",
+    note: "Tega Cay families get boarding and grooming in a home, with no kennel runs.",
   },
   {
     name: "Fort Mill",
     state: "SC",
-    note: "Fort Mill pups are regulars — same booking flow, same Fear-Free handling as Charlotte clients.",
+    note: "Fort Mill owners can book online or call (980) 320-0502. Every dog gets the same Fear-Free handling.",
   },
   {
     name: "Ballantyne",
     state: "NC",
-    note: "Ballantyne owners who want a quiet first groom or a senior-safe bath book here by appointment.",
+    note: "Ballantyne owners book with us for a quiet first groom or a gentle bath for an older dog.",
   },
   {
     name: "Matthews",
     state: "NC",
-    note: "Matthews families use Barkly’s for full grooms and overnight stays without a warehouse daycare vibe.",
+    note: "Matthews families book full grooms and overnight stays in a home setting.",
   },
   {
     name: "Belmont",
     state: "NC",
-    note: "Belmont is an easy hop for weekday evening grooms when the corporate salons are already booked out.",
+    note: "Weeknight and weekend hours make it easy for Belmont owners to fit in a groom.",
   },
   {
     name: "Gastonia",
     state: "NC",
-    note: "Gastonia clients make the drive for Vanessa’s Fear-Free approach with anxious and first-time dogs.",
+    note: "Anxious and first-time dogs from Gastonia get Vanessa’s Fear-Free approach.",
   },
 ] as const;
 

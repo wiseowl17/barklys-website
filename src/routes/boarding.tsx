@@ -18,7 +18,7 @@ import { Input, Label, Textarea } from "@/components/ui/input";
 
 const TITLE = "Dog Boarding, Daycare & Dog Sitting in Charlotte NC | Barkly's";
 const DESCRIPTION =
-  "A real home, not a kennel — in-home dog boarding, daycare, and dog sitting with Fear-Free care in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC & Gastonia NC.";
+  "Your dog stays in our home, not a kennel. In-home dog boarding, daycare, and dog sitting with Fear-Free care in Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC & Gastonia NC.";
 
 const FAQS: readonly FaqItem[] = [
   {
@@ -28,7 +28,7 @@ const FAQS: readonly FaqItem[] = [
   },
   {
     question: "How do I request boarding or daycare?",
-    answer: `Fill out the request form on this page with dates, number of dogs, and notes. Vanessa or Manuel personally confirms every stay by phone or email. You can also call ${SITE.phoneDisplay}.`,
+    answer: `Fill out the request form on this page with dates, number of dogs, and notes. We’ll confirm every stay by phone or email. You can also call ${SITE.phoneDisplay}.`,
   },
   {
     question: "What vaccines does my dog need?",
@@ -146,7 +146,7 @@ function BoardingRequestForm() {
       <input type="hidden" name="_captcha" value="false" />
 
       <p className="text-center text-sm text-muted">
-        This is a request only — Vanessa or Manuel will personally confirm your stay based on availability.
+        Sending this form doesn’t book the stay yet. We’ll call or email to confirm your dates.
       </p>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -262,7 +262,7 @@ function BoardingPage() {
           {cmsText(
             copy,
             "boarding.intro",
-            `Overnight dog boarding, in-home dog sitting, and daytime daycare in our calm home — structure, rest, and familiar faces for families in ${site.area}.`,
+            `Your dog stays in our home, not a kennel. We offer overnight boarding, daytime daycare, and in-home dog sitting for families in ${site.area}.`,
           )}
         </p>
 
@@ -285,7 +285,7 @@ function BoardingPage() {
             </span>
             <h2 className="mt-4 font-display text-2xl">Boarding</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              Overnight stay in our calm home — structure, rest, and Fear-Free care.
+              Overnight stays in our home, with a set routine and quiet time to rest.
             </p>
           </article>
           <article className="flex flex-col items-center rounded-xl border border-line bg-paper p-6 shadow-card">
@@ -312,12 +312,12 @@ function BoardingPage() {
             <RateCard title="Boarding" subtitle="In our home" rows={prices.boarding} />
           </div>
           <p className="mx-auto mt-4 max-w-xl text-xs text-muted">
-            Extended care and holiday pricing are confirmed when you book — no surprises at pick-up.
+            We confirm holiday and extended-care prices when you book, so you know the total before your dog’s stay.
           </p>
           <p className="mx-auto mt-8 max-w-xl rounded-xl border border-line bg-cream px-5 py-4 text-sm text-muted">
-            <span className="font-medium text-navy">Daycare & dog sitting</span> is daytime only and
-            quoted per visit. Need someone to watch your dog while you work, run errands, or travel
-            for the day? Request in-home dog sitting on the form below — no separate daycare page.
+            <span className="font-medium text-navy">Daycare and dog sitting</span> are daytime only
+            and priced per visit. Need someone to watch your dog while you work or run errands? Use
+            the form below.
           </p>
         </div>
       </section>
@@ -337,7 +337,7 @@ function BoardingPage() {
             to="/book"
             className="font-medium text-teal-deep underline decoration-sky underline-offset-2"
           >
-            Book grooming on Square
+            Book a groom online
           </Link>
           .
         </p>

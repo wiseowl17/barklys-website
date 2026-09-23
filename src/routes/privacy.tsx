@@ -40,7 +40,7 @@ function PrivacyPage() {
         </p>
         <h2 className="font-display text-2xl">What we collect</h2>
         <ul className="list-disc space-y-2 pl-5 text-muted">
-          <li>Booking details you submit (name, phone, email, pet info, dates) via Square or our request form.</li>
+          <li>Booking details you submit (name, phone, email, pet info, dates) via Setmore or our request form.</li>
           <li>Messages you send by email, phone, or WhatsApp.</li>
           <li>Optional analytics cookies (Google Analytics) only if you accept them on the cookie banner.</li>
         </ul>
@@ -52,7 +52,7 @@ function PrivacyPage() {
         </p>
         <h2 className="font-display text-2xl">Processors</h2>
         <p className="text-muted">
-          Square processes grooming bookings and payments. FormSubmit delivers boarding
+          Setmore handles grooming bookings. FormSubmit delivers boarding
           requests to our email. Google Analytics runs only after you accept cookies. WhatsApp
           is used if you choose to chat with us there.
         </p>

@@ -30,18 +30,13 @@ function AboutPage() {
     cmsText(copy, "about.bullet_1", "Trained as a veterinary doctor in Venezuela"),
     cmsText(
       copy,
-      "about.bullet_2",
-      "Currently studying to revalidate her veterinary degree in the United States",
-    ),
-    cmsText(
-      copy,
       "about.bullet_3",
       "Professional groomer with 5 years of hands-on salon experience",
     ),
     cmsText(
       copy,
       "about.bullet_4",
-      "Special care for poodles, schnauzers, doodles, and small breeds — all breeds welcome",
+      "Extra experience with poodles, schnauzers, doodles, and small breeds. All breeds welcome.",
     ),
   ];
 
@@ -78,7 +73,7 @@ function AboutPage() {
               {cmsText(
                 copy,
                 "about.intro",
-                "Nearly two decades in animal care, a veterinary education from Venezuela, and five years as a professional dog groomer — with a Fear Free certification at the center of every appointment. Vanessa welcomes dogs from the greater Charlotte area and nearby towns.",
+                "Vanessa has worked with animals for nearly two decades. She trained as a veterinarian in Venezuela and has groomed dogs professionally for five years. As a Fear Free Certified Professional, she watches each dog’s body language and slows down when a dog is worried. She welcomes dogs from the greater Charlotte area and nearby towns.",
               )}
             </p>
             <ul className="mt-8 space-y-3 text-[15px] leading-relaxed text-ink">
@@ -133,12 +128,15 @@ function AboutPage() {
               </p>
               <p>
                 The result is a calmer, safer experience for the dog and greater peace of mind for
-                owners. At Barkly’s every appointment prioritizes your pet’s emotional well-being —
-                the haircut never comes before the animal in the chair.
+                owners. At Barkly’s every appointment puts your pet’s emotional well-being first,
+                and the haircut never comes before the dog on the table. Vanessa won’t force a
+                groom: if your dog gets stressed, she’ll take a break, skip a step, or finish on
+                another day.
               </p>
               <p>
                 If your dog needs extra time, breaks, or a slower introduction to the table, dryer,
-                or clippers, that is the plan — not an inconvenience.
+                or clippers, that is part of the plan, not an inconvenience. Just tell us when you
+                book.
               </p>
             </div>
             <Button asChild className="mt-8">

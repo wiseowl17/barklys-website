@@ -26,7 +26,7 @@ const POLICIES: readonly FaqItem[] = [
   {
     question: "When should I pick up my dog?",
     answer:
-      "Please pick up within one hour of your dog being ready. After that, a boarding fee applies — asking early if you’re running late helps us plan around it.",
+      "Please pick up within 45 minutes of your dog being ready. After that, a boarding fee applies. If you’re running late, let us know early so we can plan.",
   },
   {
     question: "What vaccines and health requirements apply?",
@@ -49,22 +49,22 @@ const POLICIES: readonly FaqItem[] = [
   },
   {
     question: "How do I book grooming, boarding, or daycare?",
-    answer: `Book grooming online at barklysclt.com/book (Setmore). You can also call ${SITE.phoneDisplay} or message us on WhatsApp. We’re open ${SITE.hoursDisplay}. Boarding and daycare are by request — use the form on the Boarding page or call, and Vanessa or Manuel will confirm availability.`,
+    answer: `Book grooming online at barklysclt.com/book (Setmore). You can also call ${SITE.phoneDisplay} or message us on WhatsApp. We’re open ${SITE.hoursDisplay}. Boarding and daycare are by request — use the form on the Boarding page or call, and we’ll confirm availability.`,
   },
   {
     question: "How should I care for my dog’s coat between visits?",
     answer:
-      "Brush regularly between appointments so mats don’t build up, especially on doodles and longer coats. Keep the coat at a comfortable length you can maintain at home, and book sooner if you notice tangles, skin irritation, or your dog seems uncomfortable. Extra time for matting or heavy coat work may be quoted at drop-off.",
+      "Brush regularly between appointments so mats don’t build up, especially on doodles and longer coats. Keep the coat at a comfortable length you can maintain at home, and book sooner if you notice tangles, skin irritation, or your dog seems uncomfortable. Heavy matting or a thick coat takes longer. If it will cost extra, we’ll tell you the price at drop-off.",
   },
   {
     question: "Do you use cages?",
     answer:
-      "No. Barkly’s is a Fear-Free home studio — no cages, no crowded kennel runs, and no rushing your dog through a haircut. Dogs get one-on-one attention in a calm home setting.",
+      "No. Since Barkly’s is a Fear-Free studio, we don’t use cages or kennel runs, and we never rush a dog through a haircut. Dogs stay in our home and get one-on-one attention.",
   },
   {
     question: "What breeds do you groom?",
     answer:
-      "All breeds are welcome. We have extra fluency in poodles, schnauzers, doodles, and small breeds, and we pace every visit to the dog in the chair.",
+      "All breeds are welcome. We have extra experience with poodles, schnauzers, doodles, and small breeds, and we pace every visit to the dog.",
   },
   {
     question: "What’s the difference between boarding and daycare?",
@@ -100,8 +100,7 @@ function PoliciesPage() {
         Grooming & boarding policies
       </h1>
       <p className="mx-auto mt-4 max-w-xl text-muted">
-        Written to keep the day calm for every dog on the books — including
-        yours.
+        A few rules that keep the schedule calm for every dog, including yours.
       </p>
       <div className="mt-10">
         <FaqSection title="Policy FAQs" faqs={POLICIES} />

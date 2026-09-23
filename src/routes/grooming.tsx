@@ -14,7 +14,7 @@ import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
 import { SITE } from "@/lib/site";
 
-const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Salon";
+const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Home Studio";
 const DESCRIPTION =
   "Fear-Free dog grooming at your pup's pace — full grooms, baths & breed-specific cuts in a calm home studio serving Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC & Gastonia NC.";
 
@@ -22,7 +22,7 @@ const FAQS: readonly FaqItem[] = [
   {
     question: "What is Fear-Free dog grooming?",
     answer:
-      "Fear-Free grooming means we work at your dog’s pace — extra time, breaks, and gentle handling so the haircut never comes before the animal in the chair. Vanessa is a Fear Free Certified Professional.",
+      "We work at your dog’s pace, with breaks and gentle handling, and we won’t force a groom. Vanessa is a Fear Free Certified Professional.",
   },
   {
     question: "Do you groom dogs from Fort Mill and Matthews?",
@@ -36,7 +36,7 @@ const FAQS: readonly FaqItem[] = [
   {
     question: "Do you groom all breeds?",
     answer:
-      "All breeds are welcome. We have extra fluency in poodles, schnauzers, doodles, and small breeds, and we pace every visit to the dog in the chair.",
+      "All breeds are welcome. We have extra experience with poodles, schnauzers, doodles, and small breeds, and we pace every visit to the dog.",
   },
   {
     question: "Where can I see recent grooms and house rules?",
@@ -82,7 +82,7 @@ function GroomingPage() {
           {cmsText(
             copy,
             "grooming.intro",
-            `Full grooms, baths, and add-ons for dogs in ${site.area}. All breeds welcome, with extra fluency in poodles, schnauzers, and doodles.`,
+            `Full grooms, baths, and add-ons for dogs in ${site.area}. All breeds welcome, with extra experience with poodles, schnauzers, and doodles.`,
           )}
         </p>
         <div className="mt-6">
@@ -149,7 +149,7 @@ function GroomingPage() {
                   </tr>
                 ))}
                 <tr className="border-t border-line bg-cream">
-                  <td className="px-4 py-3 font-medium text-navy">Touch-up</td>
+                  <td className="px-4 py-3 font-medium text-navy">Touch-up grooming</td>
                   <td className="px-4 py-3 text-muted">Bath, face, feet & tidy</td>
                   <td className="px-4 py-3 text-teal-deep">$10 less than a full groom</td>
                 </tr>
@@ -157,7 +157,7 @@ function GroomingPage() {
             </table>
           </div>
           <p className="mx-auto mt-4 max-w-xl text-xs text-muted">
-            Extra time for matting or heavy coat work may be quoted at drop-off.
+            Heavy matting or a thick coat takes longer. If it will cost extra, we’ll tell you the price at drop-off.
           </p>
         </div>
       </section>

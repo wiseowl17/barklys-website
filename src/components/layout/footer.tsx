@@ -69,7 +69,7 @@ export function Footer() {
             ))}
           </ul>
           <p className="mt-4 max-w-xs text-xs leading-relaxed text-sky/80">
-            Serving {site.area}. Exact studio address is shared after your appointment is confirmed.
+            Serving {site.area}.
           </p>
         </div>
       </div>
