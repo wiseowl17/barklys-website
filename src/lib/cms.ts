@@ -26,7 +26,15 @@ export type StudioPhoto = {
   sort_order: number
 }
 
-export type GroomPrice = { size: string; range: string; price: string }
+/** One weight class. `price` is the full groom; the rest follow the Setmore menu. */
+export type GroomPrice = {
+  size: string
+  range: string
+  price: string
+  touchUp: string
+  bathShort: string
+  bathLong: string
+}
 export type AddonPrice = { name: string; from: string }
 export type BoardingPrice = { name: string; price: string; note: string }
 
@@ -221,7 +229,13 @@ function parseJson<T>(raw: string | undefined, fallback: T): T {
 
 export function parseGroomPrices(copy: Record<string, string>): GroomPrice[] {
   const parsed = parseJson<GroomPrice[]>(copy["prices.groom"], [...GROOM_PRICES])
-  return Array.isArray(parsed) && parsed.length > 0 ? parsed : [...GROOM_PRICES]
+  // Rows saved before coat pricing have no touch-up or bath columns; showing
+  // them would leave blank cells, so fall back to the current menu instead.
+  const complete =
+    Array.isArray(parsed) &&
+    parsed.length > 0 &&
+    parsed.every((row) => row.touchUp != null && row.bathShort != null && row.bathLong != null)
+  return complete ? parsed : [...GROOM_PRICES]
 }
 
 export function parseAddonPrices(copy: Record<string, string>): AddonPrice[] {

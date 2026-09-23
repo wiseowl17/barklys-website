@@ -6,11 +6,11 @@ import {
   pageHead,
   type FaqItem,
 } from "@/lib/seo";
-import { SERVICE_AREA_NAMES, SITE } from "@/lib/site";
+import { HOUSE_VISIT_RULES, SERVICE_AREA_NAMES, SITE } from "@/lib/site";
 
-const TITLE = "Grooming & Boarding Policies | Barkly's Charlotte";
+const TITLE = "Policies & FAQ | Barkly's Charlotte";
 const DESCRIPTION =
-  "Cancellation, vaccine, pick-up, Fear-Free handling, booking, service areas, breeds, coat care, and boarding vs daycare FAQs for Barkly's home studio in Charlotte NC.";
+  "Cancellation, vaccine, pick-up, Fear-Free handling, booking, service areas, breeds, coat care, boarding vs daycare, and house visit policies for Barkly's home studio in Charlotte NC.";
 
 const POLICIES: readonly FaqItem[] = [
   {
@@ -43,6 +43,9 @@ const POLICIES: readonly FaqItem[] = [
     answer:
       "Barkly’s is home-based. The studio address is shared after confirmation. Please arrive on time, keep siblings and extra guests to a minimum, and follow any parking notes we send.",
   },
+];
+
+const FAQS: readonly FaqItem[] = [
   {
     question: "Which cities does Barkly's serve?",
     answer: `We serve families across ${SERVICE_AREA_NAMES}. Fort Mill and Matthews families book the same way as Charlotte clients — online or by phone.`,
@@ -81,10 +84,10 @@ export const Route = createFileRoute("/policies")({
       description: DESCRIPTION,
       path: "/policies",
       jsonLd: [
-        faqPageJsonLd(POLICIES),
+        faqPageJsonLd([...POLICIES, ...HOUSE_VISIT_RULES, ...FAQS]),
         breadcrumbJsonLd([
           { name: "Home", path: "/" },
-          { name: "Policies", path: "/policies" },
+          { name: "Policies & FAQ", path: "/policies" },
         ]),
       ],
     }),
@@ -97,13 +100,19 @@ function PoliciesPage() {
         House rules
       </p>
       <h1 className="mt-3 font-display text-4xl sm:text-5xl">
-        Grooming & boarding policies
+        Policies & FAQ
       </h1>
       <p className="mx-auto mt-4 max-w-xl text-muted">
         A few rules that keep the schedule calm for every dog, including yours.
       </p>
       <div className="mt-10">
-        <FaqSection title="Policy FAQs" faqs={POLICIES} />
+        <FaqSection title="Policies" faqs={POLICIES} />
+        <FaqSection
+          id="house-visit-policies"
+          title="House visit policies"
+          faqs={HOUSE_VISIT_RULES}
+        />
+        <FaqSection title="Frequently asked questions" faqs={FAQS} />
       </div>
     </main>
   );

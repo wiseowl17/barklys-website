@@ -1,8 +1,17 @@
 import type { FaqItem } from "@/lib/seo";
 
-export function FaqSection({ title, faqs }: { title: string; faqs: readonly FaqItem[] }) {
+export function FaqSection({
+  title,
+  faqs,
+  id,
+}: {
+  title: string;
+  faqs: readonly FaqItem[];
+  /** Anchor for deep links; the sticky header is cleared by scroll margin. */
+  id?: string;
+}) {
   return (
-    <section>
+    <section id={id} className={id ? "scroll-mt-40" : undefined}>
       <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6">
         <h2 className="font-display text-3xl">{title}</h2>
         <div className="mt-8 space-y-4">

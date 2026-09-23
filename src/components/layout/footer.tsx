@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Link } from "@tanstack/react-router";
 import { navLinks, SERVICE_AREAS } from "@/lib/site";
 import { BrandLogo } from "@/components/brand-logo";
@@ -23,11 +24,20 @@ export function Footer() {
           <p className="text-xs font-semibold tracking-[0.18em] text-gold uppercase">Visit</p>
           <ul className="mt-4 space-y-2 text-sm">
             {navLinks().map((item) => (
-              <li key={item.to}>
-                <Link to={item.to} className="text-sky hover:text-paper">
-                  {item.label}
-                </Link>
-              </li>
+              <Fragment key={item.to}>
+                <li>
+                  <Link to={item.to} className="text-sky hover:text-paper">
+                    {item.label}
+                  </Link>
+                </li>
+                {item.to === "/boarding" ? (
+                  <li>
+                    <Link to="/grooming" hash="house-visits" className="text-sky hover:text-paper">
+                      House visits
+                    </Link>
+                  </li>
+                ) : null}
+              </Fragment>
             ))}
           </ul>
         </div>
@@ -83,7 +93,7 @@ export function Footer() {
             Terms
           </Link>
           <Link to="/policies" className="hover:text-paper">
-            Policies
+            Policies & FAQ
           </Link>
         </p>
       </div>

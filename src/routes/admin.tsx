@@ -617,10 +617,21 @@ function CopyPanel({ initial, dbOk }: { initial: Record<string, string>; dbOk: b
       ))}
 
       <fieldset className="rounded-2xl border border-line bg-paper p-5 shadow-card sm:p-6">
-        <legend className="px-2 font-display text-2xl">Grooming prices</legend>
+        <legend className="px-2 font-display text-2xl">Grooming & bath prices</legend>
         <div className="mt-4 space-y-3">
+          <div
+            aria-hidden
+            className="hidden gap-2 px-1 text-xs font-medium text-muted sm:grid sm:grid-cols-6"
+          >
+            <span>Size</span>
+            <span>Weight</span>
+            <span>Full groom</span>
+            <span>Touch-up</span>
+            <span>Bath, short hair</span>
+            <span>Bath, long / double</span>
+          </div>
           {groom.map((row, index) => (
-            <div key={`groom-${index}`} className="grid gap-2 sm:grid-cols-3">
+            <div key={`groom-${index}`} className="grid gap-2 sm:grid-cols-6">
               <Input
                 aria-label={`Groom size ${index + 1}`}
                 value={row.size}
@@ -657,6 +668,27 @@ function CopyPanel({ initial, dbOk }: { initial: Record<string, string>; dbOk: b
                   )
                 }
               />
+              {(
+                [
+                  ["touchUp", "Touch-up price"],
+                  ["bathShort", "Short-hair bath price"],
+                  ["bathLong", "Long or double coat bath price"],
+                ] as const
+              ).map(([field, label]) => (
+                <Input
+                  key={field}
+                  aria-label={`${label} ${index + 1}`}
+                  value={row[field]}
+                  className="text-left"
+                  onChange={(event) =>
+                    setGroom((rows) =>
+                      rows.map((item, i) =>
+                        i === index ? { ...item, [field]: event.target.value } : item,
+                      ),
+                    )
+                  }
+                />
+              ))}
             </div>
           ))}
         </div>

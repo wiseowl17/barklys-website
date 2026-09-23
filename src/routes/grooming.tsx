@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Droplets, Scissors } from "lucide-react";
 import { FaqSection } from "@/components/faq-section";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
+import { HouseVisitSection } from "@/components/house-visit";
 import { Button } from "@/components/ui/button";
 import {
   breadcrumbJsonLd,
@@ -12,7 +13,7 @@ import {
 } from "@/lib/seo";
 import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
-import { SITE } from "@/lib/site";
+import { HOUSE_VISIT, SITE } from "@/lib/site";
 
 const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Home Studio";
 const DESCRIPTION =
@@ -37,6 +38,10 @@ const FAQS: readonly FaqItem[] = [
     question: "Do you groom all breeds?",
     answer:
       "All breeds are welcome. We have extra experience with poodles, schnauzers, doodles, and small breeds, and we pace every visit to the dog.",
+  },
+  {
+    question: "Do you do house visits?",
+    answer: `Yes, for homes with ${HOUSE_VISIT.minDogs} or more dogs. House visits cost 25% more than studio visits, and every dog after the second gets $${HOUSE_VISIT.extraDogDiscount} off. Use the house visit request form on this page and we’ll confirm the date.`,
   },
   {
     question: "Where can I see recent grooms and house rules?",
@@ -129,30 +134,70 @@ function GroomingPage() {
         <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
           <h2 className="font-display text-3xl">Grooming prices</h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-            Full grooms include haircut, bath, dry, ears, and nails.
+            Priced by coat and weight. A full groom includes bath, blow-dry, brush-out, haircut or
+            style, ear cleaning, and nail trim. A touch-up is a lighter refresh between full grooms:
+            bath, brush-out, trim, and nail trim.
           </p>
-          <div className="mt-8 overflow-hidden rounded-xl border border-line">
+          <div className="mt-8 overflow-x-auto rounded-xl border border-line">
             <table className="w-full text-center text-sm">
               <thead className="bg-cream-deep text-navy">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">Size</th>
-                  <th className="px-4 py-3 font-semibold">Weight</th>
-                  <th className="px-4 py-3 font-semibold">Full groom</th>
+                  <th rowSpan={2} className="px-4 py-3 align-bottom font-semibold">
+                    Size
+                  </th>
+                  <th rowSpan={2} className="px-4 py-3 align-bottom font-semibold">
+                    Weight
+                  </th>
+                  <th colSpan={2} className="px-4 pt-3 pb-1 font-semibold">
+                    Long hair or double coat
+                  </th>
+                </tr>
+                <tr>
+                  <th className="px-4 pt-1 pb-3 text-xs font-medium text-muted">Full groom</th>
+                  <th className="px-4 pt-1 pb-3 text-xs font-medium text-muted">Touch-up</th>
                 </tr>
               </thead>
               <tbody className="bg-paper">
                 {prices.groom.map((row) => (
                   <tr key={row.size} className="border-t border-line">
                     <td className="px-4 py-3 font-medium text-navy">{row.size}</td>
-                    <td className="px-4 py-3 text-muted">{row.range}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-muted">{row.range}</td>
                     <td className="px-4 py-3 tabular-nums text-teal-deep">{row.price}</td>
+                    <td className="px-4 py-3 tabular-nums text-teal-deep">{row.touchUp}</td>
                   </tr>
                 ))}
-                <tr className="border-t border-line bg-cream">
-                  <td className="px-4 py-3 font-medium text-navy">Touch-up grooming</td>
-                  <td className="px-4 py-3 text-muted">Bath, face, feet & tidy</td>
-                  <td className="px-4 py-3 text-teal-deep">$10 less than a full groom</td>
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mx-auto mt-4 max-w-xl text-sm text-muted">
+            Short-haired dog? Book a bath instead. Prices are below.
+          </p>
+
+          <h2 className="mt-14 font-display text-3xl">Bath prices</h2>
+          <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
+            Priced by weight and coat. Every bath includes a blow-dry and nail trim, and long or
+            double coats also get a full brush-out.
+          </p>
+          <div className="mt-8 overflow-x-auto rounded-xl border border-line">
+            <table className="w-full text-center text-sm">
+              <thead className="bg-cream-deep text-navy">
+                <tr>
+                  <th className="px-4 py-3 font-semibold">Size</th>
+                  <th className="px-4 py-3 font-semibold">Weight</th>
+                  <th className="px-4 py-3 font-semibold">Short hair</th>
+                  <th className="px-4 py-3 font-semibold">Long hair or double coat</th>
                 </tr>
+              </thead>
+              <tbody className="bg-paper">
+                {prices.groom.map((row) => (
+                  <tr key={row.size} className="border-t border-line">
+                    <td className="px-4 py-3 font-medium text-navy">{row.size}</td>
+                    <td className="px-4 py-3 whitespace-nowrap text-muted">{row.range}</td>
+                    <td className="px-4 py-3 tabular-nums text-teal-deep">{row.bathShort}</td>
+                    <td className="px-4 py-3 tabular-nums text-teal-deep">{row.bathLong}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -180,6 +225,8 @@ function GroomingPage() {
         </Button>
         <GalleryPoliciesLinks />
       </section>
+
+      <HouseVisitSection />
 
       <FaqSection title="Grooming FAQs" faqs={FAQS} />
     </main>

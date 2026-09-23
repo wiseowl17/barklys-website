@@ -93,7 +93,7 @@ export const SITE = {
     "Home-based studio in Charlotte, NC. Exact address is shared after your appointment is confirmed.",
   /** Keep in lockstep with the live Google listing. */
   googleRatingValue: "5.0",
-  googleReviewCount: 6,
+  googleReviewCount: 9,
 } as const;
 
 export type NavLink = { to: string; label: string };
@@ -110,7 +110,7 @@ export const NAV: readonly NavItem[] = [
     ],
   },
   { to: "/gallery", label: "Gallery" },
-  { to: "/policies", label: "Policies" },
+  { to: "/policies", label: "Policies & FAQ" },
   { to: "/book", label: "Book" },
 ] as const;
 
@@ -119,20 +119,69 @@ export function navLinks(items: readonly NavItem[] = NAV): NavLink[] {
   return items.flatMap((item) => ("children" in item ? [...item.children] : [item]));
 }
 
+/**
+ * Priced by weight and coat, matching the Setmore menu. `price` is the full
+ * groom and `touchUp` the lighter refresh (both long-haired / double-coated);
+ * baths split by short vs long / double coat.
+ */
 export const GROOM_PRICES = [
-  { size: "S", range: "0–25 lbs", price: "$75" },
-  { size: "M", range: "26–40 lbs", price: "$85" },
-  { size: "L", range: "41–70 lbs", price: "$95" },
-  { size: "XL", range: "71–90 lbs", price: "$105" },
-  { size: "XL+", range: "91+ lbs", price: "$115" },
+  { size: "S", range: "0–25 lbs", price: "$75", touchUp: "$65", bathShort: "$45", bathLong: "$55" },
+  { size: "M", range: "26–40 lbs", price: "$85", touchUp: "$75", bathShort: "$60", bathLong: "$70" },
+  { size: "L", range: "41–70 lbs", price: "$95", touchUp: "$85", bathShort: "$80", bathLong: "$90" },
+  { size: "XL", range: "71–90 lbs", price: "$105", touchUp: "$95", bathShort: "Call us", bathLong: "Call us" },
 ] as const;
 
+/** House visits: studio price plus 25%, rounded to the nearest $5. */
+export const HOUSE_VISIT = {
+  markup: 0.25,
+  roundTo: 5,
+  minDogs: 2,
+  /** Taken off each dog after the second. */
+  extraDogDiscount: 5,
+} as const;
+
+/**
+ * House-visit rules. Customers must agree to these before the request form
+ * sends, and /policies lists them as "House visit policies".
+ */
+export const HOUSE_VISIT_RULES = [
+  {
+    question: "Who can book a house visit?",
+    answer: "House visits are for homes with two or more dogs. For one dog, book a studio appointment.",
+  },
+  {
+    question: "How much do house visits cost?",
+    answer:
+      "House visits cost 25% more than studio visits, rounded to the nearest $5, and every dog after the second gets $5 off. The full price table is on the Grooming page.",
+  },
+  {
+    question: "What do you use in my home?",
+    answer: "We bathe your dogs in your bathtub, using your water.",
+  },
+  {
+    question: "Do you clean up after a house visit?",
+    answer:
+      "We vacuum up the hair after the groom, but we can’t guarantee your space will be fully clean afterward.",
+  },
+] as const;
+
+/**
+ * House-visit price for a studio price like "$75". Anything that isn't a plain
+ * dollar amount ("Call us") passes through unchanged.
+ */
+export function houseVisitPrice(studio: string): string {
+  const match = /^\$(\d+(?:\.\d+)?)$/.exec(studio.trim());
+  if (!match) return studio;
+  const raised = Number(match[1]) * (1 + HOUSE_VISIT.markup);
+  return `$${Math.round(raised / HOUSE_VISIT.roundTo) * HOUSE_VISIT.roundTo}`;
+}
+
 export const ADD_ONS = [
-  { name: "Deshedding", from: "$25–$40" },
-  { name: "Dematting", from: "$20–$40" },
-  { name: "Nail trim", from: "$15" },
+  { name: "Deshedding", from: "$25" },
+  { name: "Dematting", from: "$20–$35 by size" },
+  { name: "Nail trim on its own", from: "$20" },
   { name: "Teeth brushing", from: "$6" },
-  { name: "Paw balm", from: "$8" },
+  { name: "Paw balm", from: "$4" },
   { name: "Specialty shampoo", from: "Quoted" },
 ] as const;
 

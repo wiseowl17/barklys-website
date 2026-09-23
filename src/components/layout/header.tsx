@@ -82,6 +82,16 @@ export function Header() {
                             {child.label}
                           </Link>
                         ))}
+                        {item.label === "Services" ? (
+                          <Link
+                            to="/grooming"
+                            hash="house-visits"
+                            onClick={() => setServicesOpen(false)}
+                            className="block px-4 py-2.5 text-sm font-medium text-navy/80 transition-colors hover:bg-cream hover:text-navy"
+                          >
+                            House visits
+                          </Link>
+                        ) : null}
                       </div>
                     ) : null}
                   </div>
@@ -145,6 +155,16 @@ export function Header() {
                         {child.label}
                       </Link>
                     ))}
+                    {item.label === "Services" ? (
+                      <Link
+                        to="/grooming"
+                        hash="house-visits"
+                        onClick={() => setOpen(false)}
+                        className="block w-full rounded-md px-3 py-3 text-base font-medium text-navy"
+                      >
+                        House visits
+                      </Link>
+                    ) : null}
                   </div>
                 );
               }
