@@ -34,7 +34,7 @@ function HomePage() {
       <section className="relative overflow-hidden">
         <div className="mx-auto flex max-w-3xl flex-col items-center px-4 py-12 sm:px-6 lg:pb-8 lg:pt-16">
           <h1 className="font-display text-4xl leading-[1.1] text-navy-deep sm:text-5xl lg:text-6xl">
-            {cmsText(copy, "home.headline", "Fear-Free dog grooming and boarding in a Charlotte home")}
+            {cmsText(copy, "home.headline", "Fear-Free dog grooming in Charlotte")}
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
             {cmsText(

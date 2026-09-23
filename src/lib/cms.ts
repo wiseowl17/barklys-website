@@ -62,7 +62,7 @@ export const COPY_FIELDS: readonly CopyField[] = [
     key: "home.headline",
     label: "Home headline",
     group: "Home",
-    defaultValue: "Fear-Free dog grooming and boarding in a Charlotte home",
+    defaultValue: "Fear-Free dog grooming in Charlotte",
   },
   {
     key: "home.subhead",
