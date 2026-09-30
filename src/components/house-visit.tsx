@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useCms } from "@/lib/cms-context";
+import { submitStayRequest } from "@/lib/requests.functions";
 import { HOUSE_VISIT, HOUSE_VISIT_RULES, houseVisitPrice } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
@@ -93,6 +95,7 @@ export function HouseVisitSection() {
 function HouseVisitForm() {
   const { site } = useCms();
   const navigate = useNavigate();
+  const submit = useServerFn(submitStayRequest);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [agreed, setAgreed] = useState(false);
@@ -127,12 +130,26 @@ function HouseVisitForm() {
     }
 
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
+      const result = await submit({
+        data: {
+          kind: "house_visit",
+          name,
+          phone,
+          email,
+          company: String(data.get("company") ?? ""),
+          fields: {
+            area: String(data.get("area") ?? ""),
+            preferred_date: String(data.get("preferred_date") ?? ""),
+            dogs: String(data.get("dogs") ?? ""),
+            dogs_details: String(data.get("dogs_details") ?? ""),
+            agreed_to_house_rules: String(data.get("agreed_to_house_rules") ?? ""),
+          },
+        },
       });
-      if (!res.ok) throw new Error("send failed");
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
       void navigate({ to: "/thanks" });
     } catch {
       setError(
@@ -149,9 +166,7 @@ function HouseVisitForm() {
       className="mx-auto max-w-xl space-y-4 rounded-2xl border border-line bg-cream p-6 text-left shadow-card sm:p-8"
       noValidate
     >
-      <input type="hidden" name="_subject" value="Barkly's house visit request" />
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
 
       <p className="text-center text-sm text-muted">
         Sending this form doesn’t book the visit yet. We’ll call or email to confirm the date.

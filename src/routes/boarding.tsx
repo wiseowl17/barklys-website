@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { HeartHandshake, Home } from "lucide-react";
 import {
   breadcrumbJsonLd,
@@ -11,6 +12,7 @@ import {
 import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
 import { SITE } from "@/lib/site";
+import { submitStayRequest } from "@/lib/requests.functions";
 import { FaqSection } from "@/components/faq-section";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { Button } from "@/components/ui/button";
@@ -96,6 +98,7 @@ function RateCard({
 function BoardingRequestForm() {
   const { site } = useCms();
   const navigate = useNavigate();
+  const submit = useServerFn(submitStayRequest);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
 
@@ -115,16 +118,36 @@ function BoardingRequestForm() {
       return;
     }
 
-    try {
-      const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-        },
-        body: data,
-      });
+    const fields: Record<string, string> = {};
+    for (const key of [
+      "service",
+      "start_date",
+      "end_date",
+      "days",
+      "dogs",
+      "dog_name",
+      "breed",
+      "weight",
+      "message",
+    ]) {
+      fields[key] = String(data.get(key) ?? "");
+    }
 
-      if (!res.ok) throw new Error("send failed");
+    try {
+      const result = await submit({
+        data: {
+          kind: "boarding",
+          name,
+          phone,
+          email,
+          company: String(data.get("company") ?? ""),
+          fields,
+        },
+      });
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
       void navigate({ to: "/thanks" });
     } catch {
       setError(
@@ -141,9 +164,7 @@ function BoardingRequestForm() {
       className="mx-auto max-w-xl space-y-4 rounded-2xl border border-line bg-paper p-6 text-left shadow-card sm:p-8"
       noValidate
     >
-      <input type="hidden" name="_subject" value="Barkly's boarding / daycare request" />
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
 
       <p className="text-center text-sm text-muted">
         Sending this form doesn’t book the stay yet. We’ll call or email to confirm your dates.

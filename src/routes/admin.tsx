@@ -1,7 +1,7 @@
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ChevronDown, ChevronUp, ChevronsDown, ChevronsUp, ImagePlus, Images, KeyRound, LogOut, PencilLine } from "lucide-react";
+import { ChevronDown, ChevronUp, ChevronsDown, ChevronsUp, ImagePlus, Images, Inbox, KeyRound, LogOut, PencilLine } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Textarea } from "@/components/ui/input";
@@ -30,6 +30,7 @@ import {
   uploadStudioPhoto,
 } from "@/lib/cms.functions";
 import { clearStudioToken, writeStudioToken } from "@/lib/cms-middleware";
+import { getStayRequests, type StayRequest } from "@/lib/requests.functions";
 import { pageHead } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
@@ -143,7 +144,7 @@ function LoginCard() {
 function StudioDesk({ studio }: { studio: Studio }) {
   const router = useRouter();
   const logout = useServerFn(adminLogout);
-  const [tab, setTab] = useState<"gallery" | "hero" | "copy">("gallery");
+  const [tab, setTab] = useState<"gallery" | "hero" | "copy" | "requests">("gallery");
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6">
@@ -205,6 +206,10 @@ function StudioDesk({ studio }: { studio: Studio }) {
           <PencilLine className="size-4" />
           Copy & prices
         </TabButton>
+        <TabButton active={tab === "requests"} onClick={() => setTab("requests")}>
+          <Inbox className="size-4" />
+          Requests
+        </TabButton>
       </div>
 
       <div className="mt-8">
@@ -227,6 +232,7 @@ function StudioDesk({ studio }: { studio: Studio }) {
           />
         ) : null}
         {tab === "copy" ? <CopyPanel initial={studio.copy} dbOk={studio.dbOk} /> : null}
+        {tab === "requests" ? <RequestsPanel /> : null}
       </div>
     </main>
   );
@@ -532,6 +538,97 @@ function PhotosPanel({
           </ol>
         )}
       </section>
+    </div>
+  );
+}
+
+const REQUEST_LABELS: Record<string, string> = {
+  service: "Service",
+  start_date: "Start",
+  end_date: "End",
+  days: "Days",
+  dogs: "Dogs",
+  dog_name: "Dog",
+  breed: "Breed",
+  weight: "Weight",
+  message: "Notes",
+  area: "Area",
+  preferred_date: "Preferred date",
+  dogs_details: "Dogs",
+  agreed_to_house_rules: "Agreed to house rules",
+};
+
+function RequestsPanel() {
+  const load = useServerFn(getStayRequests);
+  const [rows, setRows] = useState<StayRequest[] | null>(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    load()
+      .then((next) => {
+        if (!cancelled) setRows(next);
+      })
+      .catch(() => {
+        if (!cancelled) setError("Couldn’t load requests.");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [load]);
+
+  if (error) {
+    return (
+      <p role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+        {error}
+      </p>
+    );
+  }
+  if (!rows) {
+    return <p className="text-sm text-muted">Loading requests…</p>;
+  }
+  if (rows.length === 0) {
+    return (
+      <p className="rounded-2xl border border-line bg-paper px-5 py-8 text-center text-sm text-muted">
+        No boarding or house-visit requests yet.
+      </p>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      {rows.map((row) => {
+        const when = new Intl.DateTimeFormat("en-US", {
+          timeZone: "America/New_York",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+        }).format(new Date(row.createdAt));
+        return (
+          <article key={row.id} className="rounded-2xl border border-line bg-paper p-5 text-left shadow-card">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h2 className="font-display text-2xl text-navy">
+                {row.kind === "house_visit" ? "House visit" : "Boarding"} · {row.name}
+              </h2>
+              <p className="text-xs text-muted">{when}</p>
+            </div>
+            <p className="mt-1 text-sm text-muted">
+              <a className="text-teal-deep underline" href={`tel:${row.phone}`}>{row.phone}</a>
+              {" · "}
+              <a className="text-teal-deep underline" href={`mailto:${row.email}`}>{row.email}</a>
+            </p>
+            <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
+              {Object.entries(row.payload).map(([key, value]) => (
+                <div key={key}>
+                  <dt className="text-xs font-medium text-muted">{REQUEST_LABELS[key] ?? key}</dt>
+                  <dd className="text-ink">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+        );
+      })}
     </div>
   );
 }
