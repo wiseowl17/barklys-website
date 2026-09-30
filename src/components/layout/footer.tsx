@@ -15,8 +15,8 @@ export function Footer() {
           <BrandLogo decorative className="mx-auto mb-4 h-28 w-auto drop-shadow-md" />
           <p className="mt-2 text-sm font-medium text-paper">Barkly’s Grooming & Boarding</p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-sky">
-            Fear-Free dog grooming, boarding, and daycare for {site.area}. {site.studioNote} Open{" "}
-            {site.hoursDisplay}.
+            Fear-Free dog grooming, boarding, and daycare for {site.area}. {site.studioNote} By
+            appointment only.
           </p>
         </div>
 
