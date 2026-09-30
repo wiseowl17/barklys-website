@@ -44,6 +44,30 @@ function cleanFields(raw: Record<string, string>): Record<string, string> {
   return fields;
 }
 
+const FIELD_LABELS: Record<string, string> = {
+  service: "Service",
+  start_date: "Start",
+  end_date: "End",
+  days: "Days",
+  dogs: "Dogs",
+  dog_name: "Dog",
+  breed: "Breed",
+  weight: "Weight",
+  message: "Notes",
+  area: "Area",
+  preferred_date: "Preferred date",
+  dogs_details: "Dogs",
+  agreed_to_house_rules: "Agreed to house rules",
+};
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&" + "amp;")
+    .replace(/</g, "&" + "lt;")
+    .replace(/>/g, "&" + "gt;")
+    .replace(/"/g, "&" + "quot;");
+}
+
 async function notifyByEmail(input: {
   kind: (typeof KINDS)[number];
   name: string;
@@ -51,41 +75,50 @@ async function notifyByEmail(input: {
   email: string;
   fields: Record<string, string>;
 }) {
-  const body = new FormData();
-  body.set(
-    "_subject",
+  const key = process.env["RESEND_API_KEY"];
+  if (!key) {
+    console.error("[request] email notify skipped: RESEND_API_KEY missing");
+    return;
+  }
+
+  const subject =
     input.kind === "boarding"
       ? "Barkly's boarding / daycare request"
-      : "Barkly's house visit request",
-  );
-  body.set("_template", "table");
-  body.set("_captcha", "false");
-  body.set("_replyto", input.email);
-  body.set(
-    "_url",
-    input.kind === "boarding"
-      ? "https://www.barklysclt.com/boarding"
-      : "https://www.barklysclt.com/grooming",
-  );
-  body.set("name", input.name);
-  body.set("phone", input.phone);
-  body.set("email", input.email);
-  for (const [key, value] of Object.entries(input.fields)) body.set(key, value);
+      : "Barkly's house visit request";
+  const rows: Array<[string, string]> = [
+    ["Name", input.name],
+    ["Phone", input.phone],
+    ["Email", input.email],
+    ...Object.entries(input.fields).map(
+      ([field, value]) => [FIELD_LABELS[field] ?? field, value] as [string, string],
+    ),
+  ];
+  const text = rows.map(([label, value]) => `${label}: ${value}`).join("\n");
+  const html = `<table cellpadding="6" cellspacing="0">${rows
+    .map(
+      ([label, value]) =>
+        `<tr><td><strong>${escapeHtml(label)}</strong></td><td>${escapeHtml(value)}</td></tr>`,
+    )
+    .join("")}</table>`;
 
-  const res = await fetch(`https://formsubmit.co/ajax/${SITE.email}`, {
+  const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
-      Accept: "application/json",
-      Origin: "https://www.barklysclt.com",
-      Referer:
-        input.kind === "boarding"
-          ? "https://www.barklysclt.com/boarding"
-          : "https://www.barklysclt.com/grooming",
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
     },
-    body,
+    body: JSON.stringify({
+      from: "Barkly's <requests@barklysclt.com>",
+      to: [SITE.email],
+      reply_to: input.email,
+      subject,
+      text,
+      html,
+    }),
   });
   if (!res.ok) {
-    console.error("[request] email notify failed", res.status);
+    const detail = await res.text();
+    console.error("[request] email notify failed", res.status, detail.slice(0, 300));
   }
 }
 

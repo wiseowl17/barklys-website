@@ -53,7 +53,7 @@ function PrivacyPage() {
         <h2 className="font-display text-2xl">Processors</h2>
         <p className="text-muted">
           Setmore handles grooming bookings. Boarding and house-visit requests are saved
-          for the studio and emailed when delivery is available. Google Analytics runs only after you accept cookies. WhatsApp
+          for the studio, and Resend emails them to us. Google Analytics runs only after you accept cookies. WhatsApp
           is used if you choose to chat with us there.
         </p>
         <h2 className="font-display text-2xl">Studio address</h2>
