@@ -5,17 +5,18 @@ import { HomeShootGrid } from "@/components/home-shoot-grid";
 import { GalleryPoliciesLinks } from "@/components/gallery-policies-links";
 import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
-import { pageHead } from "@/lib/seo";
+import { pageHead, websiteJsonLd } from "@/lib/seo";
 import { REVIEWS, SERVICE_AREA_NOTES, SERVICES, SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
   head: () =>
     pageHead({
-      title: "Barkly's | Fear-Free Dog Grooming in Charlotte",
+      title: "Barkly's Grooming & Boarding | Fear-Free Dog Grooming Charlotte",
       description:
         "Fear-Free certified dog grooming, boarding, daycare, and dog sitting serving Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC, and Gastonia NC.",
       path: "/",
+      jsonLd: websiteJsonLd(),
     }),
 });
 
