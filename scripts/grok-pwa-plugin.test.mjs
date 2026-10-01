@@ -473,11 +473,25 @@ test("escapes host-derived values in the install page", () => {
   assert.equal(html.includes("<script>alert(1)</script>"), false);
 });
 
-test("renders the manifest with the per-app name", () => {
+test("renders the Barkly's manifest with crown icons", () => {
   const manifest = JSON.parse(renderWebManifest("wild-race.grok.me"));
-  assert.equal(manifest.name, "Wild Race");
-  assert.equal(manifest.short_name, "Wild Race");
-  assert.equal(manifest.icons[0].src, "/__grok/icon-180.png");
+  assert.equal(manifest.name, "Barkly's");
+  assert.equal(manifest.short_name, "Barkly's");
+  assert.equal(manifest.theme_color, "#2C5A71");
+  assert.equal(manifest.background_color, "#2C5A71");
+  assert.deepEqual(
+    manifest.icons.map((i) => i.src),
+    ["/icon-192.png", "/icon-512.png"],
+  );
+});
+
+test("does not add a second apple-touch-icon when one exists", () => {
+  const out = injectGrokPwaHead(
+    '<html><head><link rel="apple-touch-icon" href="/icon-180.png" sizes="180x180"></head><body></body></html>',
+    { host: "example.com" },
+  );
+  assert.equal((out.match(/rel="apple-touch-icon"/g) ?? []).length, 1);
+  assert.equal(out.includes("/__grok/icon-180.png"), false);
 });
 
 // Tripwires: the deployed-app path only works if Nitro scans server/ — an
