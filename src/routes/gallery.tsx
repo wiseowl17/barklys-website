@@ -11,7 +11,7 @@ export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
   head: () =>
     pageHead({
-      title: "Dog Grooming Gallery | Barkly's Charlotte",
+      title: "Dog Grooming Gallery | Barkly's",
       description:
         "See real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails. Book your dog's own before-and-after.",
       path: "/gallery",

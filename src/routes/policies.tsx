@@ -8,7 +8,7 @@ import {
 } from "@/lib/seo";
 import { HOUSE_VISIT_RULES, SERVICE_AREA_NAMES, SITE } from "@/lib/site";
 
-const TITLE = "Policies & FAQ | Barkly's Charlotte";
+const TITLE = "Policies & FAQ | Barkly's";
 const DESCRIPTION =
   "Cancellation, vaccine, pick-up, Fear-Free handling, booking, service areas, breeds, coat care, boarding vs daycare, and house visit policies for Barkly's home studio in Charlotte NC.";
 
