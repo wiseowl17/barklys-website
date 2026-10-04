@@ -234,6 +234,16 @@ export const GALLERY = [
     alt: "Before-and-after of an apricot doodle groomed in Charlotte, from a long curly coat to a smooth teddy-bear cut with a purple Halloween bandana.",
   },
   {
+    src: "/gallery/oliver-schnauzer-before-after.jpg",
+    name: "Oliver’s fresh look",
+    alt: "Before-and-after of Oliver, a miniature Schnauzer at Barkly’s in Charlotte: a long wiry coat, then a neat beard, furnishings, and a pastel bandana.",
+  },
+  {
+    src: "/gallery/golden-yorkie-before-after.jpg",
+    name: "Golden’s fresh look",
+    alt: "Before-and-after of Golden, a Yorkshire Terrier groomed in Charlotte, from a long coat to a tidy face, silky ears, and a purple checkered tie.",
+  },
+  {
     src: "/gallery/cavalier-autumn-bandana.jpg",
     name: "Autumn Cavalier",
     alt: "Ruby Cavalier King Charles Spaniel with a long silky coat and an autumn pumpkin bandana after a Fear-Free groom in Charlotte, North Carolina.",
@@ -313,18 +323,74 @@ export const GALLERY = [
     name: "Teal-bandana Pom",
     alt: "Pomeranian in a round teddy-bear cut wearing a teal paw-print bandana after grooming in Charlotte, North Carolina.",
   },
+  {
+    src: "/gallery/frenchie-heart-bandana.jpg",
+    name: "Heart-bandana Frenchie",
+    alt: "Fawn French Bulldog with a pink heart gem and a red heart bandana after a Fear-Free groom at Barkly’s in Charlotte.",
+  },
+  {
+    src: "/gallery/chow-puppy-bandana.jpg",
+    name: "Chow puppy",
+    alt: "Fluffy chocolate Chow Chow puppy in a blue Shiba-print bandana after a gentle puppy groom in Charlotte.",
+  },
+  {
+    src: "/gallery/cream-doodle-pink-bows.jpg",
+    name: "Pink-bow doodle",
+    alt: "Cream Goldendoodle with pink satin ear bows and a pink paw-print bandana after a Fear-Free groom in Charlotte.",
+  },
+  {
+    src: "/gallery/white-dog-check-tie.jpg",
+    name: "Checkered-tie pup",
+    alt: "Small white dog in a fluffy round cut wearing a blue checkered tie after grooming at Barkly’s in Charlotte.",
+  },
+  {
+    src: "/gallery/bichon-autumn-bandana.jpg",
+    name: "Autumn Bichon",
+    alt: "White Bichon Frise in a round teddy-bear cut and a brown autumn leaf bandana after a Fear-Free groom in Charlotte.",
+  },
+  {
+    src: "/gallery/pembroke-corgi.jpg",
+    name: "Pembroke Corgi",
+    alt: "Pembroke Welsh Corgi with a fresh face and big ears smiling after a Fear-Free bath and tidy in Charlotte.",
+  },
+  {
+    src: "/gallery/cream-dachshund-sprinkles.jpg",
+    name: "Sprinkle Dachshund",
+    alt: "Long-haired cream Dachshund with a pink sprinkle bandana and a tiny pink gem after a Fear-Free groom in Charlotte.",
+  },
+  {
+    src: "/gallery/apricot-doodle-watermelon.jpg",
+    name: "Watermelon doodle",
+    alt: "Apricot and white doodle puppy with a watermelon bandana after a puppy groom at Barkly’s in Charlotte.",
+  },
+  {
+    src: "/gallery/golden-peach-bandana.jpg",
+    name: "Peach-bandana Golden",
+    alt: "Golden Retriever with a clean face and a peach paw-print bandana after a Fear-Free bath and brush in Charlotte.",
+  },
+  {
+    src: "/gallery/tri-aussie-autumn.jpg",
+    name: "Autumn Aussie",
+    alt: "Tri-color Australian Shepherd in a cream autumn pumpkin bandana after a Fear-Free groom at Barkly’s in Charlotte.",
+  },
 ] as const;
 
-export const HERO_SLIDES = [
-  GALLERY[15],
-  GALLERY[11],
-  GALLERY[2],
-  GALLERY[4],
-  GALLERY[14],
-  GALLERY[3],
-  GALLERY[6],
-  GALLERY[9],
+const HERO_SRCS = [
+  "/gallery/bernedoodle-puppy-flower.jpg",
+  "/gallery/pomeranian-teddy-cut.jpg",
+  "/gallery/cavalier-autumn-bandana.jpg",
+  "/gallery/golden-retriever-halloween.jpg",
+  "/gallery/sheltie-heart-bandana.jpg",
+  "/gallery/longhair-dachshund-halloween.jpg",
+  "/gallery/pomeranian-blue-bowtie.jpg",
+  "/gallery/pomeranian-stars-bandana.jpg",
 ] as const;
+
+export const HERO_SLIDES = HERO_SRCS.map((src) => {
+  const photo = GALLERY.find((item) => item.src === src);
+  if (!photo) throw new Error(`Missing hero photo ${src}`);
+  return photo;
+});
 
 /** Studio photoshoot — homepage grid (not the client gallery). */
 export const HOME_SHOOT = [
