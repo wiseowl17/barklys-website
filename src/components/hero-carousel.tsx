@@ -38,6 +38,7 @@ export function HeroCarousel({ slides }: { slides?: readonly GalleryItem[] }) {
               key={item.src}
               src={item.src}
               alt={item.alt}
+              title={item.name}
               className={cn(
                 "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
                 i === index ? "opacity-100" : "opacity-0",

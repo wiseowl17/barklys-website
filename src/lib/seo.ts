@@ -155,20 +155,6 @@ export function localBusinessJsonLd() {
   };
 }
 
-/** Homepage-only. Linked to the LocalBusiness block in the root route via `@id`. */
-export function websiteJsonLd() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${CANONICAL_ORIGIN}/#website`,
-    url: canonicalUrl("/"),
-    name: SITE.name,
-    alternateName: ["Barkly's Grooming & Boarding", "Barkly's Charlotte", "Barkly's CLT"],
-    publisher: { "@id": `${CANONICAL_ORIGIN}/#business` },
-    inLanguage: "en-US",
-  };
-}
-
 export function serviceJsonLd(input: {
   name: string;
   description: string;
@@ -226,12 +212,33 @@ export function collectionPageJsonLd(input: {
   name: string;
   description: string;
   path: string;
+  images?: readonly { src: string; name: string; alt: string }[];
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
+    "@type": ["CollectionPage", "ImageGallery"],
     name: input.name,
     description: input.description,
     url: canonicalUrl(input.path),
+    ...(input.images?.length
+      ? {
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: input.images.length,
+            itemListElement: input.images.map((image, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "ImageObject",
+                contentUrl: `${CANONICAL_ORIGIN}${image.src}`,
+                url: canonicalUrl(input.path),
+                name: image.name,
+                caption: image.name,
+                description: image.alt,
+              },
+            })),
+          },
+        }
+      : {}),
   };
 }

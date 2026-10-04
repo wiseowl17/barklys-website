@@ -4,6 +4,7 @@ import { Heart, X } from "lucide-react";
 import { useCms } from "@/lib/cms-context";
 import type { GalleryItem } from "@/lib/cms";
 import { breadcrumbJsonLd, collectionPageJsonLd, pageHead } from "@/lib/seo";
+import { GALLERY } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
   head: () =>
     pageHead({
-      title: "Dog Grooming Gallery | Barkly's",
+      title: "Dog Grooming Gallery | Barkly's Charlotte",
       description:
         "See real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails. Book your dog's own before-and-after.",
       path: "/gallery",
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/gallery")({
           description:
             "See real Barkly's clients after Fear-Free dog grooming in the Charlotte NC area — bows, bandanas, and happy tails. Book your dog's own before-and-after.",
           path: "/gallery",
+          images: GALLERY,
         }),
         breadcrumbJsonLd([
           { name: "Home", path: "/" },
@@ -31,14 +33,6 @@ export const Route = createFileRoute("/gallery")({
 });
 
 const TAPES = ["bg-pink", "bg-gold", "bg-sky", "bg-teal"] as const;
-const ASPECTS = [
-  "aspect-[4/5]",
-  "aspect-square",
-  "aspect-[3/4]",
-  "aspect-[5/6]",
-  "aspect-[4/5]",
-  "aspect-[3/4]",
-] as const;
 
 function GalleryPage() {
   const { gallery } = useCms();
@@ -75,7 +69,6 @@ function GalleryPage() {
       <div className="relative mx-auto mt-12 max-w-6xl columns-2 gap-3 sm:columns-3 sm:gap-5 lg:columns-4 lg:gap-6">
         {gallery.map((photo, i) => {
           const tape = TAPES[i % TAPES.length];
-          const aspect = ASPECTS[i % ASPECTS.length];
           return (
             <button
               key={photo.src}
@@ -93,13 +86,15 @@ function GalleryPage() {
               />
               <span
                 className={cn(
-                  "relative block overflow-hidden rounded-[1rem]",
-                  aspect,
+                  "relative block aspect-[3/4] overflow-hidden rounded-[1rem]",
                 )}
               >
                 <img
                   src={photo.src}
                   alt={photo.alt}
+                  title={photo.name}
+                  width={1500}
+                  height={2000}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
               </span>
@@ -141,6 +136,7 @@ function GalleryPage() {
             <img
               src={active.src}
               alt={active.alt}
+              title={active.name}
               className="max-h-[78vh] w-full rounded-[1.15rem] object-contain"
             />
             <figcaption className="mt-4 text-center font-display text-xl italic text-navy">
