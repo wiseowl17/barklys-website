@@ -66,7 +66,7 @@ function GalleryPage() {
         <Heart className="size-4 fill-pink text-pink" />
       </p>
 
-      <div className="relative mx-auto mt-12 max-w-6xl columns-2 gap-3 sm:columns-3 sm:gap-5 lg:columns-4 lg:gap-6">
+      <div className="relative mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
         {gallery.map((photo, i) => {
           const tape = TAPES[i % TAPES.length];
           return (
@@ -74,7 +74,7 @@ function GalleryPage() {
               key={photo.src}
               type="button"
               onClick={() => setActive(photo)}
-              className="group relative mb-3 inline-block w-full break-inside-avoid rounded-[1.35rem] bg-paper p-2.5 pb-3 text-left shadow-card ring-1 ring-line/70 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft sm:mb-5 lg:mb-6"
+              className="group relative w-full rounded-[1.35rem] bg-paper p-2.5 pb-3 text-left shadow-card ring-1 ring-line/70 transition-transform duration-300 hover:-translate-y-1 hover:shadow-soft"
             >
               <span
                 aria-hidden
