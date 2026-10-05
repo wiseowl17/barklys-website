@@ -15,7 +15,7 @@ import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
 import { HOUSE_VISIT, SITE } from "@/lib/site";
 
-const TITLE = "Dog Grooming in Charlotte NC | Barkly's";
+const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Home Studio";
 const DESCRIPTION =
   "Fear-Free dog grooming at your pup's pace — full grooms, baths & breed-specific cuts in a calm home studio serving Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC & Gastonia NC.";
 
@@ -134,9 +134,9 @@ function GroomingPage() {
         <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
           <h2 className="font-display text-3xl">Grooming prices</h2>
           <p className="mx-auto mt-2 max-w-2xl text-sm text-muted">
-            Priced by coat and weight. A full groom includes bath, blow-dry, brush-out, haircut or
-            style, ear cleaning, and nail trim. A touch-up is a lighter refresh between full grooms:
-            bath, brush-out, trim, and nail trim.
+            Priced by coat and weight. A full groom includes bath, blow-dry, brush-out, haircut,
+            ear cleaning, and nail trim. Styling is an extra charge depending on the design. A
+            touch-up is a lighter refresh between full grooms: bath, brush-out, trim, and nail trim.
           </p>
           <div className="mt-8 overflow-x-auto rounded-xl border border-line">
             <table className="w-full text-center text-sm">
