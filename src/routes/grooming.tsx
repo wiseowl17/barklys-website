@@ -15,7 +15,7 @@ import { useCms } from "@/lib/cms-context";
 import { cmsText } from "@/lib/cms";
 import { HOUSE_VISIT, SITE } from "@/lib/site";
 
-const TITLE = "Dog Grooming in Charlotte NC | Barkly's Fear-Free Home Studio";
+const TITLE = "Dog Grooming in Charlotte NC | Barkly's";
 const DESCRIPTION =
   "Fear-Free dog grooming at your pup's pace — full grooms, baths & breed-specific cuts in a calm home studio serving Charlotte NC, Tega Cay SC, Fort Mill SC, Ballantyne NC, Matthews NC, Belmont NC & Gastonia NC.";
 
