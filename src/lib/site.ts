@@ -128,7 +128,7 @@ export const GROOM_PRICES = [
   { size: "S", range: "0–25 lbs", price: "$75", touchUp: "$65", bathShort: "$45", bathLong: "$55" },
   { size: "M", range: "26–40 lbs", price: "$85", touchUp: "$75", bathShort: "$60", bathLong: "$70" },
   { size: "L", range: "41–70 lbs", price: "$95", touchUp: "$85", bathShort: "$80", bathLong: "$90" },
-  { size: "XL", range: "71–90 lbs", price: "$105", touchUp: "$95", bathShort: "Call us", bathLong: "Call us" },
+  { size: "XL", range: "71–90 lbs", price: "$105", touchUp: "$95", bathShort: "$90", bathLong: "$105" },
 ] as const;
 
 /** House visits: studio price plus 25%, rounded to the nearest $5. */

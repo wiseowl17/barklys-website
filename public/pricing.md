@@ -1,26 +1,41 @@
 # Pricing — Barkly's
 
-Fear-Free dog grooming, boarding, and daycare in Charlotte, NC. Prices are confirmed at booking; extra time for matting or heavy coat work may be quoted at drop-off.
+Fear-Free dog grooming, boarding, and daycare in Charlotte, NC. Prices are confirmed at booking. Heavy matting or a thick coat takes longer; if it will cost extra, we say so at drop-off. Styling is an extra charge depending on the design.
 
-## Grooming
+## Grooming (long hair or double coat)
 
-Full groom includes haircut, bath, dry, ears, and nails.
+A full groom includes bath, blow-dry, brush-out, haircut, ear cleaning, and nail trim. A touch-up is a lighter refresh between full grooms: bath, brush-out, trim, and nail trim.
 
-- Small (0–25 lbs): $75
-- Medium (26–40 lbs): $85
-- Large (41–70 lbs): $95
-- XL (71–90 lbs): $105
-- XL+ (91+ lbs): $115
-- Touch-up (bath, face, feet & tidy): $10 less than a full groom
+| Size | Weight | Full groom | Touch-up |
+|---|---|---|---|
+| Small | 0–25 lbs | $75 | $65 |
+| Medium | 26–40 lbs | $85 | $75 |
+| Large | 41–70 lbs | $95 | $85 |
+| XL | 71–90 lbs | $105 | $95 |
 
-## Grooming add-ons
+## Baths
 
-- Deshedding: $25–$40
-- Dematting: $20–$40
-- Nail trim: $15
+Every bath includes a blow-dry and nail trim. Long hair and double coats also get a full brush-out.
+
+| Size | Weight | Short hair | Long hair or double coat |
+|---|---|---|---|
+| Small | 0–25 lbs | $45 | $55 |
+| Medium | 26–40 lbs | $60 | $70 |
+| Large | 41–70 lbs | $80 | $90 |
+| XL | 71–90 lbs | $90 | $105 |
+
+## Add-ons
+
+- Deshedding: $25
+- Dematting: $20–$35 by size
+- Nail trim on its own: $20
 - Teeth brushing: $6
-- Paw balm: $8
-- Specialty shampoo: quoted at drop-off
+- Paw balm: $4
+- Specialty shampoo: quoted
+
+## House visits
+
+For homes with two or more dogs. House visits cost 25% more than studio prices, rounded to the nearest $5, and every dog after the second gets $5 off. Prices are per dog. The full house-visit table is at https://www.barklysclt.com/grooming#house-visits.
 
 ## Boarding (overnight, in our home)
 
@@ -39,4 +54,4 @@ Daytime only, quoted per visit. Request through the boarding form at https://www
 
 (980) 320-0502 · barklysclt@gmail.com · https://www.barklysclt.com/book
 
-Last updated: 2026-09-15
+Last updated: 2026-10-08

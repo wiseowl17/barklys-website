@@ -14,7 +14,7 @@
 
 ## Services
 
-- [Grooming](https://www.barklysclt.com/grooming): Full grooms, baths, and add-ons for all breeds, with extra fluency in poodles, schnauzers, doodles, and small breeds. See [pricing](https://www.barklysclt.com/pricing.md).
+- [Grooming](https://www.barklysclt.com/grooming): Full grooms, baths, and add-ons for all breeds, with extra experience with poodles, schnauzers, doodles, and small breeds. See [pricing](https://www.barklysclt.com/pricing.md).
 - [Boarding, daycare & dog sitting](https://www.barklysclt.com/boarding): Overnight boarding and in-home dog sitting in a real home, not a kennel. Daytime daycare quoted per visit.
 - [Book grooming online](https://www.barklysclt.com/book): Square Appointments booking widget. Boarding and daycare are requested by form and confirmed manually by phone or email.
 
