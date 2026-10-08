@@ -35,7 +35,7 @@ const FAQS: readonly FaqItem[] = [
   {
     question: "What vaccines does my dog need?",
     answer:
-      "Dogs should be current on core vaccines and free of contagious illness. Let us know about injuries, skin conditions, or medications before the visit. Full house rules are on our policies page.",
+      "Dogs must be at least 8 weeks old and current on their rabies vaccine, given at least 48 hours before the stay. Puppies between 8 and 16 weeks are the exception. DPP, Bordetella, and canine influenza are strongly recommended. The full vaccine and health requirements are on our policies page.",
   },
 ];
 

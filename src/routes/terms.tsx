@@ -41,8 +41,8 @@ function TermsPage() {
         </p>
         <h2 className="font-display text-2xl">Cancellations & no-shows</h2>
         <p className="text-muted">
-          House rules — including the 2-day cancel window, 15-minute grooming grace period, and
-          pick-up timing — are on our{" "}
+          House rules, including the 24-hour cancellation window, deposit policy, 15-minute grooming
+          grace period, and pick-up timing, are on our{" "}
           <Link to="/policies" className="text-teal-deep underline">
             policies
           </Link>{" "}
@@ -50,8 +50,8 @@ function TermsPage() {
         </p>
         <h2 className="font-display text-2xl">Pet care</h2>
         <p className="text-muted">
-          Barkly’s is not a veterinary clinic. Dogs should be current on core vaccines and free
-          of contagious illness. We use Fear-Free handling and may pause or stop a service if a
+          Barkly’s is not a veterinary clinic. Dogs must be current on their rabies vaccine and
+          free of contagious illness; the full health requirements are on our policies page. We use Fear-Free handling and may pause or stop a service if a
           dog is too stressed or unsafe to continue.
         </p>
         <h2 className="font-display text-2xl">Website</h2>

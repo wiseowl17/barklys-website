@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FaqSection } from "@/components/faq-section";
+import { HealthRequirements } from "@/components/health-requirements";
 import {
   breadcrumbJsonLd,
   faqPageJsonLd,
@@ -16,22 +17,22 @@ const POLICIES: readonly FaqItem[] = [
   {
     question: "What is the cancellation policy?",
     answer:
-      "Please cancel at least 2 days before your appointment. Late cancellations keep another dog from taking that time slot.",
+      "Please cancel at least 24 hours before your appointment, and let us know as early as you can. We understand that things come up, and your deposit is refunded when you give us 24 hours’ notice or more. If you cancel with less than 24 hours’ notice, arrive late, or don’t show up, the deposit is not refunded.",
   },
   {
     question: "What happens if I am late or miss a grooming appointment?",
     answer:
-      "There’s a 15-minute grace period for grooming. After that, the appointment is forfeited and a no-show fee applies (confirmed when you book). Three no-shows and we won’t be able to book future appointments.",
+      "There’s a 15-minute grace period for grooming. After that, the appointment is forfeited and your deposit is not refunded. Three no-shows and we won’t be able to book future appointments.",
   },
   {
     question: "When should I pick up my dog?",
     answer:
-      "Please pick up within 45 minutes of your dog being ready. After that, a boarding fee applies. If you’re running late, let us know early so we can plan.",
+      "Please pick up within 30 minutes of your dog being ready. After that, a boarding fee applies. If you’re running late, let us know early so we can plan.",
   },
   {
     question: "What vaccines and health requirements apply?",
     answer:
-      "Dogs should be current on core vaccines and free of contagious illness. Let us know about injuries, skin conditions, or medications before the visit.",
+      "Dogs must be at least 8 weeks old and current on their rabies vaccine (puppies between 8 and 16 weeks are the exception), given at least 48 hours before service. The full list of vaccine and health requirements is below.",
   },
   {
     question: "How does Fear-Free handling work at Barkly's?",
@@ -107,6 +108,7 @@ function PoliciesPage() {
       </p>
       <div className="mt-10">
         <FaqSection title="Policies" faqs={POLICIES} />
+        <HealthRequirements />
         <FaqSection
           id="house-visit-policies"
           title="House visit policies"

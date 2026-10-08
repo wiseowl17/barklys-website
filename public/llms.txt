@@ -31,10 +31,11 @@
 
 ## Policies
 
-- Cancel at least 2 days before your appointment.
-- Grooming has a 15-minute grace period; after that the appointment is forfeited and a no-show fee applies (amount confirmed at booking). Three no-shows and future appointments won't be booked.
-- Pick up your dog within one hour of being ready, or a boarding fee applies.
-- Dogs should be current on core vaccines and free of contagious illness.
+- Cancel at least 24 hours before your appointment and the deposit is refunded. Late arrivals, no-shows, and cancellations with less than 24 hours' notice forfeit the deposit.
+- Grooming has a 15-minute grace period; after that the appointment is forfeited and the deposit is not refunded. Three no-shows and future appointments won't be booked.
+- Pick up your dog within 30 minutes of being ready, or a boarding fee applies.
+- Dogs must be 8 weeks or older with a current rabies vaccine (puppies 8 to 16 weeks are the exception), given at least 48 hours before service. DPP, Bordetella, and canine influenza are strongly recommended.
+- Not accepted: pets in heat, with recent surgery, wearing an Elizabethan collar, with fleas or ticks, with a contagious illness now or in the past 30 days, or with unprovoked aggression that harmed a person or another pet. Full list on the policies page.
 - Fear-Free handling: appointments are never rushed or forced. Breaks, extra time, or a follow-up visit are the plan, not an inconvenience.
 
-Last updated: 2026-09-15
+Last updated: 2026-10-08
